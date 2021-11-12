@@ -77,6 +77,7 @@ with lib;
     enable = true;
     lsp.enable = true;
   };
+  ngpc.languages.python.enable = true;
   ngpc.languages.rust = {
     enable = true;
     lsp.enable = true;
