@@ -1,6 +1,5 @@
 with builtins;
 { config, lib, pkgs, ... }:
-with config;
 with lib;
 with types;
 let
@@ -11,7 +10,7 @@ in {
     system = {
       gamePath = mkOption {
         type = str;
-        default = "${home.homeDirectory}/Games";
+        default = "${config.home.homeDirectory}/Games";
       };
     };
   };

@@ -20,7 +20,7 @@ in
         };
       };
     }
-    (mkIf config.ngpc.emacs.lsp.enable {
+    (mkIf config.ngpc.programs.emacs.lsp.enable {
       programs.emacs.init.init.packages = {
         haskell-mode = {
           hook = {

@@ -49,7 +49,7 @@ let
         default = {};
       };
       mode = mkOption {
-        type = attrsOf str;
+        type = attrsOf (nullOr str);
         default = {};
       };
       preface = mkOption {
@@ -107,7 +107,7 @@ let
 
   mkMode = mode: optionalString (mode != {})
     ":mode (${concatStringsSep "\n" (mapAttrsToList (pattern: mode:
-      if mode == "" then stringToElisp pattern else "(${stringToElisp pattern} . ${mode})"
+      if mode == null then stringToElisp pattern else "(${stringToElisp pattern} . ${mode})"
     ) mode)})";
 
   mkPreface = preface: optionalString (preface != "") ''

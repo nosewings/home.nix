@@ -1,5 +1,4 @@
 { config, lib, pkgs, ... }:
-with config;
 with lib;
 let
   cfg = config.ngpc.programs.emacs.circe;

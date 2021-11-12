@@ -1,7 +1,7 @@
 with builtins;
 { lib, pkgs, ... }:
 with lib;
-mkIf (currentSystem == "x86_x64-linux") {
+mkIf (currentSystem == "x86_64-linux") {
   home.sessionVariables = {
     EDITOR = "emacsclient -q emacs";
     VISUAL = "emacsclient -cq emacs";

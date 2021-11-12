@@ -16,6 +16,6 @@ in
     ];
 
     programs.lutris.enable = true;
-    programs.lutris.system.gamePath = "${home.homeDirectory}/lutris";
+    programs.lutris.system.gamePath = "${config.home.homeDirectory}/lutris";
   };
 }
