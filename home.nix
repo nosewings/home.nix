@@ -19,6 +19,7 @@ with lib;
     htop
     musescore
     neofetch
+    nix-prefetch-github
     openssl
     pciutils
     ripgrep
