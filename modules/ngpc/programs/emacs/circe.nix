@@ -17,7 +17,7 @@ in
           circe-network-options = ''
             '(("Libera Chat"
                :nick "nosewings"
-               :tls-keylist (("${home.homeDirectory}/.ssh/libera.pem" "${home.homeDirectory}/.ssh/libera.pem"))
+               :tls-keylist (("${config.home.homeDirectory}/.ssh/libera.pem" "${config.home.homeDirectory}/.ssh/libera.pem"))
                :channels ("#agda" "#haskell" "#nixos")))
             '';
         };
