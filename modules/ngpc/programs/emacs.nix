@@ -122,6 +122,16 @@ in
             hook = {
               org-mode = [ "auto-fill-mode" ];
             };
+            preface = ''
+              (defun ngpc/org-raw-link-at-point ()
+                (let ((ctx (org-element-context)))
+                  (if (not (eq (org-element-type ctx) 'link))
+                      (user-error "No link found")
+                    (org-element-property :raw-link ctx))))
+
+              (defun ngpc/org-copy-raw-link-at-point ()
+                (interactive)
+                (kill-new (ngpc/org-raw-link-at-point)))'';
           };
           org-roam = {
             enable = true;
