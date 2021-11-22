@@ -32,7 +32,7 @@ mkIf (currentSystem == "x86_64-linux") {
   programs.firefox.enable = true;
   home.sessionVariables.MOZ_ENABLE_WAYLAND = "1";
 
-  services.gammastep = {
+  services.redshift = {
     enable = true;
     provider = "geoclue2";
     temperature.night = 2500;
