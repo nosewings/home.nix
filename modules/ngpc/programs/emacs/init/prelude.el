@@ -1,3 +1,5 @@
+(cl-float-limits)
+
 (setq make-backup-files nil
       create-lockfiles nil)
 
@@ -16,6 +18,8 @@
   (setq show-trailing-whitespace nil))
 
 (xterm-mouse-mode)
+
+(setq echo-keystrokes cl-least-positive-float)
 
 (defun ngpc/rename-current-buffer-file (new-file)
   (interactive (list (read-file-name "Rename current buffer file: " nil nil nil (file-name-nondirectory (buffer-file-name)))))
