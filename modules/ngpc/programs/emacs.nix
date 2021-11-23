@@ -58,7 +58,25 @@ in
 
           (defun ngpc/insert-fake-sha256 ()
             (interactive)
-            (insert "0000000000000000000000000000000000000000000000000000"))'';
+            (insert "0000000000000000000000000000000000000000000000000000"))
+
+          (defmacro ngpc/with-output-eater (var &rest body)
+            (declare (indent 1))
+            (let ((tmpvar (make-symbol "tmp")))
+              `(let ((,tmpvar nil)
+                     (,var (lambda (c) (setq ,tmpvar (cons c ,tmpvar)))))
+                 ,@body
+                 (concat (nreverse ,tmpvar)))))
+
+          (defun ngpc/eval-last-sexp (arg)
+            (interactive "P")
+            (if (not (eq arg 1))
+                (call-interactively #'eval-last-sexp)
+              (save-mark-and-excursion
+                (mark-sexp -1)
+                (kill-new (ngpc/with-output-eater out
+                            (prin1 (eval (read (buffer-substring (region-beginning) (region-end)))) out))))))
+          (global-set-key (kbd "C-x C-e") #'ngpc/eval-last-sexp)'';
         packages = {
           ace-window = {
             enable = true;
