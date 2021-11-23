@@ -59,8 +59,17 @@ with lib;
     userEmail = "coltharp@pdx.edu";
     userName = "Nicholas Coltharp";
     ignores = [
+      "*.aux"
+      "*.bbl"
+      "*.bcf"
+      "*.blg"
+      "*.log"
+      "*.out"
+      "*.pdf"
+      "*.xml"
       ".direnv/"
       "__pycache__/"
+      "auto/"
       "dist/"
       "dist-newstyle/"
     ];
