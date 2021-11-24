@@ -79,6 +79,10 @@ in
               window-setup = [ "gcmh-mode" ];
             };
           };
+          git-gutter = {
+            enable = true;
+            config = "(global-git-gutter-mode)";
+          };
           highlight-numbers = {
             enable = true;
           };
