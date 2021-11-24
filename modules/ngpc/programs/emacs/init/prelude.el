@@ -44,6 +44,5 @@
       (call-interactively #'eval-last-sexp)
     (save-mark-and-excursion
       (mark-sexp -1)
-      (kill-new (ngpc/with-output-eater out
-                  (prin1 (eval (read (buffer-substring (region-beginning) (region-end)))) out))))))
+      (kill-new (prin1-to-string (eval (read (buffer-substring (region-beginning) (region-end)))))))))
 (global-set-key (kbd "C-x C-e") #'ngpc/eval-last-sexp)
