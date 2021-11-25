@@ -114,6 +114,7 @@ in
             enable = true;
             bind = {
               "" = {
+                "\"C-c o r a a\"" = "org-roam-alias-add";
                 "\"C-c o r f\"" = "org-roam-node-find";
                 "\"C-c o r i\"" = "org-roam-node-insert";
                 "\"C-c o r s\"" = "org-roam-db-sync";
