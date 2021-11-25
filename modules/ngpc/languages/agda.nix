@@ -12,6 +12,7 @@ in
     programs.emacs.init.init.packages = {
       agda-input = {
         enable = true;
+        no-require = false;
       };
       agda2-mode = {
         enable = true;
