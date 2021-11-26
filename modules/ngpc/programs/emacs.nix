@@ -65,10 +65,6 @@ in
             enable = true;
             config = "(load-theme 'doom-outrun-electric t)";
           };
-          exec-path-from-shell = {
-            enable = true;
-            config = "(exec-path-from-shell-initialize)";
-          };
           flycheck = {
             enable = true;
             config = "(global-flycheck-mode)";

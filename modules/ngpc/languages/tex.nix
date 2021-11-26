@@ -13,6 +13,7 @@ in
       tex = {
         enable = true;
         package = epkgs: epkgs.auctex;
+        depends = pkgs: with pkgs; [ texlive.combined.scheme-medium ];
         custom = {
           TeX-parse-self = "t";
           TeX-auto-save = "t";
