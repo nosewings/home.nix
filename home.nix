@@ -66,7 +66,7 @@ with lib;
       "*.log"
       "*.out"
       "*.pdf"
-      "*.xml"
+      "*.run.xml"
       ".direnv/"
       "__pycache__/"
       "auto/"
