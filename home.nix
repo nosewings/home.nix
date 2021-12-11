@@ -82,6 +82,7 @@ with lib;
 
   ngpc.programs.direnv.enable = true;
   ngpc.programs.emacs.enable = true;
+  ngpc.programs.ssh.enable = true;
 
   ngpc.languages.nix = {
     enable = true;
