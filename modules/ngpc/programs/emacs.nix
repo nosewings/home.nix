@@ -14,7 +14,7 @@ in
 
     programs.emacs.vterm.enable = true;
 
-    ngpc.programs.emacs.completion = "selectrum";
+    ngpc.programs.emacs.completion = "vertico";
     ngpc.programs.emacs.circe.enable = true;
     ngpc.programs.emacs.lsp.enable = true;
     ngpc.programs.emacs.treemacs.enable = true;
