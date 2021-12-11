@@ -4,7 +4,7 @@ with types;
 {
   options.ngpc.programs.emacs = {
     completion = mkOption {
-      type = enum [ null "ivy" "selectrum" ];
+      type = enum [ null "ivy" "selectrum" "vertico" ];
     };
   };
 }
