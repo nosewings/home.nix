@@ -13,7 +13,7 @@ let
     options = {
       enable = mkEnableOption "Emacs package ${name}.";
       package = mkOption {
-        type = functionTo package;
+        type = nullOr (functionTo package);
         default = epkgs: epkgs.${name};
       };
       depends = mkOption {
@@ -181,7 +181,7 @@ in
         hasPackages = enabledPackages != {};
         hasBinds = any (pkg: pkg.bind != {} || pkg.bind-keymap != {}) (attrValues enabledPackages);
         dependencies =
-          optional hasPackages epkgs.use-package ++ optional hasBinds epkgs.bind-key ++ mapAttrsToList (_: v: v.package epkgs) enabledPackages;
+          optional hasPackages epkgs.use-package ++ optional hasBinds epkgs.bind-key ++ concatLists (mapAttrsToList (_: v: optional (v.package != null) (v.package epkgs)) enabledPackages);
         mkInitPackage = baseName: packages: srcParts:
           let
             rawSrc = concatStringsSep "\n\n" (filter (part: part != "") srcParts);
