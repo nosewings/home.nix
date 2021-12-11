@@ -161,6 +161,11 @@ in
           restart-emacs = {
             enable = true;
           };
+          savehist = {
+            enable = true;
+            package = null;
+            config = "(savehist-mode)";
+          };
           unicode-fonts = {
             enable = true;
             config = "(unicode-fonts-setup)";
