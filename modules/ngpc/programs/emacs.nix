@@ -44,6 +44,15 @@ in
           company = {
             enable = true;
           };
+          company-box = {
+            enable = true;
+            custom = {
+              "company-box-doc-delay" = "0";
+            };
+            hook = {
+              company-mode = [ "company-box-mode" ];
+            };
+          };
           dashboard = {
             enable = true;
             config = "(dashboard-setup-startup-hook)";
