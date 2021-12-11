@@ -144,6 +144,10 @@ in
           restart-emacs = {
             enable = true;
           };
+          unicode-fonts = {
+            enable = true;
+            config = "(unicode-fonts-setup)";
+          };
           vterm = {
             enable = true;
             hook = {
