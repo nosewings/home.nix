@@ -141,6 +141,23 @@ in
           pkg-info = {
             enable = true;
           };
+          projectile = {
+            enable = true;
+            bind-keymap = {
+              "" = {
+                "\"C-c p\"" = "projectile-command-map";
+              };
+            };
+            config = ''
+              (projectile-mode)
+              (advice-add #'ngpc/rename-current-buffer-file :after #'ngpc/rename-current-buffer-file/projectile-invalidate-cache)
+            '';
+            preface = ''
+              (defun ngpc/rename-current-buffer-file/projectile-invalidate-cache ()
+                (when (projectile-project-p)
+                  (call-interactively #'projectile-invalidate-cache)))
+            '';
+          };
           restart-emacs = {
             enable = true;
           };
