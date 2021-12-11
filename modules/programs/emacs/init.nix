@@ -16,10 +16,6 @@ let
         type = nullOr (functionTo package);
         default = epkgs: epkgs.${name};
       };
-      depends = mkOption {
-        type = functionTo (listOf package);
-        default = _: [];
-      };
       bind = mkOption {
         type = attrsOf (attrsOf str);
         default = {};
@@ -169,12 +165,6 @@ in
 
   config = mkIf cfg.enable {
     programs.emacs.enable = true;
-    programs.emacs.package = pkgs.emacs.overrideAttrs (super: {
-      postInstall = ''
-        ${super.postInstall or ""}
-        wrapProgram "$out/bin/emacs" --prefix PATH : ${makeBinPath (concatLists (mapAttrsToList (_: v: v.depends pkgs) cfg.init.packages))}
-      '';
-    });
     programs.emacs.extraPackages = epkgs:
       let
         enabledPackages = filterAttrs (_: v: v.enable) cfg.init.packages;
