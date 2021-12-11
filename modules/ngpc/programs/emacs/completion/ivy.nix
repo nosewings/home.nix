@@ -9,7 +9,14 @@ with lib;
       };
       counsel = {
         enable = true;
-        config = "(counsel-mode)";
+        config = ''
+          (counsel-mode)
+          (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
+        '';
+      };
+      ivy-rich = {
+        enable = true;
+        config = "(ivy-rich-mode)";
       };
     };
   };
