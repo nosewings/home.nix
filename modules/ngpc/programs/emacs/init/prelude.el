@@ -21,10 +21,30 @@
 
 (setq echo-keystrokes cl-least-positive-float)
 
-(defun ngpc/rename-current-buffer-file (new-file)
-  (interactive (list (read-file-name "Rename current buffer file: " nil nil nil (file-name-nondirectory (buffer-file-name)))))
-  (rename-file (buffer-file-name new-file)
-               (rename-buffer (file-name-nondirectory new-file))))
+(defun find-file/make-directory (filename &optional wildcards)
+  (let ((dir (file-name-directory filename)))
+    (unless (file-exists-p dir)
+      (make-directory dir t))))
+(advice-add #'find-file :before #'find-file/make-directory)
+
+;; Adapted from a similar Spacemacs function.
+(defun ngpc/rename-current-buffer-file ()
+  "Interactively rename the current buffer and its associated file."
+  (interactive)
+  (let ((current-file (buffer-file-name)))
+    (when (not (and current-file (file-exists-p current-file)))
+      (error "Buffer is not visiting a file"))
+    (let* ((current-buffer-name (buffer-name))
+           (new-file (read-file-name "Rename file and buffer: " (file-name-directory current-file)))
+           (new-dir (file-name-directory new-file)))
+      (when (not (file-exists-p new-dir))
+        (make-directory new-dir t))
+      (rename-file current-file new-file)
+      (set-visited-file-name new-file)
+      (set-buffer-modified-p nil)
+      (when (fboundp 'recentf-add-file)
+        (recentf-remove-if-non-kept current-file)
+        (recentf-add-file new-file)))))
 
 (defun ngpc/insert-fake-sha256 ()
   (interactive)
