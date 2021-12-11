@@ -24,6 +24,10 @@ let
         type = attrsOf (attrsOf str);
         default = {};
       };
+      bind-keymap = mkOption {
+        type = attrsOf (attrsOf str);
+        default = {};
+      };
       commands = mkOption {
         type = listOf str;
         default = [];
@@ -67,18 +71,22 @@ let
     };
   });
 
-  mkBind = bind: optionalString (bind != {}) (
+  mkBindGeneral = keyword: bind: optionalString (bind != {}) (
     let
       globalBinds = bind."" or "";
       nonGlobalBinds = removeKey "" bind;
       mkBindings = bindings: concatStringsSep "\n" (mapAttrsToList (key: bind: "(${key} . ${bind})") bindings);
       mkNonGlobalBindings = keymap: bindings: ":map ${keymap}\n" + mkBindings bindings;
     in
-      ":bind (${concatStringsSep "\n" (filter (x: x != "") [
+      ":${keyword} (${concatStringsSep "\n" (filter (x: x != "") [
         (mkBindings globalBinds)
         (concatStringsSep "\n" (mapAttrsToList mkNonGlobalBindings nonGlobalBinds))
       ])})"
   );
+
+  mkBindKeymap = mkBindGeneral "bind-keymap";
+
+  mkBind = mkBindGeneral "bind";
 
   mkCommands = commands: optionalString (commands != []) (
     if isString commands then
@@ -123,6 +131,7 @@ let
 
   mkPackageString = name: package:
     concatStringsSep "\n" (["(use-package ${name}"] ++ filter (x: x != "") [
+      (mkBindKeymap package.bind-keymap)
       (mkBind package.bind)
       (mkCommands package.commands)
       (mkInit package.init)
@@ -170,7 +179,7 @@ in
       let
         enabledPackages = filterAttrs (_: v: v.enable) cfg.init.packages;
         hasPackages = enabledPackages != {};
-        hasBinds = any (pkg: pkg.bind != {}) (attrValues enabledPackages);
+        hasBinds = any (pkg: pkg.bind != {} || pkg.bind-keymap != {}) (attrValues enabledPackages);
         dependencies =
           optional hasPackages epkgs.use-package ++ optional hasBinds epkgs.bind-key ++ mapAttrsToList (_: v: v.package epkgs) enabledPackages;
         mkInitPackage = baseName: packages: srcParts:
