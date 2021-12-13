@@ -21,6 +21,11 @@ in
                :channels ("#agda" "#haskell" "#nixos")))
             '';
         };
+        hook = {
+          circe-server-mode = [ "ngpc/dont-show-trailing-whitespace" ];
+          circe-channel-mode = [ "ngpc/dont-show-trailing-whitespace" ];
+        };
+      };
       circe-notifications = {
         enable = true;
         hook = {
