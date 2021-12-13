@@ -21,6 +21,11 @@ in
                :channels ("#agda" "#haskell" "#nixos")))
             '';
         };
+      circe-notifications = {
+        enable = true;
+        hook = {
+          circe-connected-hook = [ "enable-circe-notifications" ];
+        };
       };
     };
   };
