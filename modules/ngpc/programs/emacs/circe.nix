@@ -22,8 +22,7 @@ in
             '';
         };
         hook = {
-          circe-server-mode = [ "ngpc/dont-show-trailing-whitespace" ];
-          circe-channel-mode = [ "ngpc/dont-show-trailing-whitespace" ];
+          circe-mode = [ "ngpc/dont-show-trailing-whitespace" ];
         };
       };
       circe-notifications = {
