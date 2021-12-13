@@ -26,12 +26,16 @@ in
           circe-mode = [ "ngpc/dont-show-trailing-whitespace" ];
         };
       };
-      circe-notifications = {
-        enable = true;
-        hook = {
-          circe-connected-hook = [ "enable-circe-notifications" ];
-        };
-      };
+      circe-notifications = mkMerge [
+        {
+          enable = true;
+        }
+        (mkIf pkgs.stdenv.isDarwin {
+          custom = {
+            circe-notifications-alert-style = "'osx-notify";
+          };
+        })
+      ];
     };
   };
 }
