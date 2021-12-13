@@ -10,6 +10,7 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ gnutls ];
+    ngpc.programs.emacs.alert.enable = true;
     programs.emacs.init.init.packages = {
       circe = {
         enable = true;
