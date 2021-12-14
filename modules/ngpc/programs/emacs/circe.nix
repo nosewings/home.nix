@@ -29,6 +29,9 @@ in
       circe-notifications = mkMerge [
         {
           enable = true;
+          hook = {
+            circe-server-connected = [ "enable-circe-notifications" ];
+          };
         }
         (mkIf pkgs.stdenv.isDarwin {
           custom = {
