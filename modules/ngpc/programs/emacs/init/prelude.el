@@ -16,6 +16,8 @@
 (defun ngpc/dont-show-trailing-whitespace ()
   (interactive)
   (setq show-trailing-whitespace nil))
+(add-hook 'buffer-menu-mode-hook #'ngpc/dont-show-trailing-whitespace)
+(add-hook 'completion-list-mode-hook #'ngpc/dont-show-trailing-whitespace)
 
 (xterm-mouse-mode)
 
