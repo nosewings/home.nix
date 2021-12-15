@@ -173,7 +173,10 @@ in
           vterm = {
             enable = true;
             hook = {
-              vterm-mode = [ "ngpc/dont-show-trailing-whitespace" ];
+              vterm-mode = [
+                "ngpc/disable-hl-line"
+                "ngpc/dont-show-trailing-whitespace"
+              ];
             };
           };
           ws-butler = {

@@ -7,10 +7,13 @@
       show-paren-delay 0)
 (column-number-mode)
 (global-display-line-numbers-mode)
-(global-hl-line-mode)
 (show-paren-mode)
 
 (setq-default indent-tabs-mode nil)
+
+(global-hl-line-mode)
+(defun ngpc/disable-hl-line ()
+  (setq-local global-hl-line-mode nil))
 
 (setq-default show-trailing-whitespace t)
 (defun ngpc/dont-show-trailing-whitespace ()
