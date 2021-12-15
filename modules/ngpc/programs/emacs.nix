@@ -19,6 +19,7 @@ in
     ngpc.programs.emacs.lsp.enable = true;
     ngpc.programs.emacs.treemacs.enable = true;
     ngpc.programs.emacs.which-key.enable = true;
+    ngpc.programs.emacs.yatemplate.enable = true;
 
     programs.emacs.init = {
       enable = true;
