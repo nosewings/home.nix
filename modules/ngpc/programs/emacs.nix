@@ -63,7 +63,7 @@ in
             };
             hook = {
               after-init = [ "dashboard-refresh-buffer" ];
-              dashboard-mode = [ "ngpc/dont-show-trailing-whitespace" ];
+              dashboard-mode = [ "ngpc/disable-show-trailing-whitespace" ];
             };
           };
           doom-modeline = {
@@ -175,7 +175,7 @@ in
             hook = {
               vterm-mode = [
                 "ngpc/disable-hl-line"
-                "ngpc/dont-show-trailing-whitespace"
+                "ngpc/disable-show-trailing-whitespace"
               ];
             };
           };

@@ -23,7 +23,7 @@ in
             '';
         };
         hook = {
-          circe-mode = [ "ngpc/dont-show-trailing-whitespace" ];
+          circe-mode = [ "ngpc/disable-show-trailing-whitespace" ];
         };
       };
       circe-notifications = mkMerge [

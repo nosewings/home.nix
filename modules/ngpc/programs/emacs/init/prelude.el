@@ -16,11 +16,11 @@
   (setq-local global-hl-line-mode nil))
 
 (setq-default show-trailing-whitespace t)
-(defun ngpc/dont-show-trailing-whitespace ()
+(defun ngpc/disable-show-trailing-whitespace ()
   (interactive)
   (setq show-trailing-whitespace nil))
-(add-hook 'buffer-menu-mode-hook #'ngpc/dont-show-trailing-whitespace)
-(add-hook 'completion-list-mode-hook #'ngpc/dont-show-trailing-whitespace)
+(add-hook 'buffer-menu-mode-hook #'ngpc/disable-show-trailing-whitespace)
+(add-hook 'completion-list-mode-hook #'ngpc/disable-show-trailing-whitespace)
 
 (xterm-mouse-mode)
 
