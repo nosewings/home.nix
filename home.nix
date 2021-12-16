@@ -26,6 +26,7 @@ with lib;
     wget
     xorg.xkill
     xterm-24bit
+    yt-dlp
   ];
 
   programs.bash.enable = true;
