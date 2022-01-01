@@ -95,6 +95,10 @@ in
           magit = {
             enable = true;
           };
+          nyan-mode = {
+            enable = true;
+            config = "(nyan-mode)";
+          };
           org = {
             enable = true;
             bind = {
