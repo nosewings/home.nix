@@ -13,7 +13,10 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     {
-      home.packages = with pkgs; [ rustup ];
+      home.packages = with pkgs; [
+        cargo-expand
+        rustup
+      ];
       programs.emacs.init.init.packages = {
         rustic = {
           enable = true;
