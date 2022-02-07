@@ -21,7 +21,6 @@ with lib;
     musescore
     neofetch
     nix-prefetch-github
-    openmw
     openssl
     pciutils
     ripgrep
