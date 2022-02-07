@@ -17,6 +17,7 @@ with lib;
     killall
     gnumake
     htop
+    mplayer
     musescore
     neofetch
     nix-prefetch-github
