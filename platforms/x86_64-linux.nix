@@ -22,6 +22,7 @@ mkIf (currentSystem == "x86_64-linux") {
 
   home.packages = with pkgs; [
     agda
+    lm_sensors
     openrgb
     usbutils
     vlc
