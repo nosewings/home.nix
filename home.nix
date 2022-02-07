@@ -8,7 +8,7 @@ with lib;
 
   programs.home-manager.enable = true;
 
-  home.packages = with pkgs; [
+  home.packages = with pkgs; flatten [
     atool
     bat
     exa
@@ -25,7 +25,10 @@ with lib;
     pciutils
     ripgrep
     wget
-    xorg.xkill
+    (with xorg; [
+      xev
+      xkill
+    ])
     xterm-24bit
     yt-dlp
   ];
