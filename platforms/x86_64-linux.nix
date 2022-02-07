@@ -54,4 +54,6 @@ mkIf (currentSystem == "x86_64-linux") {
   ngpc.programs.zoom.enable = true;
 
   ngpc.services.fluidsynth.enable = true;
+
+  ngpc.xsession.xmonad.enable = true;
 }
