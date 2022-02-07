@@ -14,6 +14,13 @@ with lib;
       consult = {
         enable = true;
       };
+      orderless = {
+        enable = true;
+        custom = {
+          completion-styles = "'(orderless)";
+          completion-category-defaults = "nil";
+        };
+      };
     };
   };
 }
