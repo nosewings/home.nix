@@ -42,6 +42,13 @@ in
               };
             };
           };
+          beacon = {
+            enable = true;
+            config = "(beacon-mode)";
+            custom = {
+              beacon-blink-when-focused = "t";
+            };
+          };
           company = {
             enable = true;
           };
