@@ -23,6 +23,7 @@ with lib;
     neofetch
     nix-prefetch-github
     openssl
+    openxcom
     pciutils
     ripgrep
     wget
