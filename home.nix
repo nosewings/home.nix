@@ -26,6 +26,7 @@ with lib;
     openxcom
     pciutils
     ripgrep
+    unzip
     wget
     (with xorg; [
       xev
