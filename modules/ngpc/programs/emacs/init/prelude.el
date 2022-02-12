@@ -3,6 +3,8 @@
 (setq make-backup-files nil
       create-lockfiles nil)
 
+(setq custom-file null-device)
+
 (setq frame-resize-pixelwise t
       show-paren-delay 0)
 (column-number-mode)
