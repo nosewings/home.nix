@@ -17,6 +17,7 @@ with lib;
     killall
     gnumake
     htop
+    mgba
     mplayer
     musescore
     neofetch
