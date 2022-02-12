@@ -10,6 +10,19 @@ in
 
   config = mkIf cfg.enable {
     programs.emacs.enable = true;
+    programs.emacs.overrides = self: super: {
+      explain-pause-mode = self.trivialBuild {
+        pname = "explain-pause-mode";
+        version = "0.1";
+        src = pkgs.fetchFromGitHub {
+          owner = "lastquestion";
+          repo = "explain-pause-mode";
+          rev = "2356c8c3639cbeeb9751744dbe737267849b4b51";
+          sha256 = "++znrjiDSx+cy4okFBBXUBkRFdtnE2x+trkmqjB3Njs=";
+        };
+      };
+    };
+
     home.packages = with pkgs; [ emacs-all-the-icons-fonts ];
 
     programs.emacs.vterm.enable = true;
@@ -81,6 +94,11 @@ in
           doom-themes = {
             enable = true;
             config = "(load-theme 'doom-outrun-electric t)";
+          };
+          explain-pause-mode = {
+            enable = true;
+            config = "(explain-pause-mode)";
+            no-require = false;
           };
           flycheck = {
             enable = true;
