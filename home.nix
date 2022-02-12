@@ -14,9 +14,10 @@ with lib;
     exa
     file
     fd
-    killall
     gnumake
+    killall
     htop
+    lsof
     mgba
     mplayer
     musescore
