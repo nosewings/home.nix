@@ -9,12 +9,11 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs.plasma5Packages; [
+    home.packages = with pkgs; with plasma5Packages; [
       ark
       gwenview
       kate
       okular
-      plasma-applet-caffeine-plus
       yakuake
     ];
     services.kdeconnect.enable = true;
