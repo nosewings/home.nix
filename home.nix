@@ -91,6 +91,7 @@ with lib;
 
   ngpc.programs.direnv.enable = true;
   ngpc.programs.emacs.enable = true;
+  ngpc.programs.geogebra6.enable = true;
   ngpc.programs.ssh.enable = true;
 
   ngpc.languages.html.enable = true;
