@@ -14,6 +14,20 @@ in
     }
     (mkIf config.ngpc.programs.emacs.lsp.enable {
       programs.emacs.init.init.packages = {
+        python-mode = {
+          enable = true;
+          bind = {
+            python-mode-map = {
+              "\"C-c c\"" = "ngpc/python-execute-file";
+            };
+          };
+          preface = ''
+            (defun ngpc/python-execute-file ()
+              (interactive)
+              (let ((compile-command (format "python %s" (file-name-nondirectory buffer-file-name)))
+                    (prefix-arg 4))
+                (call-interactively #'compile)))'';
+        };
         lsp-pyright = {
           enable = true;
           hook = {
