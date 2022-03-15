@@ -14,7 +14,7 @@ in
     }
     (mkIf config.ngpc.programs.emacs.lsp.enable {
       programs.emacs.init.init.packages = {
-        python-mode = {
+        python = {
           enable = true;
           bind = {
             python-mode-map = {
