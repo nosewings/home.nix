@@ -13,6 +13,7 @@ in
       home.packages = with pkgs; [ pyright ];
     }
     (mkIf config.ngpc.programs.emacs.lsp.enable {
+      home.packages = with pkgs; [ python310 python310Packages.ipython ];
       programs.emacs.init.init.packages = {
         python = {
           enable = true;
@@ -20,6 +21,10 @@ in
             python-mode-map = {
               "\"C-c c\"" = "ngpc/python-execute-file";
             };
+          };
+          custom = {
+            python-shell-interpreter = "\"ipython\"";
+            python-shell-interpreter-args = "\"--simple-prompt -i\"";
           };
           preface = ''
             (defun ngpc/python-execute-file ()
