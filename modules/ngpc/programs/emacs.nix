@@ -114,6 +114,15 @@ in
             enable = true;
             config = "(global-git-gutter-mode)";
           };
+          highlight-indent-guides = {
+            enable = true;
+            custom = {
+              highlight-indent-guides-method = "'character";
+            };
+            hook = {
+              prog-mode = [ "highlight-indent-guides-mode" ];
+            };
+          };
           highlight-numbers = {
             enable = true;
           };
