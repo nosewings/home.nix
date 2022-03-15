@@ -179,11 +179,13 @@ in
             epkgs.trivialBuild rec {
               pname = "emacs-${baseName}";
               src = pkgs.writeText "${pname}.el" rawSrc;
+              buildInputs = dependencies;
               packageRequires = packages;
               preBuild = ''
                 emacs -Q --batch \
+                  --eval "(require 'use-package)" \
                   --eval '(find-file "${pname}.el")' \
-                  --eval '(let ((indent-tabs-mode nil) (lisp-indent-offset 2)) (indent-region (point-min) (point-max)))' \
+                  --eval '(indent-region (point-min) (point-max))' \
                   --eval '(write-file "${pname}.el")'
               '';
             };
