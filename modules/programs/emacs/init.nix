@@ -69,7 +69,7 @@ let
 
   mkBindGeneral = keyword: bind: optionalString (bind != {}) (
     let
-      globalBinds = bind."" or "";
+      globalBinds = bind."" or {};
       nonGlobalBinds = removeKey "" bind;
       mkBindings = bindings: concatStringsSep "\n" (mapAttrsToList (key: bind: "(${key} . ${bind})") bindings);
       mkNonGlobalBindings = keymap: bindings: ":map ${keymap}\n" + mkBindings bindings;
