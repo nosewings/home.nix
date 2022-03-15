@@ -24,9 +24,7 @@ in
           preface = ''
             (defun ngpc/python-execute-file ()
               (interactive)
-              (let ((compile-command (format "python %s" (file-name-nondirectory buffer-file-name)))
-                    (prefix-arg 4))
-                (call-interactively #'compile)))'';
+              (compile (format "%s %s" python-shell-interpreter buffer-file-name) t))'';
         };
         lsp-pyright = {
           enable = true;
