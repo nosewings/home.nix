@@ -17,8 +17,7 @@ in
       enable = true;
       config = ''
         (yas-global-mode)
-        (yatemplate-fill-alist)
-      '';
+        (yatemplate-fill-alist)'';
     };
     home.file = flip mapAttrs' cfg.templateFiles (file: source:
        nameValuePair ".config/emacs/templates/${file}" { inherit source; }

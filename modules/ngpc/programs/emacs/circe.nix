@@ -19,8 +19,7 @@ in
             '(("Libera Chat"
                :nick "nosewings"
                :tls-keylist (("${config.home.homeDirectory}/.ssh/libera.pem" "${config.home.homeDirectory}/.ssh/libera.pem"))
-               :channels ("#agda" "#haskell" "#nixos" "#rust")))
-            '';
+               :channels ("#agda" "#haskell" "#nixos" "#rust")))'';
         };
         hook = {
           circe-mode = [ "ngpc/disable-show-trailing-whitespace" ];

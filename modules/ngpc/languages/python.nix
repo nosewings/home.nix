@@ -39,8 +39,7 @@ in
           preface = ''
             (defun ngpc/load-pyright ()
               (require 'lsp-pyright)
-              (lsp))
-          '';
+              (lsp))'';
         };
       };
     })
