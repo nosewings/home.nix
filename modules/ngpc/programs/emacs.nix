@@ -126,6 +126,10 @@ in
           highlight-numbers = {
             enable = true;
           };
+          hl-todo = {
+            enable = true;
+            config = "(global-hl-todo-mode)";
+          };
           magit = {
             enable = true;
           };
