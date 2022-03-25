@@ -24,7 +24,7 @@ in
       programs.emacs.init.init.packages = {
         haskell-mode = {
           hook = {
-            "" = [ "lsp" ];
+            haskell-mode = [ "lsp" ];
           };
         };
         lsp-haskell = {
