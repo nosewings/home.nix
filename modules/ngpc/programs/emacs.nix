@@ -84,7 +84,6 @@ in
             };
             hook = {
               after-init = [ "dashboard-refresh-buffer" ];
-              dashboard-mode = [ "ngpc/disable-show-trailing-whitespace" ];
             };
           };
           doom-modeline = {
@@ -199,6 +198,12 @@ in
                 (when (projectile-project-p)
                   (call-interactively #'projectile-invalidate-cache)))'';
           };
+          prog-mode = {
+            enable = true;
+            package = null;
+            hook = {
+              "prog-mode" = [ "ngpc/enable-show-trailing-whitespace" ];
+            };
           };
           restart-emacs = {
             enable = true;
@@ -217,7 +222,6 @@ in
             hook = {
               vterm-mode = [
                 "ngpc/disable-hl-line"
-                "ngpc/disable-show-trailing-whitespace"
               ];
             };
           };
