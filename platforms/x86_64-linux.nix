@@ -55,4 +55,3 @@
 
   ngpc.xsession.xmonad.enable = true;
 }
-#}
