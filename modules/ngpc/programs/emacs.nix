@@ -25,12 +25,11 @@ in
 
     home.packages = with pkgs; [ emacs-all-the-icons-fonts ];
 
-    programs.emacs.vterm.enable = true;
-
     ngpc.programs.emacs.completion = "vertico";
     ngpc.programs.emacs.circe.enable = true;
     ngpc.programs.emacs.lsp.enable = true;
     ngpc.programs.emacs.treemacs.enable = true;
+    ngpc.programs.emacs.vterm.enable = true;
     ngpc.programs.emacs.which-key.enable = true;
     ngpc.programs.emacs.yatemplate.enable = true;
 
@@ -216,14 +215,6 @@ in
           unicode-fonts = {
             enable = true;
             config = "(unicode-fonts-setup)";
-          };
-          vterm = {
-            enable = true;
-            hook = {
-              vterm-mode = [
-                "ngpc/disable-hl-line"
-              ];
-            };
           };
           ws-butler = {
             enable = true;
