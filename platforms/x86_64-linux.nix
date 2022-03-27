@@ -1,7 +1,5 @@
-with builtins;
 { lib, pkgs, ... }:
-with lib;
-mkIf (currentSystem == "x86_64-linux") {
+{
   home.sessionVariables = {
     EDITOR = "emacsclient -q emacs";
     VISUAL = "emacsclient -cq emacs";
@@ -57,3 +55,4 @@ mkIf (currentSystem == "x86_64-linux") {
 
   ngpc.xsession.xmonad.enable = true;
 }
+#}

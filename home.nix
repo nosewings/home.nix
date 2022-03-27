@@ -1,10 +1,7 @@
 { config, lib, pkgs, ... }:
 with lib;
 {
-  imports = [ ./local.nix ] ++ filter (hasSuffix ".nix") (concatMap filesystem.listFilesRecursive [
-    ./platforms
-    ./modules
-  ]);
+  imports = filter (hasSuffix ".nix") (filesystem.listFilesRecursive ./modules);
 
   programs.home-manager.enable = true;
 
