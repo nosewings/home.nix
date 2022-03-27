@@ -9,11 +9,11 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ FatBoy ];
+    # home.packages = with pkgs; [ FatBoy ];
     services.fluidsynth = {
       enable = true;
       soundService = "pipewire-pulse";
-      soundFont = "${pkgs.FatBoy}/share/soundfonts/FatBoy.sf2";
+      # soundFont = "${pkgs.FatBoy}/share/soundfonts/FatBoy.sf2";
     };
   };
 }
