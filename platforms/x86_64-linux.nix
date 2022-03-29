@@ -21,8 +21,10 @@
   home.packages = with pkgs; [
     agda
     lm_sensors
+    mgba
     openmw
     openrgb
+    openxcom
     usbutils
     vlc
   ];
@@ -31,6 +33,8 @@
 
   programs.firefox.enable = true;
   home.sessionVariables.MOZ_ENABLE_WAYLAND = "1";
+
+  programs.starship.enable = true;
 
   services.redshift = {
     enable = true;

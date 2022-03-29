@@ -15,13 +15,11 @@ with lib;
     killall
     htop
     lsof
-    mgba
     mplayer
     musescore
     neofetch
     nix-prefetch-github
     openssl
-    openxcom
     pciutils
     ripgrep
     unzip
@@ -42,8 +40,6 @@ with lib;
       set fish_greeting
     '';
   };
-
-  programs.starship.enable = true;
 
   programs.tmux = {
     enable = true;
