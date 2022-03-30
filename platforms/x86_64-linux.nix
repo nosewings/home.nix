@@ -20,6 +20,7 @@
 
   home.packages = with pkgs; [
     agda
+    libreoffice-fresh
     lm_sensors
     mgba
     openmw
