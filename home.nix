@@ -14,6 +14,7 @@ with lib;
     gnumake
     killall
     htop
+    libreoffice-fresh
     lsof
     mplayer
     musescore
