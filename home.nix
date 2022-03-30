@@ -31,6 +31,7 @@ with lib;
     ])
     xterm-24bit
     yt-dlp
+    zip
   ];
 
   programs.bash.enable = true;
