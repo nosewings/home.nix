@@ -11,6 +11,8 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; with plasma5Packages; [
       ark
+      bluedevil
+      bluez-qt
       gwenview
       kate
       okular
