@@ -54,18 +54,18 @@
         };
       };
     in {
-        homeConfigurations.blackstar = mkConfiguration rec {
-          system = "x86_64-linux";
-          username = "ngpc";
-          homeDirectory = "/home/${username}";
-          stateVersion = "21.11";
-        };
+      homeConfigurations.blackstar = mkConfiguration rec {
+        system = "x86_64-linux";
+        username = "ngpc";
+        homeDirectory = "/home/${username}";
+        stateVersion = "21.11";
+      };
 
-        homeConfigurations.no-surprises = mkConfiguration rec {
-          system = "aarch64-darwin";
-          username = "ngpc";
-          homeDirectory = "/Users/${username}";
-          stateVersion = "21.11";
-        };
+      homeConfigurations.no-surprises = mkConfiguration rec {
+        system = "aarch64-darwin";
+        username = "ngpc";
+        homeDirectory = "/Users/${username}";
+        stateVersion = "21.11";
+      };
     };
 }
