@@ -23,7 +23,7 @@
     libreoffice-fresh
     lm_sensors
     mgba
-    openmw
+    # openmw
     openrgb
     openxcom
     usbutils
