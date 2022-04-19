@@ -57,6 +57,4 @@
   ngpc.programs.zoom.enable = true;
 
   ngpc.services.fluidsynth.enable = true;
-
-  ngpc.xsession.xmonad.enable = true;
 }

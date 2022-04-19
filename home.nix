@@ -102,4 +102,7 @@ with lib;
   };
   ngpc.languages.tex.enable = true;
   ngpc.languages.yaml.enable = true;
+
+  ngpc.xsession.enable = true;
+  ngpc.xsession.exwm.enable = true;
 }
