@@ -52,6 +52,7 @@
           imports = [ ./home.nix ./platforms/${system}.nix ];
           nixpkgs.overlays = [ overlay ];
         };
+        } // (args.configuration or {});
       };
     in {
       homeConfigurations.blackstar = mkConfiguration rec {
@@ -59,6 +60,11 @@
         username = "ngpc";
         homeDirectory = "/home/${username}";
         stateVersion = "21.11";
+        configuration = {
+          xresources.properties = {
+            "Xft.dpi" = 144;
+          };
+        };
       };
 
       homeConfigurations.no-surprises = mkConfiguration rec {
