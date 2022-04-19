@@ -201,7 +201,7 @@ in
             enable = true;
             package = null;
             hook = {
-              "prog-mode" = [ "ngpc/enable-show-trailing-whitespace" ];
+              prog-mode = [ "ngpc/enable-show-trailing-whitespace" ];
             };
           };
           restart-emacs = {
