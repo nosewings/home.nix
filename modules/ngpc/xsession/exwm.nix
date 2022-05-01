@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 with lib;
 let
   cfg = config.ngpc.xsession.exwm;
@@ -36,13 +36,11 @@ in
           (defun ngpc/launch (command)
             (interactive (list (read-shell-command "$ ")))
             (start-process-shell-command command nil command))
-
           (defun ngpc/exwm-init ()
             "Initialize EXWM."
             (require 'exwm-randr)
             (exwm-randr-enable)
             (exwm-init))
-
           (defun ngpc/exwm-update-buffer-name ()
             (exwm-workspace-rename-buffer exwm-title))
           (defun ngpc/exwm-input-append-local-simulation-keys (simulation-keys)
