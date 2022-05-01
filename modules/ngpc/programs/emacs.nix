@@ -46,14 +46,6 @@ in
       init = {
         prelude = readFile ./emacs/init/prelude.el;
         packages = {
-          ace-window = {
-            enable = true;
-            bind = {
-              "" = {
-                "\"C-x o\"" = "ace-window";
-              };
-            };
-          };
           beacon = {
             enable = true;
             config = "(beacon-mode)";
@@ -215,6 +207,10 @@ in
           unicode-fonts = {
             enable = true;
             config = "(unicode-fonts-setup)";
+          };
+          winum = {
+            enable = true;
+            config = "(winum-mode)";
           };
           ws-butler = {
             enable = true;
