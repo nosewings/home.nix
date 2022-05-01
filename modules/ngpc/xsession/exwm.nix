@@ -14,8 +14,8 @@ in
         enable = true;
         custom = {
           exwm-input-global-keys = ''
-            '(([?\s-&] . ngpc/launch))
-          '';
+            '(([?\s-&] . ngpc/launch)
+              ([?\s-i] . exwm-input-toggle-keyboard))'';
           exwm-input-simulation-keys = ''
             '(([?\C-b] . [left])
               ([?\C-f] . [right])
