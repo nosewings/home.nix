@@ -30,6 +30,7 @@ in
         };
         hook = {
           exwm-update-title = [ "ngpc/exwm-update-buffer-name" ];
+          exwm-manage-finish = [ "ngpc/exwm-map-search" ];
         };
         preface = ''
           (defun ngpc/launch (command)
@@ -43,7 +44,13 @@ in
             (exwm-init))
 
           (defun ngpc/exwm-update-buffer-name ()
-            (exwm-workspace-rename-buffer exwm-title))'';
+            (exwm-workspace-rename-buffer exwm-title))
+          (defun ngpc/exwm-input-append-local-simulation-keys (simulation-keys)
+            "Buffer-locally add SIMULATION-KEYS."
+            (exwm-input-set-local-simulation-keys (append exwm-input-simulation-keys simulation-keys)))
+          (defun ngpc/exwm-map-search ()
+            (when (string= exwm-class-name "firefox")
+              (ngpc/exwm-input-append-local-simulation-keys '(([?\C-s] . [?\C-f])))))'';
       };
     };
     xsession.windowManager.command = "emacs -f ngpc/exwm-init";
