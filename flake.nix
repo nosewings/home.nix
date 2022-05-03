@@ -64,7 +64,7 @@
         system = "x86_64-linux";
         username = "ngpc";
         homeDirectory = "/home/${username}";
-        stateVersion = "21.11";
+        stateVersion = "22.05";
         configuration = {
           xresources.properties = {
             "Xft.dpi" = 144;
@@ -76,7 +76,7 @@
         system = "aarch64-darwin";
         username = "ngpc";
         homeDirectory = "/Users/${username}";
-        stateVersion = "21.11";
+        stateVersion = "22.05";
       };
     };
 }
