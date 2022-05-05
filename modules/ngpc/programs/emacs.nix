@@ -96,6 +96,9 @@ in
           };
           gcmh = {
             enable = true;
+            custom = {
+              gcmh-idle-delay = "1";
+            };
             hook = {
               window-setup = [ "gcmh-mode" ];
             };
