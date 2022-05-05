@@ -70,3 +70,12 @@
       (mark-sexp -1)
       (kill-new (prin1-to-string (eval (read (buffer-substring (region-beginning) (region-end)))))))))
 (global-set-key (kbd "C-x C-e") #'ngpc/eval-last-sexp)
+
+(defun ngpc/switch-theme (theme)
+  (interactive "SSwitch to theme: ")
+  ;; Try to enable the new theme first: if it doesn't exist, we don't
+  ;; want to disable the current themes.
+  (load-theme theme t)
+  (dolist (atheme custom-enabled-themes)
+    (when (not (eq atheme theme))
+      (disable-theme atheme))))
