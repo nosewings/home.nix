@@ -52,20 +52,37 @@
         })
         emacs-overlay.overlay
       ];
-      mkConfiguration = args: home-manager.lib.homeManagerConfiguration rec {
-        inherit (args) system username homeDirectory stateVersion;
-        configuration = {
-          imports = [ ./home.nix ./platforms/${system}.nix ];
-          nixpkgs.overlays = overlays;
-        } // (args.configuration or {});
-      };
+      mkConfiguration =
+        { system
+        , username
+        , homeDirectory
+        , stateVersion
+        , desktop
+        , leisure
+        , xsession
+        , config ? { }
+        }: home-manager.lib.homeManagerConfiguration {
+          inherit system username homeDirectory stateVersion;
+          configuration = {
+            imports = [ ./home.nix ./platforms/${system}.nix ];
+            config = config // {
+              nixpkgs.overlays = overlays;
+            };
+          };
+          extraSpecialArgs = {
+            inherit desktop leisure xsession;
+          };
+        };
     in {
       homeConfigurations.blackstar = mkConfiguration rec {
         system = "x86_64-linux";
         username = "ngpc";
         homeDirectory = "/home/${username}";
         stateVersion = "22.05";
-        configuration = {
+        desktop = true;
+        leisure = true;
+        xsession = true;
+        config = {
           xresources.properties = {
             "Xft.dpi" = 144;
           };
@@ -77,6 +94,19 @@
         username = "ngpc";
         homeDirectory = "/Users/${username}";
         stateVersion = "22.05";
+        desktop = false;
+        leisure = true;
+        xsession = false;
+      };
+
+      homeConfigurations.ec2 = mkConfiguration rec {
+        system = "x86_64-linux";
+        username = "ec2-user";
+        homeDirectory = "/home/${username}";
+        stateVersion = "22.05";
+        desktop = false;
+        leisure = false;
+        xsession = false;
       };
     };
 }

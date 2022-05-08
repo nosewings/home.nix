@@ -1,36 +1,40 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, leisure, xsession, ... }:
 with lib;
 {
   imports = filter (hasSuffix ".nix") (filesystem.listFilesRecursive ./modules);
 
   programs.home-manager.enable = true;
 
-  home.packages = with pkgs; flatten [
-    atool
-    bat
-    exa
-    file
-    fd
-    gnumake
-    killall
-    htop
-    lsof
-    mplayer
-    musescore
-    neofetch
-    nix-prefetch-github
-    openssl
-    pciutils
-    ripgrep
-    unzip
-    wget
-    (with xorg; [
-      xev
-      xkill
+  home.packages = mkMerge [
+    (with pkgs; flatten [
+      atool
+      bat
+      exa
+      file
+      fd
+      gnumake
+      killall
+      htop
+      lsof
+      nix-prefetch-github
+      openssl
+      pciutils
+      ripgrep
+      unzip
+      wget
+      (with xorg; [
+        xev
+        xkill
+      ])
+      xterm-24bit
+      zip
     ])
-    xterm-24bit
-    yt-dlp
-    zip
+    (mkIf leisure (with pkgs; [
+      mplayer
+      musescore
+      neofetch
+      yt-dlp
+    ]))
   ];
 
   programs.bash.enable = true;
@@ -85,8 +89,7 @@ with lib;
 
   ngpc.programs.direnv.enable = true;
   ngpc.programs.emacs.enable = true;
-  programs.emacs.package = pkgs.emacsUnstable;
-  # ngpc.programs.geogebra6.enable = true;
+  # ngpc.programs.geogebra6.enable = mkIf leisure true;
   ngpc.programs.ssh.enable = true;
 
   ngpc.languages.html.enable = true;
@@ -103,6 +106,6 @@ with lib;
   ngpc.languages.tex.enable = true;
   ngpc.languages.yaml.enable = true;
 
-  ngpc.xsession.enable = true;
-  ngpc.xsession.exwm.enable = true;
+  ngpc.xsession.enable = mkIf xsession true;
+  ngpc.xsession.exwm.enable = mkIf xsession true;
 }
