@@ -12,7 +12,7 @@ in
       fonts.fontconfig.enable = true;
       home.packages = with pkgs; [
         dejavu_fonts
-        iosevka
+        iosevka-bin
         nerdfonts
         overpass
         roboto
