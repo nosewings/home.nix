@@ -37,12 +37,6 @@
 
   programs.starship.enable = true;
 
-  services.redshift = {
-    enable = true;
-    provider = "geoclue2";
-    temperature.night = 2500;
-  };
-
   ngpc.fonts.enable = true;
   ngpc.plasma.enable = true;
 
