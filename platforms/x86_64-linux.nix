@@ -1,4 +1,4 @@
-{ lib, pkgs, desktop, leisure, xsession, ... }:
+{ lib, pkgs, desktop, hardware, leisure, xsession, ... }:
 {
   home.sessionVariables = {
     EDITOR = "emacsclient -q emacs";
@@ -20,11 +20,14 @@
 
   home.packages = lib.mkMerge [
     (with pkgs; [
-      agda
+    ])
+    (lib.mkIf desktop (with pkgs; [
       libreoffice-fresh
+    ]))
+    (lib.mkIf hardware (with pkgs; [
       lm_sensors
       usbutils
-    ])
+    ]))
     (lib.mkIf leisure (with pkgs; [
       mgba
       # openmw
@@ -45,7 +48,6 @@
   ngpc.plasma.enable = lib.mkIf xsession true;
 
   ngpc.languages.agda.enable = true;
-  ngpc.languages.haskell.enable = true;
 
   ngpc.programs.discord.enable = lib.mkIf leisure true;
   ngpc.programs.lutris.enable = lib.mkIf leisure true;

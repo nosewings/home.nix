@@ -57,9 +57,11 @@
         , username
         , homeDirectory
         , stateVersion
-        , desktop
-        , leisure
-        , xsession
+        , desktop ? false
+        , hardware ? false
+        , leisure ? false
+        , ssh ? false
+        , xsession ? false
         , config ? { }
         }: home-manager.lib.homeManagerConfiguration {
           inherit system username homeDirectory stateVersion;
@@ -70,7 +72,7 @@
             };
           };
           extraSpecialArgs = {
-            inherit desktop leisure xsession;
+            inherit desktop hardware leisure xsession;
           };
         };
     in {
@@ -80,6 +82,7 @@
         homeDirectory = "/home/${username}";
         stateVersion = "22.05";
         desktop = true;
+        hardware = true;
         leisure = true;
         xsession = true;
         config = {
@@ -94,9 +97,8 @@
         username = "ngpc";
         homeDirectory = "/Users/${username}";
         stateVersion = "22.05";
-        desktop = false;
-        leisure = true;
-        xsession = false;
+        hardware = true;
+        ssh = true;
       };
 
       homeConfigurations.ec2 = mkConfiguration rec {
@@ -104,9 +106,6 @@
         username = "ec2-user";
         homeDirectory = "/home/${username}";
         stateVersion = "22.05";
-        desktop = false;
-        leisure = false;
-        xsession = false;
       };
     };
 }

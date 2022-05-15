@@ -1,4 +1,4 @@
-{ config, lib, pkgs, leisure, xsession, ... }:
+{ config, lib, pkgs, hardware, leisure, xsession, ... }:
 with lib;
 {
   imports = filter (hasSuffix ".nix") (filesystem.listFilesRecursive ./modules);
@@ -18,7 +18,6 @@ with lib;
       lsof
       nix-prefetch-github
       openssl
-      pciutils
       ripgrep
       unzip
       wget
@@ -34,6 +33,9 @@ with lib;
       musescore
       neofetch
       yt-dlp
+    ]))
+    (mkIf hardware (with pkgs; [
+      pciutils
     ]))
   ];
 
