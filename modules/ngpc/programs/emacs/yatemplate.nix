@@ -13,6 +13,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    ngpc.programs.emacs.autoinsert.enable = true;
     programs.emacs.init.init.packages.yatemplate = {
       enable = true;
       config = ''
