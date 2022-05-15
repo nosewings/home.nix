@@ -47,8 +47,6 @@
   ngpc.fonts.enable = true;
   ngpc.plasma.enable = lib.mkIf xsession true;
 
-  ngpc.languages.agda.enable = true;
-
   ngpc.programs.discord.enable = lib.mkIf leisure true;
   ngpc.programs.lutris.enable = lib.mkIf leisure true;
   ngpc.programs.retroarch.enable = lib.mkIf leisure true;

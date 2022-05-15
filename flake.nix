@@ -62,6 +62,17 @@
         , leisure ? false
         , ssh ? false
         , xsession ? false
+        , agda ? false
+        , haskell ? false
+        , html ? false
+        , javascript ? false
+        , python ? false
+        , rust ? false
+        # We'll always want the ability to write scripts, so we
+        # include shell by default.
+        , shell ? true
+        , tex ? false
+        , yaml ? false
         , config ? { }
         }: home-manager.lib.homeManagerConfiguration {
           inherit system username homeDirectory stateVersion;
@@ -72,7 +83,8 @@
             };
           };
           extraSpecialArgs = {
-            inherit desktop hardware leisure xsession;
+            inherit desktop hardware leisure ssh xsession agda haskell html
+              javascript python rust shell tex yaml;
           };
         };
     in {
@@ -83,8 +95,17 @@
         stateVersion = "22.05";
         desktop = true;
         hardware = true;
+        ssh = true;
         leisure = true;
         xsession = true;
+        agda = true;
+        haskell = true;
+        html = true;
+        javascript = true;
+        python = true;
+        rust = true;
+        tex = true;
+        yaml = true;
         config = {
           xresources.properties = {
             "Xft.dpi" = 144;
@@ -99,6 +120,14 @@
         stateVersion = "22.05";
         hardware = true;
         ssh = true;
+        agda = true;
+        haskell = true;
+        html = true;
+        javascript = true;
+        python = true;
+        rust = true;
+        tex = true;
+        yaml = true;
       };
 
       homeConfigurations.ec2 = mkConfiguration rec {

@@ -1,7 +1,9 @@
-{ config, lib, pkgs, hardware, leisure, ssh, xsession, ... }:
-with lib;
-{
-  imports = filter (hasSuffix ".nix") (filesystem.listFilesRecursive ./modules);
+{ config, lib, pkgs, hardware, leisure, ssh, xsession,
+  agda, haskell, html, javascript, python, rust, shell, tex, yaml,
+  ... }:
+with lib; {
+  imports = filter (hasSuffix ".nix") (filesystem.listFilesRecursive
+  ./modules);
 
   programs.home-manager.enable = true;
 
@@ -92,21 +94,42 @@ with lib;
   ngpc.programs.direnv.enable = true;
   ngpc.programs.emacs.enable = true;
   # ngpc.programs.geogebra6.enable = mkIf leisure true;
-  ngpc.programs.ssh.enable = mkIf ssh true;
+  ngpc.programs.ssh = mkIf ssh {
+    enable = true;
+  };
 
-  ngpc.languages.html.enable = true;
-  ngpc.languages.javascript.enable = true;
+  ngpc.languages.agda = mkIf agda {
+    enable = true;
+  };
+  ngpc.languages.haskell = mkIf haskell {
+    enable = true;
+  };
+  ngpc.languages.html = mkIf html {
+    enable = true;
+  };
+  ngpc.languages.javascript = mkIf javascript {
+    enable = true;
+  };
   ngpc.languages.nix = {
     enable = true;
     lsp.enable = true;
   };
-  ngpc.languages.python.enable = true;
-  ngpc.languages.rust = {
+  ngpc.languages.python = mkIf python {
+    enable = true;
+  };
+  ngpc.languages.rust = mkIf rust {
     enable = true;
     lsp.enable = true;
   };
-  ngpc.languages.tex.enable = true;
-  ngpc.languages.yaml.enable = true;
+  ngpc.languages.shell = mkIf shell {
+    enable = true;
+  };
+  ngpc.languages.tex = mkIf tex {
+    enable = true;
+  };
+  ngpc.languages.yaml = mkIf yaml {
+    enable = true;
+  };
 
   ngpc.xsession.enable = mkIf xsession true;
   ngpc.xsession.exwm.enable = mkIf xsession true;
