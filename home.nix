@@ -1,4 +1,4 @@
-{ config, lib, pkgs, hardware, leisure, xsession, ... }:
+{ config, lib, pkgs, hardware, leisure, ssh, xsession, ... }:
 with lib;
 {
   imports = filter (hasSuffix ".nix") (filesystem.listFilesRecursive ./modules);
@@ -92,7 +92,7 @@ with lib;
   ngpc.programs.direnv.enable = true;
   ngpc.programs.emacs.enable = true;
   # ngpc.programs.geogebra6.enable = mkIf leisure true;
-  ngpc.programs.ssh.enable = true;
+  ngpc.programs.ssh.enable = mkIf ssh true;
 
   ngpc.languages.html.enable = true;
   ngpc.languages.javascript.enable = true;
