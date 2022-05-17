@@ -41,12 +41,31 @@ with lib; {
     ]))
   ];
 
-  programs.bash.enable = true;
-  programs.zsh.enable = true;
+  programs.bash = {
+    enable = true;
+    bashrcExtra = ''
+      if [[ -f ~/.bashrc.local ]]; then
+        source ~/.bashrc.local
+      fi
+    '';
+  };
+  programs.zsh = {
+    enable = true;
+    initExtra = ''
+      if [[ -f ~/.bashrc.local ]]; then
+        source ~/.zshrc.local
+      fi
+    '';
+  };
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
       set fish_greeting
+    '';
+    shellInit = ''
+      test -f ~/.config/fish/config.fish.local; and begin
+          source ~/.config/fish/config.fish.local
+      end
     '';
   };
 
