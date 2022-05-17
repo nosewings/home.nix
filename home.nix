@@ -102,6 +102,7 @@ with lib; {
       "auto/"
       "dist/"
       "dist-newstyle/"
+      "node_modules/"
     ];
     extraConfig = {
       init = {
