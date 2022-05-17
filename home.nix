@@ -14,12 +14,14 @@ with lib; {
       exa
       file
       fd
+      gcc
       gnumake
       killall
       htop
       lsof
       nix-prefetch-github
       openssl
+      perl
       ripgrep
       unzip
       wget
