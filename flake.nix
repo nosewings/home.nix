@@ -65,6 +65,7 @@
         , agda ? false
         , haskell ? false
         , html ? false
+        , java ? false
         , javascript ? false
         , python ? false
         , rust ? false
@@ -84,7 +85,7 @@
           };
           extraSpecialArgs = {
             inherit desktop hardware leisure ssh xsession agda haskell html
-              javascript python rust shell tex yaml;
+              java javascript python rust shell tex yaml;
           };
         };
     in {
@@ -102,6 +103,7 @@
         haskell = true;
         html = true;
         javascript = true;
+        java = true;
         python = true;
         rust = true;
         tex = true;
@@ -135,6 +137,8 @@
         username = "ec2-user";
         homeDirectory = "/home/${username}";
         stateVersion = "22.05";
+        java = true;
+        javascript = true;
       };
     };
 }

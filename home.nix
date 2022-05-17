@@ -1,5 +1,5 @@
 { config, lib, pkgs, hardware, leisure, ssh, xsession,
-  agda, haskell, html, javascript, python, rust, shell, tex, yaml,
+  agda, haskell, html, java, javascript, python, rust, shell, tex, yaml,
   ... }:
 with lib; {
   imports = filter (hasSuffix ".nix") (filesystem.listFilesRecursive
@@ -127,6 +127,9 @@ with lib; {
     enable = true;
   };
   ngpc.languages.html = mkIf html {
+    enable = true;
+  };
+  ngpc.languages.java = mkIf java {
     enable = true;
   };
   ngpc.languages.javascript = mkIf javascript {
