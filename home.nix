@@ -116,6 +116,7 @@ with lib; {
   };
 
   ngpc.programs.direnv.enable = true;
+  ngpc.programs.docker.enable = true;
   ngpc.programs.emacs.enable = true;
   # ngpc.programs.geogebra6.enable = mkIf leisure true;
   ngpc.programs.ssh = mkIf ssh {
