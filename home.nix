@@ -46,6 +46,7 @@ with lib; {
     ]))
   ];
 
+  ngpc.shell = "fish";
   programs.bash = {
     enable = true;
     bashrcExtra = ''
