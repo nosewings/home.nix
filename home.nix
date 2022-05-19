@@ -20,6 +20,7 @@ with lib; {
       gnumake
       killall
       htop
+      inetutils
       lsof
       nix-prefetch-github
       openssl
