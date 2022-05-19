@@ -8,7 +8,6 @@
 (setq frame-resize-pixelwise t
       show-paren-delay 0)
 (column-number-mode)
-(global-display-line-numbers-mode)
 (show-paren-mode)
 
 (setq-default indent-tabs-mode nil)

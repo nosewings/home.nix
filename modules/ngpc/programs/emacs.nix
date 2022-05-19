@@ -2,6 +2,19 @@
 with lib;
 let
   cfg = config.ngpc.programs.emacs;
+  normalModes = [ "prog-mode" "text-mode" ];
+  normalModeHooks = zipAttrsWith (name: values: head values) (flip map normalModes (mode: {
+    "${mode}" = {
+      enable = true;
+      package = null;
+      hook = {
+        "${mode}" = [
+          "display-line-numbers-mode"
+          "ngpc/enable-show-trailing-whitespace"
+        ];
+      };
+    };
+  }));
 in
 {
   options.ngpc.programs.emacs = {
@@ -45,181 +58,184 @@ in
               tool-bar-mode nil)'';
       init = {
         prelude = readFile ./emacs/init/prelude.el;
-        packages = {
-          beacon = {
-            enable = true;
-            config = "(beacon-mode)";
-            custom = {
-              beacon-blink-when-focused = "t";
-            };
-          };
-          company = {
-            enable = true;
-          };
-          company-box = {
-            enable = true;
-            custom = {
-              "company-box-doc-delay" = "0";
-            };
-            hook = {
-              company-mode = [ "company-box-mode" ];
-            };
-          };
-          dashboard = {
-            enable = true;
-            config = "(dashboard-setup-startup-hook)";
-            custom = {
-              dashboard-center-content = "t";
-              dashboard-startup-banner = "'logo";
-              dashboard-set-init-info = "t";
-            };
-            hook = {
-              after-init = [ "dashboard-refresh-buffer" ];
-            };
-          };
-          doom-modeline = {
-            enable = true;
-            config = "(doom-modeline-mode)";
-          };
-          doom-themes = {
-            enable = true;
-            config = "(load-theme 'doom-outrun-electric t)";
-          };
-          explain-pause-mode = {
-            enable = true;
-            config = "(explain-pause-mode)";
-            no-require = false;
-          };
-          flycheck = {
-            enable = true;
-            config = "(global-flycheck-mode)";
-          };
-          gcmh = {
-            enable = true;
-            custom = {
-              gcmh-idle-delay = "1";
-            };
-            hook = {
-              window-setup = [ "gcmh-mode" ];
-            };
-          };
-          git-gutter = {
-            enable = true;
-            config = "(global-git-gutter-mode)";
-          };
-          highlight-indent-guides = {
-            enable = true;
-            custom = {
-              highlight-indent-guides-method = "'character";
-            };
-            hook = {
-              prog-mode = [ "highlight-indent-guides-mode" ];
-            };
-          };
-          highlight-numbers = {
-            enable = true;
-          };
-          hl-todo = {
-            enable = true;
-            config = "(global-hl-todo-mode)";
-          };
-          magit = {
-            enable = true;
-          };
-          nyan-mode = {
-            enable = true;
-            config = "(nyan-mode)";
-          };
-          org = {
-            enable = true;
-            bind = {
-              "" = {
-                "\"C-c o s l\"" = "org-store-link";
+        packages = mkMerge [
+          normalModeHooks
+          {
+            beacon = {
+              enable = true;
+              config = "(beacon-mode)";
+              custom = {
+                beacon-blink-when-focused = "t";
               };
             };
-            hook = {
-              org-mode = [ "auto-fill-mode" ];
+            company = {
+              enable = true;
             };
-            preface = ''
-              (defun ngpc/org-raw-link-at-point ()
-                (let ((ctx (org-element-context)))
-                  (if (not (eq (org-element-type ctx) 'link))
-                      (user-error "No link found")
-                    (org-element-property :raw-link ctx))))
+            company-box = {
+              enable = true;
+              custom = {
+                "company-box-doc-delay" = "0";
+              };
+              hook = {
+                company-mode = [ "company-box-mode" ];
+              };
+            };
+            dashboard = {
+              enable = true;
+              config = "(dashboard-setup-startup-hook)";
+              custom = {
+                dashboard-center-content = "t";
+                dashboard-startup-banner = "'logo";
+                dashboard-set-init-info = "t";
+              };
+              hook = {
+                after-init = [ "dashboard-refresh-buffer" ];
+              };
+            };
+            doom-modeline = {
+              enable = true;
+              config = "(doom-modeline-mode)";
+            };
+            doom-themes = {
+              enable = true;
+              config = "(load-theme 'doom-outrun-electric t)";
+            };
+            explain-pause-mode = {
+              enable = true;
+              config = "(explain-pause-mode)";
+              no-require = false;
+            };
+            flycheck = {
+              enable = true;
+              config = "(global-flycheck-mode)";
+            };
+            gcmh = {
+              enable = true;
+              custom = {
+                gcmh-idle-delay = "1";
+              };
+              hook = {
+                window-setup = [ "gcmh-mode" ];
+              };
+            };
+            git-gutter = {
+              enable = true;
+              config = "(global-git-gutter-mode)";
+            };
+            highlight-indent-guides = {
+              enable = true;
+              custom = {
+                highlight-indent-guides-method = "'character";
+              };
+              hook = {
+                prog-mode = [ "highlight-indent-guides-mode" ];
+              };
+            };
+            highlight-numbers = {
+              enable = true;
+            };
+            hl-todo = {
+              enable = true;
+              config = "(global-hl-todo-mode)";
+            };
+            magit = {
+              enable = true;
+            };
+            nyan-mode = {
+              enable = true;
+              config = "(nyan-mode)";
+            };
+            org = {
+              enable = true;
+              bind = {
+                "" = {
+                  "\"C-c o s l\"" = "org-store-link";
+                };
+              };
+              hook = {
+                org-mode = [ "auto-fill-mode" ];
+              };
+              preface = ''
+                (defun ngpc/org-raw-link-at-point ()
+                  (let ((ctx (org-element-context)))
+                    (if (not (eq (org-element-type ctx) 'link))
+                        (user-error "No link found")
+                      (org-element-property :raw-link ctx))))
 
-              (defun ngpc/org-copy-raw-link-at-point ()
-                (interactive)
-                (kill-new (ngpc/org-raw-link-at-point)))'';
-          };
-          org-roam = {
-            enable = true;
-            bind = {
-              "" = {
-                "\"C-c o r a\"" = "org-roam-alias-add";
-                "\"C-c o r b\"" = "org-roam-buffer-toggle";
-                "\"C-c o r d\"" = "org-roam-db-sync";
-                "\"C-c o r f\"" = "org-roam-node-find";
-                "\"C-c o r i\"" = "org-roam-node-insert";
-                "\"C-c o r t\"" = "org-roam-tag-add";
+                (defun ngpc/org-copy-raw-link-at-point ()
+                  (interactive)
+                  (kill-new (ngpc/org-raw-link-at-point)))'';
+            };
+            org-roam = {
+              enable = true;
+              bind = {
+                "" = {
+                  "\"C-c o r a\"" = "org-roam-alias-add";
+                  "\"C-c o r b\"" = "org-roam-buffer-toggle";
+                  "\"C-c o r d\"" = "org-roam-db-sync";
+                  "\"C-c o r f\"" = "org-roam-node-find";
+                  "\"C-c o r i\"" = "org-roam-node-insert";
+                  "\"C-c o r t\"" = "org-roam-tag-add";
+                };
+              };
+              custom = {
+                org-roam-directory = "\"~/org/roam\"";
+              };
+              init = "(setq org-roam-v2-ack t)";
+              config = "(org-roam-setup)";
+              preface = ''
+                (defun ngpc/org-roam-load-directory (dir)
+                  (interactive "DLoad directory: ")
+                  (setq org-roam-directory dir)
+                  (org-roam-db-sync))'';
+            };
+            pkg-info = {
+              enable = true;
+            };
+            projectile = {
+              enable = true;
+              bind-keymap = {
+                "" = {
+                  "\"C-c p\"" = "projectile-command-map";
+                };
+              };
+              config = ''
+                (projectile-mode)
+                (advice-add #'ngpc/rename-current-buffer-file :after #'ngpc/rename-current-buffer-file/projectile-invalidate-cache)'';
+              preface = ''
+                (defun ngpc/rename-current-buffer-file/projectile-invalidate-cache ()
+                  (when (projectile-project-p)
+                    (call-interactively #'projectile-invalidate-cache)))'';
+            };
+            prog-mode = {
+              enable = true;
+              package = null;
+              hook = {
+                prog-mode = [ "ngpc/enable-show-trailing-whitespace" ];
               };
             };
-            custom = {
-              org-roam-directory = "\"~/org/roam\"";
+            restart-emacs = {
+              enable = true;
             };
-            init = "(setq org-roam-v2-ack t)";
-            config = "(org-roam-setup)";
-            preface = ''
-              (defun ngpc/org-roam-load-directory (dir)
-                (interactive "DLoad directory: ")
-                (setq org-roam-directory dir)
-                (org-roam-db-sync))'';
-          };
-          pkg-info = {
-            enable = true;
-          };
-          projectile = {
-            enable = true;
-            bind-keymap = {
-              "" = {
-                "\"C-c p\"" = "projectile-command-map";
-              };
+            savehist = {
+              enable = true;
+              package = null;
+              config = "(savehist-mode)";
             };
-            config = ''
-              (projectile-mode)
-              (advice-add #'ngpc/rename-current-buffer-file :after #'ngpc/rename-current-buffer-file/projectile-invalidate-cache)'';
-            preface = ''
-              (defun ngpc/rename-current-buffer-file/projectile-invalidate-cache ()
-                (when (projectile-project-p)
-                  (call-interactively #'projectile-invalidate-cache)))'';
-          };
-          prog-mode = {
-            enable = true;
-            package = null;
-            hook = {
-              prog-mode = [ "ngpc/enable-show-trailing-whitespace" ];
+            unicode-fonts = {
+              enable = true;
+              config = "(unicode-fonts-setup)";
             };
-          };
-          restart-emacs = {
-            enable = true;
-          };
-          savehist = {
-            enable = true;
-            package = null;
-            config = "(savehist-mode)";
-          };
-          unicode-fonts = {
-            enable = true;
-            config = "(unicode-fonts-setup)";
-          };
-          winum = {
-            enable = true;
-            config = "(winum-mode)";
-          };
-          ws-butler = {
-            enable = true;
-            config = "(ws-butler-global-mode)";
-          };
-        };
+            winum = {
+              enable = true;
+              config = "(winum-mode)";
+            };
+            ws-butler = {
+              enable = true;
+              config = "(ws-butler-global-mode)";
+            };
+          }
+        ];
       };
     };
   };
