@@ -102,8 +102,8 @@
         agda = true;
         haskell = true;
         html = true;
-        javascript = true;
         java = true;
+        javascript = true;
         python = true;
         rust = true;
         tex = true;
