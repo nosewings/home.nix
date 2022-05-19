@@ -2,7 +2,7 @@
 with lib;
 let
   cfg = config.ngpc.programs.emacs;
-  normalModes = [ "prog-mode" "text-mode" ];
+  normalModes = [ "conf-mode" "prog-mode" "text-mode" ];
   normalModeHooks = zipAttrsWith (name: values: head values) (flip map normalModes (mode: {
     "${mode}" = {
       enable = true;
