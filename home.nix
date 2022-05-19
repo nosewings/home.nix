@@ -49,15 +49,15 @@ with lib; {
     enable = true;
     bashrcExtra = ''
       if [[ -f ~/.bashrc.local ]]; then
-        source ~/.bashrc.local
+          source ~/.bashrc.local
       fi
     '';
   };
   programs.zsh = {
     enable = true;
     initExtra = ''
-      if [[ -f ~/.bashrc.local ]]; then
-        source ~/.zshrc.local
+      if [[ -f ~/.zshrc.local ]]; then
+          source ~/.zshrc.local
       fi
     '';
   };
@@ -67,7 +67,7 @@ with lib; {
       set fish_greeting
     '';
     shellInit = ''
-      test -f ~/.config/fish/config.fish.local; and begin
+      if test -f ~/.config/fish/config.fish.local
           source ~/.config/fish/config.fish.local
       end
     '';
