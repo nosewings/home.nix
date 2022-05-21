@@ -109,6 +109,9 @@ in
               enable = true;
               config = "(global-flycheck-mode)";
             };
+            font-lock-studio = {
+              enable = true;
+            };
             gcmh = {
               enable = true;
               custom = {
