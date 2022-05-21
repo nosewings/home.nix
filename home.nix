@@ -79,7 +79,7 @@ with lib; {
     enable = true;
     terminal = "tmux-256color";
     extraConfig = ''
-      set -ga terminal-overrides ',*256col*:Tc'
+      set -ga terminal-overrides ',*256color:Tc,xterm-24bit:Tc'
     '';
   };
 
