@@ -13,7 +13,11 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     {
-      home.packages = with pkgs; [ cabal2nix ];
+      home.packages = with pkgs; [
+        cabal-install
+        cabal2nix
+        ghc
+      ];
       programs.emacs.init.init.packages = {
         haskell-mode = {
           enable = true;
@@ -21,6 +25,9 @@ in
       };
     }
     (mkIf config.ngpc.programs.emacs.lsp.enable {
+      home.packages = with pkgs; [
+        haskell-language-server
+      ];
       programs.emacs.init.init.packages = {
         haskell-mode = {
           hook = {

@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 let
   cfg = config.ngpc.languages.tex;
@@ -9,6 +9,9 @@ in
   };
 
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      texlive.combined.scheme-full
+    ];
     programs.emacs.init.init.packages = {
       tex = {
         enable = true;
