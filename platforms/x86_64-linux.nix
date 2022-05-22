@@ -1,10 +1,5 @@
 { lib, pkgs, desktop, hardware, leisure, xsession, ... }:
 {
-  home.sessionVariables = {
-    EDITOR = "emacsclient -q emacs";
-    VISUAL = "emacsclient -cq emacs";
-  };
-
   xdg.userDirs = lib.mkIf desktop {
     enable = true;
     createDirectories = true;

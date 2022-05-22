@@ -23,6 +23,9 @@ in
 
   config = mkIf cfg.enable {
     programs.emacs.enable = true;
+    services.emacs.enable = true;
+    services.emacs.client.enable = true;
+    services.emacs.defaultEditor = true;
     programs.emacs.overrides = self: super: {
       explain-pause-mode = self.trivialBuild {
         pname = "explain-pause-mode";
