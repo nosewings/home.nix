@@ -49,5 +49,9 @@
   ngpc.programs.steam.enable = lib.mkIf leisure true;
   ngpc.programs.zoom.enable = lib.mkIf leisure true;
 
+  services.emacs.enable = true;
+  services.emacs.client.enable = true;
+  services.emacs.defaultEditor = true;
+
   ngpc.services.fluidsynth.enable = lib.mkIf leisure true;
 }
