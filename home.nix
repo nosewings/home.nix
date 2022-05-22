@@ -94,22 +94,6 @@ with lib; {
     delta.enable = true;
     userEmail = "coltharp@pdx.edu";
     userName = "Nicholas Coltharp";
-    ignores = [
-      "*.aux"
-      "*.bbl"
-      "*.bcf"
-      "*.blg"
-      "*.log"
-      "*.out"
-      "*.pdf"
-      "*.run.xml"
-      ".direnv/"
-      "__pycache__/"
-      "auto/"
-      "dist/"
-      "dist-newstyle/"
-      "node_modules/"
-    ];
     extraConfig = {
       init = {
         defaultBranch = "main";

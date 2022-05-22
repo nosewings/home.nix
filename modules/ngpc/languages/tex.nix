@@ -12,6 +12,17 @@ in
     home.packages = with pkgs; [
       texlive.combined.scheme-full
     ];
+    programs.git.ignores = [
+      "*.aux"
+      "*.bbl"
+      "*.bcf"
+      "*.blg"
+      "*.log"
+      "*.out"
+      "*.pdf"
+      "*.run.xml"
+      "auto/"
+    ];
     programs.emacs.init.init.packages = {
       tex = {
         enable = true;

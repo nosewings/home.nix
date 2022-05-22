@@ -12,6 +12,9 @@ in
       openjdk11
       maven
     ];
+    programs.git.ignores = [
+      "*.class"
+    ];
     programs.emacs.init.init.packages = {
       lsp-java = {
         enable = true;

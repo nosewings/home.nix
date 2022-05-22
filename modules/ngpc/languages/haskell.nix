@@ -28,6 +28,10 @@ in
       home.packages = with pkgs; [
         haskell-language-server
       ];
+      programs.git.ignores = [
+        "dist/"
+        "dist-newstyle/"
+      ];
       programs.emacs.init.init.packages = {
         haskell-mode = {
           hook = {

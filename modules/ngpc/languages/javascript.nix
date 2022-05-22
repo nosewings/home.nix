@@ -11,6 +11,9 @@ in
     home.packages = with pkgs; [
       nodejs
     ];
+    programs.git.ignores = [
+      "node_modules/"
+    ];
     programs.emacs.init.init.packages = {
       js2-mode = {
         enable = true;

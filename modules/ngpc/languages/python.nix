@@ -17,6 +17,10 @@ in
         python310
         python310Packages.ipython
       ];
+      programs.git.ignores = [
+        "__pycache__/"
+        "*.pyc"
+      ];
       programs.emacs.init.init.packages = {
         python = {
           enable = true;
