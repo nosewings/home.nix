@@ -13,7 +13,10 @@ in
       home.packages = with pkgs; [ pyright ];
     }
     (mkIf config.ngpc.programs.emacs.lsp.enable {
-      home.packages = with pkgs; [ python310 python310Packages.ipython ];
+      home.packages = with pkgs; [
+        python310
+        python310Packages.ipython
+      ];
       programs.emacs.init.init.packages = {
         python = {
           enable = true;
