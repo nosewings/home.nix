@@ -25,7 +25,6 @@ with lib; {
       nix-prefetch-github
       openssl
       perl
-      ripgrep
       unzip
       wget
       (with xorg; [
@@ -105,6 +104,7 @@ with lib; {
   ngpc.programs.docker.enable = true;
   ngpc.programs.emacs.enable = true;
   # ngpc.programs.geogebra6.enable = mkIf leisure true;
+  ngpc.programs.ripgrep.enable = true;
   ngpc.programs.ssh = mkIf ssh {
     enable = true;
   };
