@@ -93,6 +93,9 @@ with lib; {
     delta.enable = true;
     userEmail = "coltharp@pdx.edu";
     userName = "Nicholas Coltharp";
+    aliases = {
+      root = "rev-parse --show-toplevel";
+    };
     extraConfig = {
       init = {
         defaultBranch = "main";
