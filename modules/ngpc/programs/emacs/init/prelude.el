@@ -78,3 +78,9 @@
   (dolist (atheme custom-enabled-themes)
     (when (not (eq atheme theme))
       (disable-theme atheme))))
+
+(defconst ngpc/quit-prompts
+  '("L'important n'est pas la chute: c'est l'atterrissage! "))
+(setq confirm-kill-emacs
+      (defun ngpc/confirm-kill-emacs (_)
+        (yes-or-no-p (seq-random-elt ngpc/quit-prompts))))
