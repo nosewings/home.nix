@@ -102,6 +102,7 @@ with lib; {
       };
     };
   };
+  programs.starship.enable = true;
 
   ngpc.programs.direnv.enable = true;
   ngpc.programs.docker.enable = true;

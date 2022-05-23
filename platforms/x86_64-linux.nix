@@ -37,8 +37,6 @@
   programs.firefox.enable = lib.mkIf desktop true;
   home.sessionVariables.MOZ_ENABLE_WAYLAND = "1";
 
-  programs.starship.enable = true;
-
   ngpc.fonts.enable = true;
   ngpc.plasma.enable = lib.mkIf xsession true;
 
