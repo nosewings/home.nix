@@ -1,7 +1,13 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, system, ... }:
 with lib;
 let
   cfg = config.ngpc.languages.haskell;
+  allHlsGhcVersions = [ "884" "8107" "902" "922" ];
+  systemHlsGhcVersions =
+    if system == "aarch64-darwin" then
+      filter (x: x != "884") allHlsGhcVersions
+    else
+      allHlsGhcVersions;
 in
 {
   options.ngpc.languages.haskell = {
@@ -30,7 +36,7 @@ in
     }
     (mkIf config.ngpc.programs.emacs.lsp.enable {
       home.packages = with pkgs; [
-        haskell-language-server
+        (haskell-language-server.override { supportedGhcVersions = systemHlsGhcVersions; })
       ];
       programs.emacs.init.init.packages = {
         haskell-mode = {

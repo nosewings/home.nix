@@ -123,6 +123,7 @@
         stateVersion = "22.05";
         hardware = true;
         ssh = true;
+        haskell = true;
         html = true;
         java = true;
         javascript = true;
