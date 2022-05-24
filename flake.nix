@@ -84,7 +84,8 @@
             };
           };
           extraSpecialArgs = {
-            inherit desktop hardware leisure ssh xsession
+            inherit system
+              desktop hardware leisure ssh xsession
               agda haskell html java javascript python rust shell tex yaml;
           };
         };
