@@ -88,3 +88,6 @@
 
 (defalias 'rm #'delete-file)
 (defalias 'rmdir #'delete-directory)
+
+(global-set-key (kbd "C-;") #'previous-buffer)
+(global-set-key (kbd "C-'") #'next-buffer)
