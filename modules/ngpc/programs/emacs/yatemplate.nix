@@ -14,11 +14,10 @@ in
 
   config = mkIf cfg.enable {
     ngpc.programs.emacs.autoinsert.enable = true;
+    ngpc.programs.emacs.yasnippet.enable = true;
     programs.emacs.init.init.packages.yatemplate = {
       enable = true;
-      config = ''
-        (yas-global-mode)
-        (yatemplate-fill-alist)'';
+      config = "(yatemplate-fill-alist)";
     };
     home.file = flip mapAttrs' cfg.templateFiles (file: source:
        nameValuePair ".config/emacs/templates/${file}" { inherit source; }
