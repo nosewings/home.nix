@@ -80,10 +80,11 @@
       (disable-theme atheme))))
 
 (defconst ngpc/quit-prompts
-  '("L'important n'est pas la chute: c'est l'atterrissage! "))
-(setq confirm-kill-emacs
-      (defun ngpc/confirm-kill-emacs (_)
-        (yes-or-no-p (seq-random-elt ngpc/quit-prompts))))
+  '("L'important n'est pas la chute: c'est l'atterrissage! "
+    "Take care. It's a desert out there... "))
+(defun ngpc/confirm-kill-emacs (_)
+  (yes-or-no-p (seq-random-elt ngpc/quit-prompts)))
+(setq confirm-kill-emacs #'ngpc/confirm-kill-emacs)
 
 (defalias 'rm #'delete-file)
 (defalias 'rmdir #'delete-directory)
