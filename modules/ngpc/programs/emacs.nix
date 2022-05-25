@@ -144,6 +144,27 @@ in
             magit = {
               enable = true;
             };
+            nxml-mode = {
+              enable = true;
+              package = null;
+              bind = {
+                nxml-mode-map = {
+                  "\"C-c C-e\"" = "ngpc/nxml-insert-tag";
+                };
+              };
+              preface = ''
+                (defun ngpc/nxml-insert-tag (tag &optional arg)
+                  (interactive "MTag: \nP")
+                  (let ((start (point)))
+                    (insert "<" tag ">")
+                    (unless arg (newline))
+                    (let ((end (save-excursion
+                                 (unless arg (newline))
+                                 (insert "</" tag ">")
+                                 (point))))
+                      (indent-region start end)
+                      (indent-for-tab-command))))'';
+            };
             nyan-mode = {
               enable = true;
               config = "(nyan-mode)";
