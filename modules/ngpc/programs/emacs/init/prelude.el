@@ -84,3 +84,6 @@
 (setq confirm-kill-emacs
       (defun ngpc/confirm-kill-emacs (_)
         (yes-or-no-p (seq-random-elt ngpc/quit-prompts))))
+
+(defalias 'rm #'delete-file)
+(defalias 'rmdir #'delete-directory)
