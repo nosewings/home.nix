@@ -13,6 +13,9 @@ in
       programs.emacs.init.init.packages = {
         lsp-mode = {
           enable = true;
+          custom = {
+            lsp-keymap-prefix = "\"C-c l\"";
+          };
         };
         lsp-ui = {
           enable = true;
