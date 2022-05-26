@@ -101,7 +101,7 @@ in
               config = "(load-theme 'doom-outrun-electric t)";
             };
             explain-pause-mode = {
-              enable = true;
+              enable = false;
               config = "(explain-pause-mode)";
               no-require = false;
             };
