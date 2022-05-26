@@ -14,6 +14,7 @@ in
     ];
     programs.git.ignores = [
       "*.class"
+      "*.jar"
     ];
     programs.emacs.init.init.packages = {
       lsp-java = {
