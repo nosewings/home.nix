@@ -72,6 +72,17 @@ with lib; {
           source ~/.config/fish/config.fish.local
       end
     '';
+    plugins = [
+      {
+        name = "replay";
+        src = pkgs.fetchFromGitHub {
+          owner = "jorgebucaran";
+          repo = "replay.fish";
+          rev = "a2eef7319adb1c5cd00a4454bb29a9e072d51a53";
+          sha256 = "ovxpzHC9coRtm/v3rQlPlX1NEe22+WLA7HpnfqtUJU8=";
+        };
+      }
+    ];
   };
 
   programs.tmux = {
