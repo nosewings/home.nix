@@ -109,6 +109,8 @@ with lib; {
       root = "rev-parse --show-toplevel";
     };
     extraConfig = {
+      commit.cleanup = "whitespace";
+      commit.template = "/dev/null";
       init = {
         defaultBranch = "main";
       };
