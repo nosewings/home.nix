@@ -101,6 +101,7 @@ with lib; {
 
   programs.git = {
     enable = true;
+    package = pkgs.gitAndTools.gitFull;
     delta.enable = true;
     userEmail = "coltharp@pdx.edu";
     userName = "Nicholas Coltharp";
