@@ -144,6 +144,16 @@ in
               enable = true;
               config = "(global-hl-todo-mode)";
             };
+            lorem-ipsum = {
+              enable = true;
+              bind = {
+                "" = {
+                  "\"C-c i l p\"" = "lorem-ipsum-insert-paragraphs";
+                  "\"C-c i l s\"" = "lorem-ipsum-insert-sentences";
+                  "\"C-c i l l\"" = "lorem-ipsum-insert-list";
+                };
+              };
+            };
             magit = {
               enable = true;
               custom = {
