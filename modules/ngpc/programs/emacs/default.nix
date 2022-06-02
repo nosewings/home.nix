@@ -57,7 +57,7 @@ in
         (setq menu-bar-mode nil
               tool-bar-mode nil)'';
       init = {
-        prelude = readFile ./emacs/init/prelude.el;
+        prelude = readFile ./init/prelude.el;
         packages = mkMerge [
           normalModeHooks
           {
