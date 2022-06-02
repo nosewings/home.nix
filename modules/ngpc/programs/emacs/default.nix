@@ -136,6 +136,9 @@ in
             };
             highlight-numbers = {
               enable = true;
+              hook = {
+                prog-mode = [ "highlight-numbers-mode" ];
+              };
             };
             hl-todo = {
               enable = true;
