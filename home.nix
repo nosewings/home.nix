@@ -115,7 +115,14 @@ with lib; {
       };
     };
   };
-  programs.starship.enable = true;
+  programs.starship = {
+    enable = true;
+    settings = {
+      git_branch = {
+        always_show_remote = true;
+      };
+    };
+  };
 
   ngpc.programs.direnv.enable = true;
   ngpc.programs.docker.enable = true;
