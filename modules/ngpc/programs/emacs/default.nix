@@ -158,7 +158,6 @@ in
               };
               preface = ''
                 (defun ngpc/git-commit-mode-hook ()
-                  (markdown-mode)
                   (setq-local fill-column 72))'';
             };
             nxml-mode = {
