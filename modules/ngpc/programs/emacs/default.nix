@@ -80,6 +80,9 @@ in
                 company-mode = [ "company-box-mode" ];
               };
             };
+            dash = {
+              enable = true;
+            };
             dashboard = {
               enable = true;
               config = "(dashboard-setup-startup-hook)";
@@ -265,6 +268,9 @@ in
               };
             };
             restart-emacs = {
+              enable = true;
+            };
+            s = {
               enable = true;
             };
             savehist = {
