@@ -4,7 +4,7 @@ let
   cfg = config.ngpc.languages.xml;
 in
 {
-  options.ngpc.languages.nix = {
+  options.ngpc.languages.xml = {
     enable = mkEnableOption "XML config";
   };
 
