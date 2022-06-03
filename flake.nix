@@ -141,6 +141,6 @@
         stateVersion = "22.05";
         java = true;
         javascript = true;
-       };
+      };
     };
 }
