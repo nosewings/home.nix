@@ -73,7 +73,8 @@
         # include shell by default.
         , shell ? true
         , tex ? false
-        , yaml ? false
+        # YAML support costs us essentially nothing.
+        , yaml ? true
         # XML support costs us essentially nothing.
         , xml ? true
         , config ? { }
@@ -110,7 +111,6 @@
         python = true;
         rust = true;
         tex = true;
-        yaml = true;
         config = {
           xresources.properties = {
             "Xft.dpi" = 144;
@@ -132,7 +132,6 @@
         python = true;
         rust = true;
         tex = true;
-        yaml = true;
       };
 
       homeConfigurations.ec2 = mkConfiguration rec {
