@@ -74,6 +74,8 @@
         , shell ? true
         , tex ? false
         , yaml ? false
+        # XML support costs us essentially nothing.
+        , xml ? true
         , config ? { }
         }: home-manager.lib.homeManagerConfiguration {
           inherit system username homeDirectory stateVersion;
@@ -86,7 +88,7 @@
           extraSpecialArgs = {
             inherit system
               desktop hardware leisure ssh xsession
-              agda haskell html java javascript python rust shell tex yaml;
+              agda haskell html java javascript python rust shell tex xml yaml;
           };
         };
     in {

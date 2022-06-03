@@ -1,7 +1,7 @@
 {
   config, lib, pkgs,
   hardware, leisure, ssh, xsession,
-  agda, haskell, html, java, javascript, python, rust, shell, tex, yaml,
+  agda, haskell, html, java, javascript, python, rust, shell, tex, xml, yaml,
   ...
 }:
 with lib; {
@@ -163,6 +163,9 @@ with lib; {
     enable = true;
   };
   ngpc.languages.tex = mkIf tex {
+    enable = true;
+  };
+  ngpc.languages.xml = mkIf xml {
     enable = true;
   };
   ngpc.languages.yaml = mkIf yaml {
