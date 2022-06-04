@@ -151,11 +151,23 @@ in
     };
 
     init = {
+      # The obvious generalization here is to allow an arbitrary
+      # number of text/packages segments, probably ordered based on
+      # dict keys in order to allow merging package configs defined in
+      # different places.  But that comes with serious usability
+      # problems; e.g., how do you remember what key to use when
+      # you're adding to a package config?  So I'm taking a "less is
+      # more" approach here and just allowing an extra set of
+      # packages.  I'll revisit the general approach if I ever end up
+      # needing more than that.
+      earlyPackages = mkOption {
+        type = attrsOf packageType;
+        default = {};
+      };
       prelude = mkOption {
         type = lines;
         default = "";
       };
-
       packages = mkOption {
         type = attrsOf packageType;
         default = {};
@@ -167,11 +179,15 @@ in
     programs.emacs.enable = true;
     programs.emacs.extraPackages = epkgs:
       let
-        enabledPackages = filterAttrs (_: v: v.enable) cfg.init.packages;
-        hasPackages = enabledPackages != {};
-        hasBinds = any (pkg: pkg.bind != {} || pkg.bind-keymap != {}) (attrValues enabledPackages);
+        getEnabledPackages = filterAttrs (_: v: v.enable);
+        enabledEarlyPackages = getEnabledPackages cfg.init.earlyPackages;
+        enabledPackages = getEnabledPackages cfg.init.packages;
+        allEnabledPackages = enabledEarlyPackages // enabledPackages;
+        hasPackages = allEnabledPackages != {};
+        hasBinds = any (pkg: pkg.bind != {} || pkg.bind-keymap != {}) (attrValues allEnabledPackages);
         dependencies =
-          optional hasPackages epkgs.use-package ++ optional hasBinds epkgs.bind-key ++ concatLists (mapAttrsToList (_: v: optional (v.package != null) (v.package epkgs)) enabledPackages);
+          optional hasPackages epkgs.use-package ++ optional hasBinds epkgs.bind-key ++ concatLists (mapAttrsToList (_: v: optional (v.package != null) (v.package epkgs)) allEnabledPackages);
+        mkPackagesString = pkgs: concatStringsSep "\n\n" (mapAttrsToList mkPackageString pkgs);
         mkInitPackage = baseName: packages: srcParts:
           let
             rawSrc = concatStringsSep "\n\n" (filter (part: part != "") srcParts);
@@ -197,12 +213,13 @@ in
 
         emacs-init = mkInitPackage "init" dependencies [
           ";;; -*- lexical-binding: t; -*-"
-          cfg.init.prelude
           (optionalString hasPackages ''
             (eval-when-compile
               (require 'use-package))'')
           (optionalString hasBinds "(require 'bind-key)")
-          (concatStringsSep "\n\n" (mapAttrsToList mkPackageString enabledPackages))
+          (mkPackagesString enabledEarlyPackages)
+          cfg.init.prelude
+          (mkPackagesString enabledPackages)
           "(provide 'emacs-init)"
         ];
       in

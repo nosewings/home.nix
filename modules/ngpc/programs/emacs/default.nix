@@ -57,6 +57,14 @@ in
         (setq menu-bar-mode nil
               tool-bar-mode nil)'';
       init = {
+        earlyPackages = {
+          dash = {
+            enable = true;
+          };
+          s = {
+            enable = true;
+          };
+        };
         prelude = readFile ./init/prelude.el;
         packages = mkMerge [
           normalModeHooks
@@ -79,9 +87,6 @@ in
               hook = {
                 company-mode = [ "company-box-mode" ];
               };
-            };
-            dash = {
-              enable = true;
             };
             dashboard = {
               enable = true;
@@ -268,9 +273,6 @@ in
               };
             };
             restart-emacs = {
-              enable = true;
-            };
-            s = {
               enable = true;
             };
             savehist = {
