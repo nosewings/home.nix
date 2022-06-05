@@ -70,14 +70,15 @@
       (kill-new (prin1-to-string (eval (read (buffer-substring (region-beginning) (region-end)))))))))
 (global-set-key (kbd "C-x C-e") #'ngpc/eval-last-sexp)
 
-(defun ngpc/switch-theme (theme)
-  (interactive "SSwitch to theme: ")
-  ;; Try to enable the new theme first: if it doesn't exist, we don't
-  ;; want to disable the current themes.
-  (load-theme theme t)
-  (dolist (atheme custom-enabled-themes)
-    (when (not (eq atheme theme))
-      (disable-theme atheme))))
+(defun ngpc/switch-theme (theme-name)
+  (interactive (list (completing-read "Switch to theme: " (custom-available-themes))))
+  (let ((theme (intern theme-name)))
+    ;; Try to enable the new theme first: if it doesn't exist, we
+    ;; don't want to disable the current themes.
+    (load-theme theme t)
+    (dolist (atheme custom-enabled-themes)
+      (when (not (eq atheme theme))
+        (disable-theme atheme)))))
 
 (defconst ngpc/quit-prompts
   '("L'important n'est pas la chute: c'est l'atterrissage! "
