@@ -164,6 +164,11 @@ in
             };
             magit = {
               enable = true;
+              bind = {
+                "" = {
+                  "\"C-c g\"" = "magit-file-dispatch";
+                };
+              };
               custom = {
                 git-commit-major-mode = "#'markdown-mode";
                 git-commit-summary-max-length = "50";
