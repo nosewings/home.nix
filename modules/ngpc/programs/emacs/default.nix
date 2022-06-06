@@ -284,7 +284,7 @@ in
               config = "(solaire-global-mode)";
             };
             unicode-fonts = {
-              enable = true;
+              enable = false;
               config = "(unicode-fonts-setup)";
             };
             winum = {
