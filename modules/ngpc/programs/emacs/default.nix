@@ -131,6 +131,9 @@ in
               config = "(explain-pause-mode)";
               no-require = false;
             };
+            fish-mode = {
+              enable = true;
+            };
             flycheck = {
               enable = true;
               config = "(global-flycheck-mode)";
