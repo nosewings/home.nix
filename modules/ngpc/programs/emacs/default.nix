@@ -60,12 +60,15 @@ in
         earlyPackages = {
           dash = {
             enable = true;
+            no-require = false;
           };
           f = {
             enable = true;
+            no-require = false;
           };
           s = {
             enable = true;
+            no-require = false;
           };
         };
         prelude = readFile ./init/prelude.el;
