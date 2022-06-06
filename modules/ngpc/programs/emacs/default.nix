@@ -40,6 +40,7 @@ in
     ngpc.programs.emacs.completion = "vertico";
     ngpc.programs.emacs.circe.enable = true;
     ngpc.programs.emacs.lsp.enable = true;
+    ngpc.programs.emacs.magit.enable = true;
     ngpc.programs.emacs.projectile.enable = true;
     ngpc.programs.emacs.treemacs.enable = true;
     ngpc.programs.emacs.vterm.enable = true;
@@ -175,27 +176,6 @@ in
                   "\"C-c i l l\"" = "lorem-ipsum-insert-list";
                 };
               };
-            };
-            magit = {
-              enable = true;
-              bind = {
-                "" = {
-                  "\"C-c g\"" = "magit-file-dispatch";
-                };
-              };
-              custom = {
-                git-commit-major-mode = "#'markdown-mode";
-                git-commit-summary-max-length = "50";
-                # If we try to commit with nothing staged, don't let
-                # us.
-                magit-commit-ask-to-stage = "nil";
-              };
-              hook = {
-                git-commit-mode = [ "ngpc/git-commit-mode-hook" ];
-              };
-              preface = ''
-                (defun ngpc/git-commit-mode-hook ()
-                  (setq-local fill-column 72))'';
             };
             nxml-mode = {
               enable = true;
