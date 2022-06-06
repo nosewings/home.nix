@@ -40,6 +40,7 @@ in
     ngpc.programs.emacs.completion = "vertico";
     ngpc.programs.emacs.circe.enable = true;
     ngpc.programs.emacs.lsp.enable = true;
+    ngpc.programs.emacs.projectile.enable = true;
     ngpc.programs.emacs.treemacs.enable = true;
     ngpc.programs.emacs.vterm.enable = true;
     ngpc.programs.emacs.which-key.enable = true;
@@ -262,21 +263,7 @@ in
             pkg-info = {
               enable = true;
             };
-            projectile = {
-              enable = true;
-              bind-keymap = {
-                "" = {
-                  "\"C-c p\"" = "projectile-command-map";
-                };
-              };
-              config = ''
-                (projectile-mode)
-                (advice-add #'ngpc/rename-current-buffer-file :after #'ngpc/rename-current-buffer-file/projectile-invalidate-cache)'';
-              preface = ''
-                (defun ngpc/rename-current-buffer-file/projectile-invalidate-cache ()
-                  (when (projectile-project-p)
-                    (call-interactively #'projectile-invalidate-cache)))'';
-            };
+
             prog-mode = {
               enable = true;
               package = null;
