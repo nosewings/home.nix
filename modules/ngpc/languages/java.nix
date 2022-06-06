@@ -54,6 +54,7 @@ in
     };
     ngpc.programs.emacs.yatemplate.templateFiles = {
       ":.*.java" = ./templates/template.java;
+      "0:pom.xml" = ./templates/template.pom.xml;
     };
   };
 }
