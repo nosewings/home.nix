@@ -13,6 +13,7 @@ with lib; {
     (with pkgs; flatten [
       atool
       bat
+      cachix
       exa
       file
       fd
