@@ -119,6 +119,7 @@ in
               (mkIf cfg.treemacs.enable {
                 config = "(doom-themes-treemacs-config)";
                 custom = {
+                  doom-themes-treemacs-enable-variable-pitch = "nil";
                   doom-themes-treemacs-theme = "\"doom-colors\"";
                 };
               })
