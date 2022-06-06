@@ -263,7 +263,6 @@ in
             pkg-info = {
               enable = true;
             };
-
             prog-mode = {
               enable = true;
               package = null;

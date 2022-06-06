@@ -82,7 +82,7 @@
 
 (defconst ngpc/quit-prompts
   '("L'important n'est pas la chute: c'est l'atterrissage! "
-    "Take care. It's a desert out there... "))
+    "Take care.  It's a desert out there... "))
 (defun ngpc/confirm-kill-emacs (_)
   (yes-or-no-p (seq-random-elt ngpc/quit-prompts)))
 (setq confirm-kill-emacs #'ngpc/confirm-kill-emacs)
