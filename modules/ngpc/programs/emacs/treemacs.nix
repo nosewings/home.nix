@@ -8,11 +8,19 @@ in
     enable = mkEnableOption "Emacs Treemacs config";
   };
 
-  config = mkIf cfg.enable {
-    programs.emacs.init.init.packages = {
-      treemacs = {
-        enable = true;
+  config = mkIf cfg.enable (mkMerge [
+    {
+      programs.emacs.init.init.packages = {
+        treemacs = {
+          enable = true;
+        };
       };
-    };
-  };
+    }
+    (mkIf config.ngpc.programs.emacs.magit.enable {
+      programs.emacs.init.init.packages.treemacs-magit.enable = true;
+    })
+    (mkIf config.ngpc.programs.emacs.projectile.enable {
+      programs.emacs.init.init.packages.treemacs-projectile.enable = true;
+    })
+  ]);
 }
