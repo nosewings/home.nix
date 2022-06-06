@@ -10,7 +10,7 @@ in
 
   config = mkIf cfg.enable {
     ngpc.programs.emacs.yatemplate.templateFiles = {
-      "00:.*.xml" = ./templates/template.xml;
+      ":.*.xml" = ./templates/template.xml;
     };
   };
 }
