@@ -279,6 +279,10 @@ in
               package = null;
               config = "(savehist-mode)";
             };
+            solaire-mode = {
+              enable = true;
+              config = "(solaire-global-mode)";
+            };
             unicode-fonts = {
               enable = true;
               config = "(unicode-fonts-setup)";
