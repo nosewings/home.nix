@@ -103,10 +103,18 @@ in
               enable = true;
               config = "(doom-modeline-mode)";
             };
-            doom-themes = {
-              enable = true;
-              config = "(load-theme 'doom-outrun-electric t)";
-            };
+            doom-themes = mkMerge [
+              {
+                enable = true;
+                config = "(load-theme 'doom-outrun-electric t)";
+              }
+              (mkIf cfg.treemacs.enable {
+                config = "(doom-themes-treemacs-config)";
+                custom = {
+                  doom-themes-treemacs-theme = "\"doom-colors\"";
+                };
+              })
+            ];
             explain-pause-mode = {
               enable = false;
               config = "(explain-pause-mode)";
