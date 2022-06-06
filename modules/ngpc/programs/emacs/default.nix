@@ -61,6 +61,9 @@ in
           dash = {
             enable = true;
           };
+          f = {
+            enable = true;
+          };
           s = {
             enable = true;
           };
