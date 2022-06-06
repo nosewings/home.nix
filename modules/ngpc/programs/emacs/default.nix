@@ -23,6 +23,7 @@ in
 
   config = mkIf cfg.enable {
     programs.emacs.enable = true;
+    programs.emacs.package = pkgs.emacsNativeComp;
     programs.emacs.overrides = self: super: {
       explain-pause-mode = self.trivialBuild {
         pname = "explain-pause-mode";
