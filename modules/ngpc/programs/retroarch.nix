@@ -9,8 +9,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ retroarch ];
-    nixpkgs.config.retroarch.enableBsnesMercury = true;
-    nixpkgs.config.retroarch.enableSnes9x = true;
+    home.packages = with pkgs; [ retroarchFull ];
   };
 }
