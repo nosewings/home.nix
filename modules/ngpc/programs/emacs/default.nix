@@ -46,6 +46,7 @@ in
     ngpc.programs.emacs.treemacs.enable = true;
     ngpc.programs.emacs.vterm.enable = true;
     ngpc.programs.emacs.which-key.enable = true;
+    ngpc.programs.emacs.yasnippet.enable = true;
     ngpc.programs.emacs.yatemplate.enable = true;
 
     programs.emacs.init = {
