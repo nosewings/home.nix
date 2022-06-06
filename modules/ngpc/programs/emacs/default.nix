@@ -36,8 +36,7 @@ in
       };
     };
 
-    home.packages = with pkgs; [ emacs-all-the-icons-fonts ];
-
+    ngpc.programs.emacs.all-the-icons.enable = true;
     ngpc.programs.emacs.completion = "vertico";
     ngpc.programs.emacs.circe.enable = true;
     ngpc.programs.emacs.lsp.enable = true;
