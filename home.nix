@@ -26,6 +26,7 @@ with lib; {
       nix-prefetch-github
       openssl
       perl
+      pv
       unzip
       wget
       (with xorg; [
