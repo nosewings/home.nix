@@ -1,20 +1,25 @@
 { config, lib, ... }:
 with lib;
 let
-  cfg = config.ngpc.programs.emacs.perspective;
+  cfg = config.ngpc.programs.emacs;
 in
 {
-  options.ngpc.programs.emacs.perspective = {
-    enable = mkEnableOption "Emacs Perspective config";
-  };
-  config = mkIf cfg.enable (mkMerge [
+  config = mkIf (cfg.perspectives == "perspective") (mkMerge [
     {
       programs.emacs.init.init.packages.perspective = {
         enable = true;
         init = "(persp-mode)";
+        config = ''
+          (advice-add #'previous-buffer :around #'ngpc/persp-prev-next-buffer)
+          (advice-add #'next-buffer :around #'ngpc/persp-prev-next-buffer)'';
         custom = {
           persp-mode-prefix-key = "(kbd \"C-c v\")";
         };
+        preface = ''
+          (defun ngpc/persp-prev-next-buffer (orig &rest args)
+            (let ((switch-to-prev-buffer-skip (lambda (window buffer bury-or-kill)
+                                                (not (persp-buffer-list-filter `(,buffer))))))
+              (call-interactively orig args)))'';
       };
     }
     (mkIf (config.ngpc.programs.emacs.completion == "ivy") {

@@ -19,7 +19,7 @@ in
     (mkIf config.ngpc.programs.emacs.magit.enable {
       programs.emacs.init.init.packages.treemacs-magit.enable = true;
     })
-    (mkIf config.ngpc.programs.emacs.perspective.enable {
+    (mkIf (config.ngpc.programs.emacs.perspectives == "perspective") {
       programs.emacs.init.init.packages.treemacs-perspective.enable = true;
     })
     (mkIf config.ngpc.programs.emacs.projectile.enable {

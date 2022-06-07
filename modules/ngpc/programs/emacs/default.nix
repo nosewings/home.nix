@@ -42,7 +42,7 @@ in
     ngpc.programs.emacs.circe.enable = true;
     ngpc.programs.emacs.lsp.enable = true;
     ngpc.programs.emacs.magit.enable = true;
-    ngpc.programs.emacs.perspective.enable = true;
+    ngpc.programs.emacs.perspectives = "persp-mode";
     ngpc.programs.emacs.projectile.enable = true;
     ngpc.programs.emacs.treemacs.enable = true;
     ngpc.programs.emacs.vterm.enable = true;
