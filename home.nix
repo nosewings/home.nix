@@ -14,6 +14,7 @@ with lib; {
       atool
       bat
       cachix
+      clang-tools
       exa
       file
       fd
