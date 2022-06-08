@@ -16,11 +16,11 @@ in
       };
       preface = ''
         (defun ngpc/persp-prev-next-buffer (orig &rest args)
-          (let [switch-to-prev-buffer-skip
-                (ngpc/switch-to-prev-buffer-skip-all
-                 switch-to-prev-buffer-skip
-                 (lambda (window buffer bury-or-kill)
-                   (not (memq buffer (persp-buffers (get-current-persp))))))])
+          (-let [switch-to-prev-buffer-skip
+                 (ngpc/switch-to-prev-buffer-skip-all
+                  switch-to-prev-buffer-skip
+                  (lambda (window buffer bury-or-kill)
+                    (not (memq buffer (persp-buffers (get-current-persp))))))])
           (call-interactively orig args))'';
     };
   };
