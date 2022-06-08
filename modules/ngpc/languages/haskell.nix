@@ -21,7 +21,6 @@ in
     {
       home.packages = with pkgs; [
         cabal-install
-        cabal2nix
         ghc
       ];
       programs.git.ignores = [
@@ -34,6 +33,11 @@ in
         };
       };
     }
+    (mkIf config.ngpc.languages.nix.enable {
+      home.packages = with pkgs; [
+        cabal2nix
+      ];
+    })
     (mkIf config.ngpc.programs.emacs.lsp.enable {
       home.packages = with pkgs; [
         (haskell-language-server.override { supportedGhcVersions = systemHlsGhcVersions; })

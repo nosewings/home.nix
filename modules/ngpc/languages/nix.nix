@@ -13,6 +13,12 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     {
+      home.packages = with pkgs; [
+        nix-prefetch-github
+      ];
+      programs.fish.shellAbbrs = {
+        nix-direnv-flake-init = "nix flake new -t github:nix-community/nix-direnv";
+      };
       programs.emacs.init.init.packages = {
         nix-mode = {
           enable = true;

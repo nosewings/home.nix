@@ -24,7 +24,6 @@ with lib; {
       htop
       inetutils
       lsof
-      nix-prefetch-github
       openssl
       perl
       pv
