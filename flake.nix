@@ -67,6 +67,8 @@
         , html ? false
         , java ? false
         , javascript ? false
+        # We'll always want the ability to configure our system.
+        , nix ? true
         , python ? false
         , rust ? false
         # We'll always want the ability to write scripts, so we
@@ -89,7 +91,7 @@
           extraSpecialArgs = {
             inherit system
               desktop hardware leisure ssh xsession
-              agda haskell html java javascript python rust shell tex xml yaml;
+              agda haskell html java javascript nix python rust shell tex xml yaml;
           };
         };
     in {

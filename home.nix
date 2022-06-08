@@ -1,7 +1,7 @@
 {
   config, lib, pkgs,
   hardware, leisure, ssh, xsession,
-  agda, haskell, html, java, javascript, python, rust, shell, tex, xml, yaml,
+  agda, haskell, html, java, javascript, nix, python, rust, shell, tex, xml, yaml,
   ...
 }:
 with lib; {
@@ -66,9 +66,6 @@ with lib; {
   };
   programs.fish = {
     enable = true;
-    shellAbbrs = {
-      nix-direnv-flake-init = "nix flake new -t github:nix-community/nix-direnv";
-    };
     interactiveShellInit = ''
       set fish_greeting
     '';
@@ -153,7 +150,7 @@ with lib; {
   ngpc.languages.javascript = mkIf javascript {
     enable = true;
   };
-  ngpc.languages.nix = {
+  ngpc.languages.nix = mkIf nix {
     enable = true;
     lsp.enable = true;
   };
