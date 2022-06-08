@@ -65,6 +65,9 @@ with lib; {
   };
   programs.fish = {
     enable = true;
+    shellAbbrs = {
+      nix-direnv-flake-init = "nix flake new -t github:nix-community/nix-direnv";
+    };
     interactiveShellInit = ''
       set fish_greeting
     '';
