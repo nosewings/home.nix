@@ -46,8 +46,16 @@ in
         };
         lsp-haskell = {
           enable = true;
+          custom = {
+            # Default is "haskell-language-server-wrapper", but that's
+            # not what the Nix binary is called.  We don't give an
+            # exact path, becaue it's common for Haskell project to
+            # come with a Nix shell that provides its own hls.
+            lsp-haskell-server-path = "\"haskell-language-server\"";
+          };
         };
       };
-    })
+    }
+    )
   ]);
 }
