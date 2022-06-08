@@ -7,6 +7,11 @@ in
   config = mkIf (cfg.perspectives == "persp-mode") {
     programs.emacs.init.init.packages.persp-mode = {
       enable = true;
+      bind = {
+        persp-mode-map = {
+          "\"C-x b\"" = "persp-switch-to-buffer";
+        };
+      };
       config = ''
         (persp-mode)
         (advice-add #'previous-buffer :around #'ngpc/persp-prev-next-buffer)
