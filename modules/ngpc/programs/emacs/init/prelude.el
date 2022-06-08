@@ -130,3 +130,30 @@ The resulting value will allow switching to a given buffer if and
 only if every member of ARGS would allow it."
   (declare (pure t) (side-effect-free t))
   (apply #'-orfn (-map #'ngpc/switch-to-prev-buffer-skip-function args)))
+
+(defun ngpc/call-process-to-output (program &optional infile &rest args)
+  "Call PROGRAM and capture its outputs.
+
+PROCESS, INFILE, and ARGS are like the corresponding arguments to
+‘call-process’.
+
+Returns a vector [STATUS STDOUT STDERR], where STATUS is the
+process’s exit code, STDOUT is a string containing the entire
+contents of the process’s standard output stream, and STDERR is
+string containing the entire contents of the process’s standard
+error stream."
+  (-let [stdout (make-temp-file "stdout")]
+    (with-temp-buffer
+      (-let [status (apply #'call-process program infile (current-buffer) nil args)]
+        `[,status ,(buffer-string) ,(f-read-text stdout)]))))
+
+(defun ngpc/github-insert-sha256 (owner repo)
+  "Insert the SHA-256 hash for the Github REPO owned by OWNER."
+  (interactive "sOwner: \nsRepo: ")
+  (-let [[status stdout stderr] (ngpc/call-process-to-output "nix-prefetch-github" nil owner repo)]
+    (when (not (eq status 0))
+      (error stdout))  ;; ‘nix-prefetch-github’ prints errors to
+                       ;; stdout for some reason
+    (insert (gethash "sha256" (json-parse-string stdout)))))
+(global-set-key (kbd "C-c i g h") #'ngpc/github-insert-sha256)
+(global-set-key (kbd "C-c i g s") #'ngpc/github-insert-sha256)
