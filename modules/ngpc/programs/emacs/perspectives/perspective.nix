@@ -8,8 +8,8 @@ in
     {
       programs.emacs.init.init.packages.perspective = {
         enable = true;
-        init = "(persp-mode)";
         config = ''
+          (persp-mode)
           (advice-add #'previous-buffer :around #'ngpc/persp-prev-next-buffer)
           (advice-add #'next-buffer :around #'ngpc/persp-prev-next-buffer)'';
         custom = {
