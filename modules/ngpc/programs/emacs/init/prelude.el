@@ -92,3 +92,41 @@
 
 (global-set-key (kbd "C-;") #'previous-buffer)
 (global-set-key (kbd "C-'") #'next-buffer)
+
+(defun ngpc/switch-to-prev-buffer-skip-function (var)
+  "Convert VAR into a function for `switch-to-prev-buffer-skip'."
+  (declare (pure t) (side-effect-free t))
+  (pcase var
+    ;; Always return `nil'.
+    ('nil (-const nil))
+    ;; Test whether any of the buffer's windows belong to the given
+    ;; window's frame.
+    ('this (lambda (window buffer bury-or-kill)
+             (-let [frame (window-frame window)]
+               (--some (eq frame (window-frame it))
+                       (get-buffer-window-list buffer)))))
+    ;; Test whether any of the buffer's windows belong to a visible
+    ;; frame.
+    ('visible (lambda (window buffer bury-or-kill)
+                (--some (eq t (frame-visible-p (window-frame it)))
+                        (get-buffer-window-list buffer))))
+    ;; Test whether any of the buffer's windows belong to a visible or
+    ;; iconified frame.  `frame-visible-t' returns `t' if the frame is
+    ;; visible, `icon' if the frame is iconified, and `nil' otherwise.
+    (0 (lambda (window buffer bury-or-kill)
+         (--some (frame-visible-p (window-frame it))
+                 (get-buffer-window-list buffer))))
+    ;; Test whether the buffer is displayed on any live frame.
+    ('t (lambda (window buffer bury-or-kill)
+          (--some (frame-live-p (window-frame it))
+                  (get-buffer-window-list buffer))))
+    ;; Assume `var' is a function (it should be at this point).
+    (_ var)))
+
+(defun ngpc/switch-to-prev-buffer-skip-all (&rest args)
+  "Conjoin ARGS into a value for `switch-to-prev-buffer-skip'.
+
+The resulting value will allow switching to a given buffer if and
+only if every member of ARGS would allow it."
+  (declare (pure t) (side-effect-free t))
+  (apply #'-orfn (-map #'ngpc/switch-to-prev-buffer-skip-function args)))
