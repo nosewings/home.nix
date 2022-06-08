@@ -49,10 +49,6 @@
         (recentf-remove-if-non-kept current-file)
         (recentf-add-file new-file)))))
 
-(defun ngpc/insert-fake-sha256 ()
-  (interactive)
-  (insert "0000000000000000000000000000000000000000000000000000"))
-
 (defmacro ngpc/with-output-eater (var &rest body)
   (declare (indent 1))
   (let ((tmpvar (make-symbol "tmp")))
