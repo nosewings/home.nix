@@ -146,7 +146,7 @@ error stream."
 (defun ngpc/github-insert-sha256 (owner repo)
   "Insert the SHA-256 hash for the Github REPO owned by OWNER."
   (interactive "sOwner: \nsRepo: ")
-  (-let [[status stdout stderr] (ngpc/call-process-to-output "nix-prefetch-github" nil owner repo)]
+  (-let [[status stdout _] (ngpc/call-process-to-output "nix-prefetch-github" nil owner repo)]
     (when (not (eq status 0))
       (error stdout))  ;; ‘nix-prefetch-github’ prints errors to
                        ;; stdout for some reason
