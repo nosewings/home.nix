@@ -14,6 +14,7 @@ in
           (advice-add #'next-buffer :around #'ngpc/persp-prev-next-buffer)'';
         custom = {
           persp-mode-prefix-key = "(kbd \"C-c v\")";
+          persp-modestring-short = "t";
         };
         preface = ''
           (defun ngpc/persp-prev-next-buffer (orig &rest args)
