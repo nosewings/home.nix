@@ -17,11 +17,11 @@ in
         };
         preface = ''
           (defun ngpc/persp-prev-next-buffer (orig &rest args)
-            (let ((switch-to-prev-buffer-skip
+            (-let [switch-to-prev-buffer-skip
                    (ngpc/switch-to-prev-buffer-skip-all
                     switch-to-prev-buffer-skip
                     (lambda (window buffer bury-or-kill)
-                      (not (persp-buffer-list-filter `(,buffer))))))'';
+                      (not (persp-buffer-list-filter `(,buffer)))))]))'';
       };
     }
     (mkIf (config.ngpc.programs.emacs.completion == "ivy") {
