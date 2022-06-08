@@ -8,6 +8,9 @@ in
     programs.emacs.init.init.packages.persp-mode = {
       enable = true;
       config = "(persp-mode)";
+      custom = {
+        persp-keymap-prefix = "\"C-c v\"";
+      };
     };
   };
 }
