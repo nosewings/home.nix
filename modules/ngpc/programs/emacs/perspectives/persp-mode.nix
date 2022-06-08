@@ -9,7 +9,7 @@ in
       enable = true;
       config = "(persp-mode)";
       custom = {
-        persp-keymap-prefix = "\"C-c v\"";
+        persp-keymap-prefix = "(kbd \"C-c v\")";
       };
     };
   };
