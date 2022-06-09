@@ -16,6 +16,10 @@ let
         type = nullOr (functionTo package);
         default = epkgs: epkgs.${name};
       };
+      after = mkOption {
+        type = listOf str;
+        default = [];
+      };
       bind = mkOption {
         type = attrsOf (attrsOf str);
         default = {};
@@ -80,6 +84,9 @@ let
       ])})"
   );
 
+  mkAfter = after: optionalString (after != []) ''
+    :after ${concatStringsSep " " after}'';
+
   mkBindKeymap = mkBindGeneral "bind-keymap";
 
   mkBind = mkBindGeneral "bind";
@@ -127,6 +134,7 @@ let
 
   mkPackageString = name: package:
     concatStringsSep "\n" (["(use-package ${name}"] ++ filter (x: x != "") [
+      (mkAfter package.after)
       (mkBindKeymap package.bind-keymap)
       (mkBind package.bind)
       (mkCommands package.commands)
