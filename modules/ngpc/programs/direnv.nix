@@ -25,6 +25,7 @@ in
         };
         preface = ''
           (defun ngpc/direnv-update-environment-if-not-remote ()
+            "Call ‘direnv-update-environment’ unless the current file is remote."
             (unless (file-remote-p (buffer-file-name (current-buffer)))
               (direnv-update-environment)))'';
       };

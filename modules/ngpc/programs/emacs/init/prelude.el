@@ -14,6 +14,7 @@
 
 (global-hl-line-mode)
 (defun ngpc/disable-hl-line ()
+  "Disable ‘hl-line-mode’."
   (setq-local global-hl-line-mode nil))
 
 (defun ngpc/enable-show-trailing-whitespace ()
