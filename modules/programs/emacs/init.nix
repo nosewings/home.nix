@@ -45,7 +45,7 @@ let
         default = {};
       };
       defer = mkOption {
-        type = bool;
+        type = oneOf [ bool int ];
         default = false;
       };
       ensure = mkOption {
@@ -110,8 +110,8 @@ let
     :custom
     ${concatStringsSep "\n" (mapAttrsToList (key: value: "(${key} ${value})") custom)}'';
 
-  mkDefer = defer: optionalString defer
-    ":defer ${boolToElisp defer}";
+  mkDefer = defer: optionalString (isInt defer || defer)
+    ":defer ${if isBool defer then boolToElisp defer else toString defer}";
 
   mkEnsure = ensure: optionalString ensure
     ":ensure ${boolToElisp ensure}";
