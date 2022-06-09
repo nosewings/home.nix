@@ -14,7 +14,7 @@ in
   config = mkIf cfg.enable (mkMerge [
     {
       home.packages = with pkgs; [
-        nix-prefetch-github
+        nix-prefetch-git
       ];
       programs.fish.shellAbbrs = {
         nix-direnv-flake-init = "nix flake new -t github:nix-community/nix-direnv";
@@ -22,6 +22,11 @@ in
       programs.emacs.init.init.packages = {
         nix-mode = {
           enable = true;
+        };
+        # `nix-update` doesn't have autoloads.
+        nix-update = {
+          enable = true;
+          no-require = false;
         };
       };
     }
