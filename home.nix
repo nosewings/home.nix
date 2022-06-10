@@ -47,8 +47,7 @@ with lib; {
     ]))
   ];
 
-  ngpc.shell = "fish";
-  programs.bash = {
+   programs.bash = {
     enable = true;
     bashrcExtra = ''
       if [[ -f ~/.bashrc.local ]]; then
