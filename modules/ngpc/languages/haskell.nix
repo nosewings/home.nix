@@ -2,7 +2,7 @@
 with lib;
 let
   cfg = config.ngpc.languages.haskell;
-  allHlsGhcVersions = [ "884" "8107" "902" "922" ];
+  allHlsGhcVersions = [ "884" "8107" "902" "923" ];
   systemHlsGhcVersions =
     if system == "aarch64-darwin" then
       filter (x: x != "884") allHlsGhcVersions

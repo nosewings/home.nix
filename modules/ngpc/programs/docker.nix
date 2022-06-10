@@ -11,7 +11,7 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       docker-compose
-      docker-edge
+      docker
       docker-machine
     ];
     programs.emacs.init.init.packages = {
