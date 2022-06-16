@@ -17,6 +17,7 @@ in
           persp-modestring-short = "t";
         };
         preface = ''
+          ;; TODO Should this be marked `pure', `side-effect-free', etc?
           (defun ngpc/persp-prev-next-buffer (orig &rest args)
             (-let [switch-to-prev-buffer-skip
                    (ngpc/switch-to-prev-buffer-skip-all

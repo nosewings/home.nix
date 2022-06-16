@@ -221,6 +221,7 @@ in
               };
               preface = ''
                 (defun ngpc/org-raw-link-at-point ()
+                  (declare (side-effect-free t))
                   (let ((ctx (org-element-context)))
                     (if (not (eq (org-element-type ctx) 'link))
                         (user-error "No link found")
