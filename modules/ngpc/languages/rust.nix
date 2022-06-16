@@ -28,7 +28,7 @@ in
     })
     (mkIf (cfg.lsp.enable && config.ngpc.programs.emacs.lsp.enable) {
       programs.emacs.init.init.packages = {
-        rustic = {
+        lsp-mode = {
           hook = {
             rustic-mode = [ "lsp" ];
           };

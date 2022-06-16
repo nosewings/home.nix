@@ -35,9 +35,9 @@ in
     })
     (mkIf (cfg.lsp.enable && config.ngpc.programs.emacs.lsp.enable) {
       programs.emacs.init.init.packages = {
-        nix-mode = {
+        lsp-mode = {
           hook = {
-            "" = [ "lsp" ];
+            "nix-mode" = [ "lsp" ];
           };
         };
       };

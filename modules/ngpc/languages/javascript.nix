@@ -17,13 +17,13 @@ in
     programs.emacs.init.init.packages = {
       js2-mode = {
         enable = true;
-        hook = {
-          js2-mode = [ "lsp" ];
-        };
       };
       typescript-mode = {
         enable = true;
+      };
+      lsp-mode = {
         hook = {
+          js2-mode = [ "lsp" ];
           typescript-mode = [ "lsp" ];
         };
       };
