@@ -8,27 +8,31 @@ in
     enable = mkEnableOption "Emacs Magit config";
   };
 
-  config = mkIf cfg.enable {
-    programs.emacs.init.init.packages.magit = {
-      enable = true;
-      bind = {
-        "" = {
-          "\"C-c g\"" = "magit-file-dispatch";
+  config = mkIf cfg.enable (mkMerge [
+    {
+      programs.emacs.init.init.packages.magit = {
+        enable = true;
+        bind = {
+          "" = {
+            "\"C-c g\"" = "magit-file-dispatch";
+          };
         };
+        custom = {
+          git-commit-summary-max-length = "50";
+          # If we try to commit with nothing staged, don't let
+          # us.
+          magit-commit-ask-to-stage = "nil";
+        };
+        hook = {
+          git-commit-mode = [ "ngpc/git-commit-mode-hook" ];
+        };
+        preface = ''
+          (defun ngpc/git-commit-mode-hook ()
+            (setq-local fill-column 72))'';
       };
-      custom = {
-        git-commit-major-mode = "#'markdown-mode";
-        git-commit-summary-max-length = "50";
-        # If we try to commit with nothing staged, don't let
-        # us.
-        magit-commit-ask-to-stage = "nil";
-      };
-      hook = {
-        git-commit-mode = [ "ngpc/git-commit-mode-hook" ];
-      };
-      preface = ''
-        (defun ngpc/git-commit-mode-hook ()
-          (setq-local fill-column 72))'';
-    };
-  };
+    }
+    (mkIf (cfg.enable && config.ngpc.languages.markdown.enable) {
+      programs.emacs.init.init.packages.magit.custom.git-commit-major-mode = "#'poly-markdown-mode";
+    })
+  ]);
 }
