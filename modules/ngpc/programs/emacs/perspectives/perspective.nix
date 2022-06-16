@@ -37,6 +37,5 @@ in
         "\"C-x k\"" = "persp-kill-buffer*";
       };
     })
-
   ]);
 }

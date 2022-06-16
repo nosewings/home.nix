@@ -20,9 +20,9 @@ in
         nix-mode = {
           enable = true;
         };
-        # `nix-update` doesn't have autoloads.
         nix-update = {
           enable = true;
+          # `nix-update` doesn't have autoloads.
           no-require = false;
         };
       };
