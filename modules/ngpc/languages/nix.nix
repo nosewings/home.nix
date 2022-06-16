@@ -44,5 +44,10 @@ in
         };
       };
     })
+    (mkIf config.ngpc.programs.direnv.enable {
+      programs.fish.shellAbbrs = {
+        nix-direnv-flake-init = "nix flake new -t github:nix-community/nix-direnv";
+      };
+    })
   ]);
 }
