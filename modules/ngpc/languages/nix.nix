@@ -16,9 +16,6 @@ in
       home.packages = with pkgs; [
         nix-prefetch-git
       ];
-      programs.fish.shellAbbrs = {
-        nix-direnv-flake-init = "nix flake new -t github:nix-community/nix-direnv";
-      };
       programs.emacs.init.init.packages = {
         nix-mode = {
           enable = true;
@@ -30,6 +27,11 @@ in
         };
       };
     }
+    (mkIf config.ngpc.programs.direnv.enable {
+      programs.fish.shellAbbrs = {
+        nix-direnv-flake-init = "nix flake new -t github:nix-community/nix-direnv";
+      };
+    })
     (mkIf cfg.lsp.enable {
       home.packages = with pkgs; [ rnix-lsp ];
     })
