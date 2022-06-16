@@ -21,7 +21,6 @@ with lib; {
       gcc
       gnumake
       killall
-      htop
       inetutils
       lsof
       openssl
@@ -123,6 +122,12 @@ with lib; {
       init = {
         defaultBranch = "main";
       };
+    };
+  };
+  programs.htop = {
+    enable = true;
+    settings = {
+      hide_userland_threads = 1;
     };
   };
   programs.starship = {
