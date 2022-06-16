@@ -16,6 +16,24 @@ in
       "*.class"
       "*.jar"
     ];
+    programs.bash.initExtra = ''
+      mvn-exec-java() {
+          shift
+          mvn exec:java -Dexec.mainClass=$1 $@
+      }
+    '';
+    programs.zsh.initExtra = ''
+      mvn-exec-java() {
+          shift
+          mvn exec:java -Dexec.mainClass=$1 $@
+      }
+    '';
+    programs.fish.functions = {
+      mvn-exec-java = {
+        argumentNames = "mainClass";
+        body = "mvn exec:java -Dexec.mainClass=$mainClass $argv[2..]";
+      };
+    };
     programs.emacs.init.init.packages = {
       cc-mode = {
         enable = true;
