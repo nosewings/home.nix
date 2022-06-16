@@ -45,7 +45,7 @@ in
       programs.emacs.init.init.packages = {
         haskell-mode = {
           hook = {
-            haskell-mode = [ "lsp" ];
+            haskell-mode = [ "lsp-deferred" ];
           };
         };
         lsp-haskell = {

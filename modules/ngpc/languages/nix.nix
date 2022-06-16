@@ -39,7 +39,7 @@ in
       programs.emacs.init.init.packages = {
         lsp-mode = {
           hook = {
-            "nix-mode" = [ "lsp" ];
+            "nix-mode" = [ "lsp-deferred" ];
           };
         };
       };

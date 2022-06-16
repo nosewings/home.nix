@@ -48,7 +48,7 @@ in
       lsp-java = {
         enable = true;
         hook = {
-          java-mode = [ "lsp" ];
+          java-mode = [ "lsp-deferred" ];
         };
       };
     };

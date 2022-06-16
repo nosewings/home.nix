@@ -30,7 +30,7 @@ in
       programs.emacs.init.init.packages = {
         lsp-mode = {
           hook = {
-            rustic-mode = [ "lsp" ];
+            rustic-mode = [ "lsp-deferred" ];
           };
         };
       };

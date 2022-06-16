@@ -23,8 +23,8 @@ in
       };
       lsp-mode = {
         hook = {
-          js2-mode = [ "lsp" ];
-          typescript-mode = [ "lsp" ];
+          js2-mode = [ "lsp-deferred" ];
+          typescript-mode = [ "lsp-deferred" ];
         };
       };
     };
