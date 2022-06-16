@@ -40,28 +40,29 @@ in
         package = null;
         preface = ''
           (defun ngpc/maven-root (file)
-            (f-full (locate-dominating-file file "pom.xml")))
+            (--when-let (locate-dominating-file file "pom.xml")
+              (f-full it)))
           (defun ngpc/maven-source-root (file)
-            (-if-let (mvn-root (f-full (ngpc/maven-root file)))
-              (->> '("src/main/java"
-                     "src/main/resources"
-                     "src/main/filters"
-                     "src/main/webapp"
-                     "src/test/java"
-                     "src/test/resources"
-                     "src/test/filters"
-                     "src/it"
-                     "src/assembly"
-                     "src/site"
-                     "")
-                   (--map (f-join mvn-root it))
-                   (--first (s-starts-with? it file)))))
+            (-when-let (mvn-root (ngpc/maven-root file))
+              (--first (s-starts-with? (f-join mvn-root it) file)
+                       '("src/main/java"
+                         "src/main/resources"
+                         "src/main/filters"
+                         "src/main/webapp"
+                         "src/test/java"
+                         "src/test/resources"
+                         "src/test/filters"
+                         "src/it"
+                         "src/assembly"
+                         "src/site"
+                         ""))))
           (defun ngpc/maven-guess-package (file)
-            (-some->> (ngpc/maven-source-root file)
-                      (f-relative file)
-                      (f-parent)
-                      (directory-file-name)
-                      (s-replace "/" ".")))'';
+            (--when-let (ngpc/maven-source-root file)
+              (->> it
+                   (f-relative file)
+                   (f-parent)
+                   (directory-file-name)
+                   (s-replace "/" "."))))'';
       };
       lsp-java = {
         enable = true;
