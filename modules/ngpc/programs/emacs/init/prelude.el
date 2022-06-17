@@ -70,16 +70,16 @@
 (defun ngpc/switch-theme (theme-name)
   (interactive (list (completing-read "Switch to theme: " (custom-available-themes))))
   (let ((theme (intern theme-name)))
-    ;; Try to enable the new theme first: if it doesn't exist, we
-    ;; don't want to disable the current themes.
+    ;; Try to enable the new theme first: if it doesn’t exist, we
+    ;; don’t want to disable the current themes.
     (load-theme theme t)
     (dolist (atheme custom-enabled-themes)
       (when (not (eq atheme theme))
         (disable-theme atheme)))))
 
 (defconst ngpc/quit-prompts
-  '("L'important n'est pas la chute: c'est l'atterrissage! "
-    "Take care.  It's a desert out there... "))
+  '("L’important n'est pas la chute: c’est l’atterrissage! "
+    "Take care.  It’s a desert out there... "))
 (defun ngpc/confirm-kill-emacs (_)
   (yes-or-no-p (seq-random-elt ngpc/quit-prompts)))
 (setq confirm-kill-emacs #'ngpc/confirm-kill-emacs)
@@ -94,22 +94,22 @@
   "Convert VAR into a function for `switch-to-prev-buffer-skip'."
   (declare (pure t) (side-effect-free t))
   (pcase var
-    ;; Always return `nil'.
+    ;; Always return ‘nil’.
     ('nil (-const nil))
-    ;; Test whether any of the buffer's windows belong to the given
-    ;; window's frame.
+    ;; Test whether any of the buffer’s windows belong to the given
+    ;; window’s frame.
     ('this (lambda (window buffer bury-or-kill)
              (-let [frame (window-frame window)]
                (--some (eq frame (window-frame it))
                        (get-buffer-window-list buffer)))))
-    ;; Test whether any of the buffer's windows belong to a visible
+    ;; Test whether any of the buffer’s windows belong to a visible
     ;; frame.
     ('visible (lambda (window buffer bury-or-kill)
                 (--some (eq t (frame-visible-p (window-frame it)))
                         (get-buffer-window-list buffer))))
-    ;; Test whether any of the buffer's windows belong to a visible or
-    ;; iconified frame.  `frame-visible-t' returns `t' if the frame is
-    ;; visible, `icon' if the frame is iconified, and `nil' otherwise.
+    ;; Test whether any of the buffer’s windows belong to a visible or
+    ;; iconified frame.  ‘frame-visible-t’ returns ‘t’ if the frame is
+    ;; visible, ‘icon’ if the frame is iconified, and ‘nil’ otherwise.
     (0 (lambda (window buffer bury-or-kill)
          (--some (frame-visible-p (window-frame it))
                  (get-buffer-window-list buffer))))
@@ -117,11 +117,11 @@
     ('t (lambda (window buffer bury-or-kill)
           (--some (frame-live-p (window-frame it))
                   (get-buffer-window-list buffer))))
-    ;; Assume `var' is a function (it should be at this point).
+    ;; Assume ‘var’ is a function (it should be at this point).
     (_ var)))
 
 (defun ngpc/switch-to-prev-buffer-skip-all (&rest args)
-  "Conjoin ARGS into a value for `switch-to-prev-buffer-skip'.
+  "Conjoin ARGS into a value for ‘switch-to-prev-buffer-skip’.
 
 The resulting value will allow switching to a given buffer if and
 only if every member of ARGS would allow it."
@@ -136,7 +136,7 @@ PROCESS, INFILE, and ARGS are like the corresponding arguments to
 
 Returns a vector [STATUS STDOUT STDERR], where STATUS is the
 process’s exit code, STDOUT is a string containing the entire
-contents of the process’s standard output stream, and STDERR is
+contents of the process’s standard output stream, and STDERR is a
 string containing the entire contents of the process’s standard
 error stream."
   (-let [stdout (make-temp-file "stdout")]
