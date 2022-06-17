@@ -14,6 +14,9 @@ in
       programs.emacs.init.init.packages = {
         vterm = {
           enable = true;
+          custom = {
+            vterm-timer-delay = "nil";
+          };
           hook = {
             vterm-mode = [
               "ngpc/disable-hl-line"
