@@ -145,7 +145,7 @@ error stream."
         `[,status ,(buffer-string) ,(f-read-text stdout)]))))
 
 (defun ngpc/github-insert-sha256 (owner repo)
-  "Insert the SHA-256 hash for the Github REPO owned by OWNER."
+  "Insert the SHA-256 hash for the GitHub REPO owned by OWNER."
   (interactive "sOwner: \nsRepo: ")
   (-let [[status stdout _] (ngpc/call-process-to-output "nix-prefetch-github" nil owner repo)]
     (when (not (eq status 0))
@@ -154,3 +154,22 @@ error stream."
     (insert (gethash "sha256" (json-parse-string stdout)))))
 (global-set-key (kbd "C-c i g h") #'ngpc/github-insert-sha256)
 (global-set-key (kbd "C-c i g s") #'ngpc/github-insert-sha256)
+
+(defun ngpc/add-hook-until (hook function &optional depth local)
+  "Temporarily add to HOOK a function that runs FUNCTION.
+
+Remove the function when FUNCTION first returns non-nil.
+
+DEPTH and LOCAL are like the corresponding arguments to
+‘add-hook’ and ‘remove-hook’."
+  (letrec ((buffer (current-buffer))
+           (hook-function (lambda (&rest args)
+                            (when (apply function args)
+                              ;; If the hook is local, switch to the
+                              ;; original buffer and remove the hook
+                              ;; locally.
+                              (if local (with-current-buffer buffer
+                                          (remove-hook hook hook-function local))
+                                ;; Otherwise, just remove the hook.
+                                (remove-hook hook hook-function local))))))
+    (add-hook hook hook-function depth local)))
