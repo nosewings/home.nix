@@ -23,6 +23,7 @@ with lib; {
       killall
       inetutils
       lsof
+      nano
       openssl
       perl
       pv
