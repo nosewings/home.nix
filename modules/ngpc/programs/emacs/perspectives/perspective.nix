@@ -9,7 +9,7 @@ in
       programs.emacs.init.init.packages.perspective = {
         enable = true;
         hook = {
-          persp-created = [ "ngpc/setup-cd-trap" ];
+          persp-created = [ "ngpc/persp-created-cd" ];
         };
         init = ''
           (persp-mode)
@@ -28,19 +28,9 @@ in
                     (lambda (window buffer bury-or-kill)
                       (not (persp-buffer-list-filter `(,buffer)))))]
               (call-interactively orig args)))
-          (defun ngpc/setup-cd-trap ()
-            (let* ((buffer (current-buffer))
-                   (func (lambda ()
-                           ;; ‘window-configuration-change-hook’ is run when
-                           ;; either the buffer or the size of the window has
-                           ;; changed.  We only want to act when the buffer
-                           ;; changes.
-                           (let ((new-buffer (window-buffer window)))
-                             (unless (eq buffer new-buffer)
-                               (with-current-buffer new-buffer
-                                 (cd "~"))
-                               t)))))
-              (ngpc/add-hook-until 'window-configuration-change-hook func nil 'local)))'';
+          (defun ngpc/persp-created-cd ()
+            (with-current-buffer (window-buffer (selected-window))
+              (cd "~")))'';
       };
     }
     (mkIf (config.ngpc.programs.emacs.completion == "ivy") {
