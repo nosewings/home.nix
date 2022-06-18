@@ -73,6 +73,11 @@ with lib; {
           source ~/.config/fish/config.fish.local
       end
     '';
+    functions = {
+      fnf = {
+        body = "$argv &>/dev/null & disown";
+      };
+    };
     plugins = [
       {
         name = "fish-ssh-agent";
