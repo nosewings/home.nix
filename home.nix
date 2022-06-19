@@ -145,6 +145,8 @@ with lib; {
     };
   };
 
+  ngpc.fonts.enable = true;
+
   ngpc.programs.direnv.enable = true;
   ngpc.programs.docker.enable = true;
   ngpc.programs.emacs.enable = true;

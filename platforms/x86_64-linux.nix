@@ -37,7 +37,6 @@
   programs.firefox.enable = lib.mkIf desktop true;
   home.sessionVariables.MOZ_ENABLE_WAYLAND = "1";
 
-  ngpc.fonts.enable = true;
   ngpc.plasma.enable = lib.mkIf xsession true;
 
   ngpc.programs.discord.enable = lib.mkIf leisure true;
