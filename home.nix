@@ -65,13 +65,13 @@ with lib; {
   };
   programs.fish = {
     enable = true;
-    interactiveShellInit = ''
-      set fish_greeting
-    '';
     shellInit = ''
       if test -f ~/.config/fish/config.fish.local
           source ~/.config/fish/config.fish.local
       end
+    '';
+    interactiveShellInit = ''
+      set fish_greeting
     '';
     functions = {
       fnf = {
