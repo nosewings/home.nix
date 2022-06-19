@@ -57,6 +57,8 @@ with lib; {
   };
   programs.zsh = {
     enable = true;
+    enableCompletion = true;
+    enableSyntaxHighlighting = true;
     initExtra = ''
       if [[ -f ~/.zshrc.local ]]; then
           source ~/.zshrc.local
