@@ -60,6 +60,7 @@
         , desktop ? false
         , hardware ? false
         , leisure ? false
+        , managed
         , ssh ? false
         , xsession ? false
         , agda ? false
@@ -92,7 +93,7 @@
           };
           extraSpecialArgs = {
             inherit system
-              desktop hardware leisure ssh xsession
+              desktop hardware leisure managed ssh xsession
               agda haskell html java javascript markdown nix python rust shell tex xml yaml;
           };
         };
@@ -106,6 +107,7 @@
         hardware = true;
         ssh = true;
         leisure = true;
+        managed = true;
         xsession = true;
         agda = true;
         haskell = true;
@@ -122,6 +124,27 @@
         };
       };
 
+      homeConfigurations.fake-plastic-trees = mkConfiguration rec {
+        system = "x86_64-linux";
+        username = "ngpc";
+        homeDirectory = "/home/${username}";
+        stateVersion = "22.05";
+        desktop = true;
+        hardware = true;
+        ssh = true;
+        leisure = true;
+        managed = false;
+        xsession = true;
+        agda = true;
+        haskell = true;
+        html = true;
+        java = true;
+        javascript = true;
+        python = true;
+        rust = true;
+        tex = true;
+      };
+
       homeConfigurations.no-surprises = mkConfiguration rec {
         system = "aarch64-darwin";
         username = "ngpc";
@@ -129,6 +152,7 @@
         stateVersion = "22.05";
         hardware = true;
         ssh = true;
+        managed = true;
         haskell = true;
         html = true;
         java = true;
@@ -143,6 +167,7 @@
         username = "ec2-user";
         homeDirectory = "/home/${username}";
         stateVersion = "22.05";
+        managed = false;
         java = true;
         javascript = true;
       };

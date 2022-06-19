@@ -1,6 +1,6 @@
 {
   config, lib, pkgs,
-  hardware, leisure, ssh, xsession,
+  hardware, leisure, managed, ssh, xsession,
   agda, haskell, html, java, javascript, markdown, nix, python, rust, shell, tex, xml, yaml,
   ...
 }:
@@ -47,9 +47,10 @@ with lib; {
     ]))
   ];
 
-   programs.bash = {
+  programs.bash = {
     enable = true;
     bashrcExtra = ''
+      ${optionalString (!managed) ". ${config.home.profileDirectory}/etc/profile.d/nix.sh"}
       if [[ -f ~/.bashrc.local ]]; then
           source ~/.bashrc.local
       fi
@@ -59,6 +60,7 @@ with lib; {
     enable = true;
     enableCompletion = true;
     enableSyntaxHighlighting = true;
+    initExtraFirst = optionalString (!managed) ". ${config.home.profileDirectory}/etc/profile.d/nix.sh";
     initExtra = ''
       if [[ -f ~/.zshrc.local ]]; then
           source ~/.zshrc.local
@@ -68,6 +70,7 @@ with lib; {
   programs.fish = {
     enable = true;
     shellInit = ''
+      ${optionalString (!managed) "replay source ${config.home.profileDirectory}/etc/profile.d/nix.sh"}
       if test -f ~/.config/fish/config.fish.local
           source ~/.config/fish/config.fish.local
       end
