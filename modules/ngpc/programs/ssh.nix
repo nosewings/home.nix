@@ -1,5 +1,5 @@
 with builtins;
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 with lib;
 let
   cfg = config.ngpc.programs.ssh;
