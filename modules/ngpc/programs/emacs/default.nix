@@ -275,6 +275,32 @@ in
             };
             restart-emacs = {
               enable = true;
+              # HACK `restart-emacs` looks at `invocation-directory`
+              # to figure out what binary it should start.
+              # Unfortunately, this is precisely what we don't want.
+              #
+              # First, our home-manager Emacs is run via a wrapper
+              # script that sets the load-path before running the
+              # actual Emacs binary.  So, for us, the `emacs` under
+              # `invocation-directory` is completely useless, since it
+              # won't be able to load any packages (including our init
+              # file!).
+              #
+              # Second, we frequently want to restart after running
+              # `home-manager switch`.  In this case, we don't even
+              # want to start the same wrapper script: we want to
+              # start the new one that we just generated.
+              #
+              # Therefore, to get behavior that works for us, we
+              # "temporarily" change `invocation-directory` so that it
+              # points to our profile's bin folder.  That way,
+              # `restart-emacs` will just start our profile's Emacs,
+              # which is almost always what we want.
+              config = "(advice-add #'restart-emacs :around #'ngpc/restart-emacs-advice)";
+              preface = ''
+                (defun ngpc/restart-emacs-advice (function &rest args)
+                  (let ((invocation-directory "${config.home.profileDirectory}/bin/"))
+                    (apply function args)))'';
             };
             savehist = {
               enable = true;
