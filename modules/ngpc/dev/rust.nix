@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-  cfg = config.ngpc.languages.rust;
+  cfg = config.ngpc.dev.rust;
 in
 {
-  options.ngpc.languages.rust = {
+  options.ngpc.dev.rust = {
     enable = mkEnableOption "Rust config";
     lsp = {
       enable = mkEnableOption "Rust LSP config";

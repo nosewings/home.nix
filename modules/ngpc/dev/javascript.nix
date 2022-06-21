@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-  cfg = config.ngpc.languages.javascript;
+  cfg = config.ngpc.dev.javascript;
 in
 {
-  options.ngpc.languages.javascript = {
+  options.ngpc.dev.javascript = {
     enable = mkEnableOption "Javascript config";
   };
   config = mkIf cfg.enable {

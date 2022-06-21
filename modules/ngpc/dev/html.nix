@@ -1,10 +1,10 @@
 { config, lib, ... }:
 with lib;
 let
-  cfg = config.ngpc.languages.html;
+  cfg = config.ngpc.dev.html;
 in
 {
-  options.ngpc.languages.html = {
+  options.ngpc.dev.html = {
     enable = mkEnableOption "HTML config";
   };
   config = mkIf cfg.enable {

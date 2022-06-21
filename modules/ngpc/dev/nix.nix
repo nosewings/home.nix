@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-  cfg = config.ngpc.languages.nix;
+  cfg = config.ngpc.dev.nix;
 in
 {
-  options.ngpc.languages.nix = {
+  options.ngpc.dev.nix = {
     enable = mkEnableOption "Nix config";
     lsp = {
       enable = mkEnableOption "Nix LSP config";

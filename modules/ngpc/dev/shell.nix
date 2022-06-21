@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-  cfg = config.ngpc.languages.shell;
+  cfg = config.ngpc.dev.shell;
 in
 {
-  options.ngpc.languages.shell = {
+  options.ngpc.dev.shell = {
     enable = mkEnableOption "Shell config";
   };
 

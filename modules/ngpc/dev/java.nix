@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-  cfg = config.ngpc.languages.java;
+  cfg = config.ngpc.dev.java;
 in
 {
-  options.ngpc.languages.java = {
+  options.ngpc.dev.java = {
     enable = mkEnableOption "Java config";
   };
   config = mkIf cfg.enable {

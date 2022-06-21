@@ -1,10 +1,10 @@
 { config, lib, ... }:
 with lib;
 let
-  cfg = config.ngpc.languages.markdown;
+  cfg = config.ngpc.dev.markdown;
 in
 {
-  options.ngpc.languages.markdown = {
+  options.ngpc.dev.markdown = {
     enable = mkEnableOption "Markdown config";
   };
 

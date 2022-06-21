@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-  cfg = config.ngpc.languages.tex;
+  cfg = config.ngpc.dev.tex;
 in
 {
-  options.ngpc.languages.tex = {
+  options.ngpc.dev.tex = {
     enable = mkEnableOption "TeX config";
   };
 

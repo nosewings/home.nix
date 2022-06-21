@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-  cfg = config.ngpc.languages.python;
+  cfg = config.ngpc.dev.python;
 in
 {
-  options.ngpc.languages.python = {
+  options.ngpc.dev.python = {
     enable = mkEnableOption "Python config";
   };
 

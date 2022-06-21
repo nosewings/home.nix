@@ -1,10 +1,10 @@
 { config, lib, ... }:
 with lib;
 let
-  cfg = config.ngpc.languages.yaml;
+  cfg = config.ngpc.dev.yaml;
 in
 {
-  options.ngpc.languages.yaml = {
+  options.ngpc.dev.yaml = {
     enable = mkEnableOption "YAML config";
   };
 

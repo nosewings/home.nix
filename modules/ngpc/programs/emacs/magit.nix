@@ -31,7 +31,7 @@ in
             (setq-local fill-column 72))'';
       };
     }
-    (mkIf (cfg.enable && config.ngpc.languages.markdown.enable) {
+    (mkIf (cfg.enable && config.ngpc.dev.markdown.enable) {
       programs.emacs.init.init.packages.magit.custom.git-commit-major-mode = "#'poly-markdown-mode";
     })
   ]);

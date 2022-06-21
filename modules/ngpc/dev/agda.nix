@@ -1,10 +1,10 @@
 { config, lib, ... }:
 with lib;
 let
-  cfg = config.ngpc.languages.agda;
+  cfg = config.ngpc.dev.agda;
 in
 {
-  options.ngpc.languages.agda = {
+  options.ngpc.dev.agda = {
     enable = mkEnableOption "Agda config";
   };
 

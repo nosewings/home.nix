@@ -1,7 +1,7 @@
 { config, lib, pkgs, system, ... }:
 with lib;
 let
-  cfg = config.ngpc.languages.haskell;
+  cfg = config.ngpc.dev.haskell;
   allHlsGhcVersions = [ "884" "8107" "902" "923" ];
   systemHlsGhcVersions =
     if system == "aarch64-darwin" then
@@ -10,7 +10,7 @@ let
       allHlsGhcVersions;
 in
 {
-  options.ngpc.languages.haskell = {
+  options.ngpc.dev.haskell = {
     enable = mkEnableOption "Haskell config";
     lsp = {
       enable = mkEnableOption "Haskell LSP config";
@@ -33,7 +33,7 @@ in
         };
       };
     }
-    (mkIf config.ngpc.languages.nix.enable {
+    (mkIf config.ngpc.dev.nix.enable {
       home.packages = with pkgs; [
         cabal2nix
       ];

@@ -1,10 +1,10 @@
 { config, lib, ... }:
 with lib;
 let
-  cfg = config.ngpc.languages.xml;
+  cfg = config.ngpc.dev.xml;
 in
 {
-  options.ngpc.languages.xml = {
+  options.ngpc.dev.xml = {
     enable = mkEnableOption "XML config";
   };
 

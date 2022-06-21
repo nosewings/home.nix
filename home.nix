@@ -153,45 +153,47 @@ with lib; {
     enable = true;
   };
 
-  ngpc.languages.agda = mkIf agda {
+  ngpc.dev.agda = mkIf agda {
     enable = true;
   };
-  ngpc.languages.haskell = mkIf haskell {
+  ngpc.dev.haskell = mkIf haskell {
     enable = true;
   };
-  ngpc.languages.html = mkIf html {
+  ngpc.dev.html = mkIf html {
     enable = true;
   };
-  ngpc.languages.java = mkIf java {
+  ngpc.dev.java = mkIf java {
     enable = true;
   };
-  ngpc.languages.javascript = mkIf javascript {
+  ngpc.dev.javascript = mkIf javascript {
     enable = true;
   };
-  ngpc.languages.markdown = mkIf markdown {
+  ngpc.dev.markdown = mkIf markdown {
     enable = true;
   };
-  ngpc.languages.nix = mkIf nix {
-    enable = true;
-    lsp.enable = true;
-  };
-  ngpc.languages.python = mkIf python {
-    enable = true;
-  };
-  ngpc.languages.rust = mkIf rust {
+  ngpc.dev.nix = mkIf nix {
     enable = true;
     lsp.enable = true;
   };
-  ngpc.languages.shell = mkIf shell {
+  ngpc.dev.python = mkIf python {
     enable = true;
   };
-  ngpc.languages.tex = mkIf tex {
+  ngpc.dev.rust = mkIf rust {
+    enable = true;
+    lsp.enable = true;
+  };
+  ngpc.dev.shell = mkIf shell {
     enable = true;
   };
-  ngpc.languages.xml = mkIf xml {
+  ngpc.dev.tex = mkIf tex {
     enable = true;
   };
-  ngpc.languages.yaml = mkIf yaml {
+    enable = true;
+  };
+  ngpc.dev.xml = mkIf xml {
+    enable = true;
+  };
+  ngpc.dev.yaml = mkIf yaml {
     enable = true;
   };
 
