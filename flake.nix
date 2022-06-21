@@ -60,7 +60,7 @@
         , desktop ? false
         , hardware ? false
         , leisure ? false
-        , managed
+        , singleUser
         , ssh ? false
         , xsession ? false
         , agda ? false
@@ -93,7 +93,7 @@
           };
           extraSpecialArgs = {
             inherit system
-              desktop hardware leisure managed ssh xsession
+              desktop hardware leisure singleUser ssh xsession
               agda haskell html java javascript markdown nix python rust shell tex xml yaml;
           };
         };
@@ -107,7 +107,7 @@
         hardware = true;
         ssh = true;
         leisure = true;
-        managed = true;
+        singleUser = false;
         xsession = true;
         agda = true;
         haskell = true;
@@ -133,7 +133,7 @@
         hardware = true;
         ssh = true;
         leisure = true;
-        managed = false;
+        singleUser = true;
         xsession = true;
         agda = true;
         haskell = true;
@@ -152,7 +152,7 @@
         stateVersion = "22.05";
         hardware = true;
         ssh = true;
-        managed = true;
+        singleUser = false;
         haskell = true;
         html = true;
         java = true;
@@ -167,7 +167,7 @@
         username = "ec2-user";
         homeDirectory = "/home/${username}";
         stateVersion = "22.05";
-        managed = false;
+        singleUser = false;
         java = true;
         javascript = true;
       };
