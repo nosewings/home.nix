@@ -261,6 +261,7 @@ in
             };
             power-mode = {
               enable = true;
+              commands = [ "power-mode" ];
             };
             prog-mode = {
               enable = true;
