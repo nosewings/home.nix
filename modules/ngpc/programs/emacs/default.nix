@@ -260,6 +260,9 @@ in
             pkg-info = {
               enable = true;
             };
+            power-mode = {
+              enable = true;
+            };
             prog-mode = {
               enable = true;
               package = null;
