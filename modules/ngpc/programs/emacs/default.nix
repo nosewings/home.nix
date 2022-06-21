@@ -98,6 +98,9 @@ in
                 company-mode = [ "company-box-mode" ];
               };
             };
+            crux = {
+              enable = true;
+            };
             dashboard = {
               enable = true;
               config = "(dashboard-setup-startup-hook)";
