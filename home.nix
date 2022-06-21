@@ -1,7 +1,7 @@
 {
   config, lib, pkgs,
   hardware, leisure, singleUser, ssh, xsession,
-  agda, haskell, html, java, javascript, markdown, nix, python, rust, shell, tex, xml, yaml,
+  agda, haskell, html, java, javascript, markdown, nix, python, rust, shell, tex, web, xml, yaml,
   ...
 }:
 with lib; {
@@ -188,6 +188,7 @@ with lib; {
   ngpc.dev.tex = mkIf tex {
     enable = true;
   };
+  ngpc.dev.web = mkIf web {
     enable = true;
   };
   ngpc.dev.xml = mkIf xml {

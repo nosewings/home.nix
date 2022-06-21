@@ -79,6 +79,7 @@
         # include shell by default.
         , shell ? true
         , tex ? false
+        , web ? false
         # YAML support costs us essentially nothing.
         , yaml ? true
         # XML support costs us essentially nothing.
@@ -95,7 +96,7 @@
           extraSpecialArgs = {
             inherit system
               desktop hardware leisure singleUser ssh xsession
-              agda haskell html java javascript markdown nix python rust shell tex xml yaml;
+              agda haskell html java javascript markdown nix python rust shell tex web xml yaml;
           };
         };
     in {
@@ -112,12 +113,11 @@
         xsession = true;
         agda = true;
         haskell = true;
-        html = true;
         java = true;
-        javascript = true;
         python = true;
         rust = true;
         tex = true;
+        web = true;
         config = {
           xresources.properties = {
             "Xft.dpi" = 144;
@@ -138,12 +138,11 @@
         xsession = true;
         agda = true;
         haskell = true;
-        html = true;
         java = true;
-        javascript = true;
         python = true;
         rust = true;
         tex = true;
+        web = true;
       };
 
       homeConfigurations.no-surprises = mkConfiguration rec {
@@ -155,12 +154,11 @@
         ssh = true;
         singleUser = false;
         haskell = true;
-        html = true;
         java = true;
-        javascript = true;
         python = true;
         rust = true;
         tex = true;
+        web = true;
       };
 
       homeConfigurations.ec2 = mkConfiguration rec {
@@ -170,7 +168,7 @@
         stateVersion = "22.05";
         singleUser = false;
         java = true;
-        javascript = true;
+        web = true;
       };
     };
 }
