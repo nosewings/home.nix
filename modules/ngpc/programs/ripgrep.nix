@@ -5,7 +5,7 @@ let
 in
 {
   options.ngpc.programs.ripgrep = {
-    enable = mkEnableOption "Ripgrep config";
+    enable = mkEnableOption "ripgrep config";
   };
 
   config = mkIf cfg.enable {
