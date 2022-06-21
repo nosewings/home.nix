@@ -24,6 +24,7 @@
 (xterm-mouse-mode)
 
 (setq echo-keystrokes cl-least-positive-float)
+(setq initial-scratch-message nil)
 
 (defun find-file/make-directory (filename &optional wildcards)
   (let ((dir (file-name-directory filename)))
