@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 with lib;
 let
   cfg = config.ngpc.programs.ripgrep;
@@ -9,9 +9,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      ripgrep
-    ];
+    programs.ripgrep.enable = true;
     programs.emacs.init.init.packages.rg = {
       enable = true;
     };
