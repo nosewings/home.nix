@@ -210,7 +210,6 @@ in
             };
             nyan-mode = {
               enable = true;
-              config = "(nyan-mode)";
             };
             org = {
               enable = true;
