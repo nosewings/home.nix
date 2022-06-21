@@ -10,7 +10,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.ssh.enable = true;
+    programs.ssh = {
+      enable = true;
+      compression = true;
+    };
     home.activation = {
       "ssh.authorized_keys" = hm.dag.entryAfter [ "writeBoundary" ] ''
         $DRY_RUN_CMD eval "curl $VERBOSE_ARG 'https://github.com/nosewings.keys' > '${config.home.homeDirectory}/.ssh/authorized_keys'"
