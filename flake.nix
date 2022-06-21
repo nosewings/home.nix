@@ -65,7 +65,8 @@
         , xsession ? false
         , agda ? false
         , haskell ? false
-        , html ? false
+        # HTML support costs us essentially nothing.
+        , html ? true
         , java ? false
         , javascript ? false
         # Markdown support costs us essentially nothing.
