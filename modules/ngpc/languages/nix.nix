@@ -16,6 +16,18 @@ in
       home.packages = with pkgs; [
         nix-prefetch-git
       ];
+      programs.emacs.overrides = self: super: {
+        nix-update = self.trivialBuild {
+          pname = "nix-update";
+          version = "1.0";
+          src = pkgs.fetchFromGitHub {
+            owner = "nosewings";
+            repo = "nix-update-el";
+            rev = "055cb9a5f887d63299020159fee73df9a231b2e4";
+            sha256 = "057kcwh1c3wd12jk42r1bnn652cm2h8ml1zc1gsn58liwf82qky1";
+          };
+        };
+      };
       programs.emacs.init.init.packages = {
         nix-mode = {
           enable = true;
