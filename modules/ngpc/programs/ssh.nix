@@ -13,6 +13,9 @@ in
     programs.ssh = {
       enable = true;
       compression = true;
+      extraConfig = ''
+        AddKeysToAgent yes
+      '';
     };
     home.activation = {
       "ssh.authorized_keys" = hm.dag.entryAfter [ "writeBoundary" ] ''
