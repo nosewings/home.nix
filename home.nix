@@ -89,8 +89,8 @@ with lib; {
         src = pkgs.fetchFromGitHub {
           owner = "jorgebucaran";
           repo = "replay.fish";
-          rev = "a2eef7319adb1c5cd00a4454bb29a9e072d51a53";
-          sha256 = "ovxpzHC9coRtm/v3rQlPlX1NEe22+WLA7HpnfqtUJU8=";
+          rev = "bd8e5b89ec78313538e747f0292fcaf631e87bd2";
+          sha256 = "0inniabgdbd7yq71rpmpnzhbk8y23ggvlk4jhaapc7bz0yhbxkkc";
         };
       }
     ];
