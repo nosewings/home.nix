@@ -130,6 +130,9 @@ in
                 };
               })
             ];
+            esup = {
+              enable = true;
+            };
             explain-pause-mode = {
               enable = false;
               config = "(explain-pause-mode)";
