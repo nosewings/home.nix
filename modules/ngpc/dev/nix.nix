@@ -34,8 +34,7 @@ in
         };
         nix-update = {
           enable = true;
-          # `nix-update` doesn't have autoloads.
-          no-require = false;
+          commands = [ "nix-update-fetch" ];
         };
       };
     }
