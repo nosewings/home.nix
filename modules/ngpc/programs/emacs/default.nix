@@ -282,6 +282,19 @@ in
               enable = true;
               config = "(solaire-global-mode)";
             };
+            string-inflection = {
+              enable = true;
+              bind = {
+                "" = {
+                  "\"C-c e i c l\"" = "string-inflection-lower-camelcase";
+                  "\"C-c e i c u\"" = "string-inflection-camelcase";
+                  "\"C-c e i k\"" = "string-inflection-kebab-case";
+                  "\"C-c e i s l\"" = "string-inflection-underscore";
+                  "\"C-c e i s u\"" = "string-inflection-capital-underscore";
+                  "\"C-c e i u\"" = "string-inflection-upcase";
+                };
+              };
+            };
             unicode-fonts = {
               enable = false;
               config = "(unicode-fonts-setup)";
