@@ -15,6 +15,7 @@
 
   home.packages = lib.mkMerge [
     (with pkgs; [
+      strace
     ])
     (lib.mkIf desktop (with pkgs; [
       libreoffice-fresh

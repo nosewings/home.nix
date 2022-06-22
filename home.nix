@@ -27,7 +27,6 @@ with lib; {
       openssl
       perl
       pv
-      strace
       unzip
       wget
       (with xorg; [
