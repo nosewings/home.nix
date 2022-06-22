@@ -157,6 +157,7 @@ with lib; {
   };
   ngpc.dev.haskell = mkIf haskell {
     enable = true;
+    lsp.enable = true;
   };
   ngpc.dev.html = mkIf html {
     enable = true;
