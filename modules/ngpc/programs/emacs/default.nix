@@ -52,7 +52,7 @@ in
 
     programs.emacs.init = {
       enable = true;
-      earlyInit = ''
+      earlyInit.prelude = ''
         (setq gc-cons-threshold most-positive-fixnum)
 
         (push '(menu-bar-lines . 0) default-frame-alist)
@@ -61,24 +61,22 @@ in
         (setq menu-bar-mode nil
               tool-bar-mode nil)'';
       init = {
-        earlyPackages = {
-          dash = {
-            enable = true;
-            no-require = false;
-          };
-          f = {
-            enable = true;
-            no-require = false;
-          };
-          s = {
-            enable = true;
-            no-require = false;
-          };
-        };
         prelude = readFile ./init/prelude.el;
         packages = mkMerge [
           normalModeHooks
           {
+            dash = {
+              enable = true;
+              no-require = false;
+            };
+            f = {
+              enable = true;
+              no-require = false;
+            };
+            s = {
+              enable = true;
+              no-require = false;
+            };
             beacon = {
               enable = true;
               config = "(beacon-mode)";

@@ -16,6 +16,10 @@ let
         type = nullOr (functionTo package);
         default = epkgs: epkgs.${name};
       };
+      loadWhenBuilding = mkOption {
+        type = bool;
+        default = false;
+      };
       after = mkOption {
         type = listOf str;
         default = [];
@@ -148,91 +152,99 @@ let
       (mkPreface package.preface)
       (mkNoRequire package.no-require)
     ]) + ")";
+  mkInitOption = {
+    prelude = mkOption {
+      type = lines;
+      default = "";
+    };
+    packages = mkOption {
+      type = attrsOf packageType;
+      default = { };
+    };
+  };
 in
 {
   options.programs.emacs.init = {
     enable = mkEnableOption "Emacs init files";
-
-    earlyInit = mkOption {
-      type = lines;
-      default = "";
-    };
-
-    init = {
-      # The obvious generalization here is to allow an arbitrary
-      # number of text/packages segments, probably ordered based on
-      # dict keys in order to allow merging package configs defined in
-      # different places.  But that comes with serious usability
-      # problems; e.g., how do you remember what key to use when
-      # you're adding to a package config?  So I'm taking a "less is
-      # more" approach here and just allowing an extra set of
-      # packages.  I'll revisit the general approach if I ever end up
-      # needing more than that.
-      earlyPackages = mkOption {
-        type = attrsOf packageType;
-        default = {};
-      };
-      prelude = mkOption {
-        type = lines;
-        default = "";
-      };
-      packages = mkOption {
-        type = attrsOf packageType;
-        default = {};
-      };
-    };
+    earlyInit = mkInitOption;
+    init = mkInitOption;
   };
 
   config = mkIf cfg.enable {
     programs.emacs.enable = true;
     programs.emacs.extraPackages = epkgs:
       let
-        getEnabledPackages = filterAttrs (_: v: v.enable);
-        enabledEarlyPackages = getEnabledPackages cfg.init.earlyPackages;
-        enabledPackages = getEnabledPackages cfg.init.packages;
-        allEnabledPackages = enabledEarlyPackages // enabledPackages;
-        hasPackages = allEnabledPackages != {};
-        hasBinds = any (pkg: pkg.bind != {} || pkg.bind-keymap != {}) (attrValues allEnabledPackages);
-        dependencies =
-          optional hasPackages epkgs.use-package ++ optional hasBinds epkgs.bind-key ++ concatLists (mapAttrsToList (_: v: optional (v.package != null) (v.package epkgs)) allEnabledPackages);
-        mkPackagesString = pkgs: concatStringsSep "\n\n" (mapAttrsToList mkPackageString pkgs);
-        mkInitPackage = baseName: packages: srcParts:
+        # Create an Emacs init derivation; i.e., a derivation that
+        # contains an Emacs init file, either init.el or
+        # early-init.el.
+        mkInitDrv = name: oldPkgs: newPkgs: prelude:
           let
-            rawSrc = concatStringsSep "\n\n" (filter (part: part != "") srcParts);
+            # A function that computes whether a given package set
+            # requires use-package.
+            needsUsePackage = pkgs: pkgs != { };
+            # Whether the current derivation needs to require
+            # use-package.  This occurs if the previous package set
+            # did not require it AND the current set does.
+            requireUsePackage = !needsUsePackage oldPkgs && needsUsePackage newPkgs;
+            # Whether the current derivation needs to depend on
+            # use-package.
+            dependUsePackage = needsUsePackage oldPkgs || needsUsePackage newPkgs;
+            # A function that computes whether a given package set
+            # requires bind-key.
+            needsBindKey = pkgs: any (pkg: pkg.bind != { } || pkg.bind-keymap != { }) (attrValues pkgs);
+            # Whether the current derivation needs to require
+            # bind-key.  As with use-package, this occurs if none of
+            # the old packages needed it AND any of the new packages
+            # needs it.
+            requireBindKey = !needsBindKey oldPkgs && needsBindKey newPkgs;
+            # Whether the current derivation needs to depend on
+            # bind-key.
+            dependBindKey = needsBindKey oldPkgs || needsBindKey newPkgs;
+            # A list of all Nix derivations that this derivation
+            # depends on.
+            dependencies = optional dependUsePackage epkgs.use-package ++ optional dependBindKey epkgs.bind-key ++ concatLists (mapAttrsToList (_: pkg: optional (pkg.package != null) (pkg.package epkgs)) (oldPkgs // newPkgs));
           in
             epkgs.trivialBuild rec {
-              pname = "emacs-${baseName}";
-              src = pkgs.writeText "${pname}.el" rawSrc;
+              pname = "emacs-${name}";
+              packageRequires = dependencies;
               buildInputs = dependencies;
-              packageRequires = packages;
+              src = pkgs.writeText "${pname}.el" (concatStringsSep "\n\n" (filter (s: s != "") (flatten [
+                ";;; -*- lexical-binding: t; -*-"
+                prelude
+                (optional requireUsePackage ''
+                  (eval-when-compile
+                    (require 'use-package))'')
+                (optional requireBindKey
+                  "(require 'bind-key)")
+                (mapAttrsToList mkPackageString newPkgs)
+                "(provide '${pname})"
+              ])));
               preBuild = ''
                 emacs -Q --batch \
-                  --eval "(require 'use-package)" \
+                  ${optionalString dependUsePackage ''--eval "(require 'use-package)"''} \
                   --eval '(find-file "${pname}.el")' \
                   --eval '(indent-region (point-min) (point-max))' \
                   --eval '(write-file "${pname}.el")'
-              '';
+                '';
             };
-        emacs-early-init = mkInitPackage "early-init" [] [
-          ";;; -*- lexical-binding: t; -*-"
-          cfg.earlyInit
-          "(provide 'emacs-early-init)"
-        ];
-
-        emacs-init = mkInitPackage "init" dependencies [
-          ";;; -*- lexical-binding: t; -*-"
-          (optionalString hasPackages ''
-            (eval-when-compile
-              (require 'use-package))'')
-          (optionalString hasBinds "(require 'bind-key)")
-          (mkPackagesString enabledEarlyPackages)
-          cfg.init.prelude
-          (mkPackagesString enabledPackages)
-          "(provide 'emacs-init)"
-        ];
+        mkInitDrvs = pairs:
+          let
+            go = pairs: oldPkgs:
+              if pairs == [ ] then [ ] else
+                let
+                  hd = head pairs;
+                  newPkgs = filterAttrs (_: pkg: pkg.enable) hd.opts.packages;
+                  prelude = hd.opts.prelude;
+                  tl = tail pairs;
+                in
+                  [ (mkInitDrv hd.name oldPkgs newPkgs prelude) ] ++ go tl (oldPkgs // newPkgs);
+          in
+            go pairs { };
       in
-        [ emacs-early-init emacs-init ];
-
+        mkInitDrvs [
+          { name = "early-init"; opts = cfg.earlyInit; }
+          { name = "init"; opts = cfg.init; }
+        ];
     home.file.".config/emacs/early-init.el".text = ''
       (require 'emacs-early-init)
     '';
