@@ -90,6 +90,7 @@
 
 (global-set-key (kbd "C-;") #'previous-buffer)
 (global-set-key (kbd "C-'") #'next-buffer)
+(global-set-key (kbd "C-M-d") #'kill-sexp)
 (global-set-key (kbd "C-M-<backspace>") #'backward-kill-sexp)
 
 (defun ngpc/switch-to-prev-buffer-skip-function (var)
