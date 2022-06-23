@@ -8,13 +8,9 @@ in
     enable = mkEnableOption "Java config";
   };
   config = mkIf cfg.enable {
+    ngpc.dev.jdk.enable = true;
     home.packages = with pkgs; [
-      openjdk11
       maven
-    ];
-    programs.git.ignores = [
-      "*.class"
-      "*.jar"
     ];
     programs.bash.initExtra = ''
       mvn-exec-java() {
