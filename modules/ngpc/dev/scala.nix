@@ -10,8 +10,10 @@ in
   };
   config = mkIf cfg.enable (mkMerge [
     {
+      ngpc.dev.jdk.enable = true;
       home.packages = with pkgs; [
         scala
+        sbt
       ];
       programs.emacs.init.init.packages = {
         scala-mode = {
@@ -24,7 +26,8 @@ in
         metals
       ];
       programs.emacs.init.init.packages = {
-        lsp-mode = {
+        lsp-metals = {
+          enable = true;
           hook = {
             scala-mode = [ "lsp-deferred" ];
           };

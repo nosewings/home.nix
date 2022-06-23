@@ -75,6 +75,7 @@
         , nix ? true
         , python ? false
         , rust ? false
+        , scala ? false
         # We'll always want the ability to write scripts, so we
         # include shell by default.
         , shell ? true
@@ -96,7 +97,7 @@
           extraSpecialArgs = {
             inherit system
               desktop hardware leisure singleUser ssh xsession
-              agda haskell html java javascript markdown nix python rust shell tex web xml yaml;
+              agda haskell html java javascript markdown nix python rust scala shell tex web xml yaml;
           };
         };
     in {
@@ -116,6 +117,7 @@
         java = true;
         python = true;
         rust = true;
+        scala = true;
         tex = true;
         web = true;
         config = {
@@ -141,6 +143,7 @@
         java = true;
         python = true;
         rust = true;
+        scala = true;
         tex = true;
         web = true;
       };
@@ -157,6 +160,7 @@
         java = true;
         python = true;
         rust = true;
+        scala = true;
         tex = true;
         web = true;
       };
