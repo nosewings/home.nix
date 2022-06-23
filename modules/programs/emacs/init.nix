@@ -16,10 +16,6 @@ let
         type = nullOr (functionTo package);
         default = epkgs: epkgs.${name};
       };
-      loadWhenBuilding = mkOption {
-        type = bool;
-        default = false;
-      };
       after = mkOption {
         type = listOf str;
         default = [];
@@ -222,6 +218,8 @@ in
               preBuild = ''
                 emacs -Q --batch \
                   ${optionalString dependUsePackage ''--eval "(require 'use-package)"''} \
+                  ${optionalString dependBindKey ''--eval "(require 'bind-key)"''} \
+                  ${concatStringsSep "\\\n" (mapAttrsToList (name: _: ''--eval "(require '${name})"'') (oldPkgs // newPkgs))} \
                   --eval '(find-file "${pname}.el")' \
                   --eval '(indent-region (point-min) (point-max))' \
                   --eval '(write-file "${pname}.el")'
