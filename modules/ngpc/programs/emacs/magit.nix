@@ -19,8 +19,7 @@ in
         };
         custom = {
           git-commit-summary-max-length = "50";
-          # If we try to commit with nothing staged, don't let
-          # us.
+          # If we try to commit with nothing staged, don't let us.
           magit-commit-ask-to-stage = "nil";
           # Show word-level differences in diffs.
           magit-diff-refine-hunk = "'all";
