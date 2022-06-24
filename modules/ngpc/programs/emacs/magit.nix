@@ -25,6 +25,7 @@ in
           magit-diff-refine-hunk = "'all";
         };
         hook = {
+          after-save = [ "magit-after-save-refresh-status" ];
           git-commit-mode = [ "ngpc/git-commit-mode-hook" ];
         };
         preface = ''
