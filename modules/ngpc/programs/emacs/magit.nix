@@ -22,6 +22,8 @@ in
           # If we try to commit with nothing staged, don't let
           # us.
           magit-commit-ask-to-stage = "nil";
+          # Show word-level differences in diffs.
+          magit-diff-refine-hunk = "'all";
         };
         hook = {
           git-commit-mode = [ "ngpc/git-commit-mode-hook" ];
