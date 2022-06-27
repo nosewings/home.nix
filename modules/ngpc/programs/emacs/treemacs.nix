@@ -17,7 +17,10 @@ in
       };
     }
     (mkIf config.ngpc.programs.emacs.magit.enable {
-      programs.emacs.init.init.packages.treemacs-magit.enable = true;
+      programs.emacs.init.init.packages.treemacs-magit = {
+        enable = true;
+        loadAtBuild = false;
+      };
     })
     (mkIf (config.ngpc.programs.emacs.perspectives == "perspective") {
       programs.emacs.init.init.packages.treemacs-perspective.enable = true;

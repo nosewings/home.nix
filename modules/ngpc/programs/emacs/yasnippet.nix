@@ -16,6 +16,7 @@ in
       };
       yasnippet-snippets = {
         enable = true;
+        loadAtBuild = false;
       };
     };
   };

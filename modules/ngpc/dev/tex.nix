@@ -27,6 +27,7 @@ in
       tex = {
         enable = true;
         package = epkgs: epkgs.auctex;
+        loadAtBuild = false;
         custom = {
           TeX-parse-self = "t";
           TeX-auto-save = "t";

@@ -12,6 +12,7 @@ in
     {
       programs.emacs.init.init.packages.magit = {
         enable = true;
+        loadAtBuild = false;
         bind = {
           "" = {
             "\"C-c g\"" = "magit-file-dispatch";
