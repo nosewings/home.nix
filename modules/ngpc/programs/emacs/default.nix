@@ -147,7 +147,7 @@ in
               config = "(global-flycheck-mode)";
             };
             font-lock-studio = {
-              enable = true;
+              enable = false;
             };
             gcmh = {
               enable = true;
