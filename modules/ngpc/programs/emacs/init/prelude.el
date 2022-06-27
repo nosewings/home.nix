@@ -69,6 +69,7 @@
 (global-set-key (kbd "C-x C-e") #'ngpc/eval-last-sexp)
 
 (defun ngpc/switch-theme (theme-name)
+  "Enable the custom theme named THEME-NAME and disable all other themes."
   (interactive (list (completing-read "Switch to theme: " (custom-available-themes))))
   (let ((theme (intern theme-name)))
     ;; Try to enable the new theme first: if it doesn’t exist, we
