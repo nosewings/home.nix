@@ -280,21 +280,28 @@ in
               # to figure out what binary it should start.
               # Unfortunately, this is precisely what we don't want.
               #
-              # First, our home-manager Emacs is run via a wrapper
-              # script that sets the load-path before running the
-              # actual Emacs binary.  So, for us, the `emacs` under
-              # `invocation-directory` is completely useless, since it
-              # won't be able to load any packages (including our init
+              # First, our `home-manager` Emacs is run via a wrapper
+              # script that sets `load-path` before running the actual
+              # Emacs binary.  But `invocation-directory` is set to
+              # the directory of the Emacs binary, not the wrapper
+              # script.  So, for us, the `emacs` under
+              # `invocation-directory` is completely useless, since
+              # its `load-path` won't be set properly, meaning won't
+              # be able to load any packages (including our init
               # file!).
               #
-              # Second, we frequently want to restart after running
-              # `home-manager switch`.  In this case, we don't even
-              # want to start the same wrapper script: we want to
-              # start the new one that we just generated.
+              # Second, a common workflow for us is to run
+              # `home-manager switch` and then restart Emacs so that
+              # we can use the changes we just made.  In this case, we
+              # don't even want to start the same wrapper script or
+              # binary.  If we've updated our Emacs config, then we
+              # want to use the newly-generated wrapper script; if
+              # we've updated our `flake.lock`, then we want to run
+              # the (probably) new Emacs binary.
               #
               # Therefore, to get behavior that works for us, we
               # "temporarily" change `invocation-directory` so that it
-              # points to our profile's bin folder.  That way,
+              # points to our profile's `bin` folder.  That way,
               # `restart-emacs` will just start our profile's Emacs,
               # which is almost always what we want.
               config = "(advice-add #'restart-emacs :around #'ngpc/restart-emacs-advice)";
