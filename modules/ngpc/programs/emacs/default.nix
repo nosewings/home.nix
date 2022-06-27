@@ -118,7 +118,10 @@ in
             doom-themes = mkMerge [
               {
                 enable = true;
-                config = "(load-theme 'doom-outrun-electric t)";
+                config = ''
+                  (doom-themes-visual-bell-config)
+                  (ngpc/switch-theme "doom-outrun-electric")
+                '';
               }
               (mkIf cfg.treemacs.enable {
                 config = "(doom-themes-treemacs-config)";
