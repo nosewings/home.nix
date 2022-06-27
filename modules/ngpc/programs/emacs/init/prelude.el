@@ -135,7 +135,7 @@ only if every member of ARGS would allow it."
 (defun ngpc/call-process-to-output (program &optional infile &rest args)
   "Call PROGRAM and capture its outputs.
 
-PROCESS, INFILE, and ARGS are like the corresponding arguments to
+PROGRAM, INFILE, and ARGS are like the corresponding arguments to
 ‘call-process’.
 
 Returns a vector [STATUS STDOUT STDERR], where STATUS is the
