@@ -177,3 +177,5 @@ DEPTH and LOCAL are like the corresponding arguments to
                                 ;; Otherwise, just remove the hook.
                                 (remove-hook hook hook-function local))))))
     (add-hook hook hook-function depth local)))
+
+(global-so-long-mode)
