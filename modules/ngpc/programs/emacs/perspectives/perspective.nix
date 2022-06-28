@@ -9,25 +9,17 @@ in
       programs.emacs.init.init.packages.perspective = {
         enable = true;
         hook = {
+          persp-activated = [ "ngpc/persp-activated" ];
           persp-created = [ "ngpc/persp-created-cd" ];
         };
-        init = ''
-          (persp-mode)
-          (advice-add #'previous-buffer :around #'ngpc/persp-prev-next-buffer)
-          (advice-add #'next-buffer :around #'ngpc/persp-prev-next-buffer)'';
+        init = "(persp-mode)";
         custom = {
           persp-mode-prefix-key = "(kbd \"C-c v\")";
           persp-modestring-short = "t";
         };
         preface = ''
-          ;; TODO Should this be marked `pure', `side-effect-free', etc?
-          (defun ngpc/persp-prev-next-buffer (orig &rest args)
-            (-let [switch-to-prev-buffer-skip
-                   (ngpc/switch-to-prev-buffer-skip-all
-                    switch-to-prev-buffer-skip
-                    (lambda (window buffer bury-or-kill)
-                      (not (persp-buffer-list-filter `(,buffer)))))]
-              (call-interactively orig args)))
+          (defun ngpc/persp-activated ()
+            (set-frame-parameter nil 'buffer-predicate #'persp-is-current-buffer))
           (defun ngpc/persp-created-cd ()
             (with-current-buffer (window-buffer (selected-window))
               (cd "~")))'';

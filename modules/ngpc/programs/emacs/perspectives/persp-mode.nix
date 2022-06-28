@@ -12,21 +12,11 @@ in
           "\"C-x b\"" = "persp-switch-to-buffer";
         };
       };
-      config = ''
-        (persp-mode)
-        (advice-add #'previous-buffer :around #'ngpc/persp-prev-next-buffer)
-        (advice-add #'next-buffer :around #'ngpc/persp-prev-next-buffer)'';
+      config = "(persp-mode)";
       custom = {
         persp-keymap-prefix = "(kbd \"C-c v\")";
+        persp-set-buffer-predicate = "t";
       };
-      preface = ''
-        (defun ngpc/persp-prev-next-buffer (orig &rest args)
-          (-let [switch-to-prev-buffer-skip
-                 (ngpc/switch-to-prev-buffer-skip-all
-                  switch-to-prev-buffer-skip
-                  (lambda (window buffer bury-or-kill)
-                    (not (memq buffer (persp-buffers (get-current-persp))))))])
-          (call-interactively orig args))'';
     };
   };
 }
