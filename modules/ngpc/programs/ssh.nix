@@ -15,7 +15,7 @@ in
       compression = true;
       extraConfig = ''
         AddKeysToAgent yes
-        Host blackstar
+        Host blackstar-remote
             HostName 76.186.194.45
             Port 32359
       '';
