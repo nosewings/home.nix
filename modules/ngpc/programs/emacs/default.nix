@@ -40,6 +40,7 @@ in
     ngpc.programs.emacs.all-the-icons.enable = true;
     ngpc.programs.emacs.completion = "vertico";
     ngpc.programs.emacs.circe.enable = true;
+    ngpc.programs.emacs.git-gutter.enable = true;
     ngpc.programs.emacs.lsp.enable = true;
     ngpc.programs.emacs.magit.enable = true;
     ngpc.programs.emacs.perspectives = "perspective";
@@ -157,10 +158,6 @@ in
               hook = {
                 window-setup = [ "gcmh-mode" ];
               };
-            };
-            git-gutter = {
-              enable = true;
-              config = "(global-git-gutter-mode)";
             };
             highlight-indent-guides = {
               enable = true;
