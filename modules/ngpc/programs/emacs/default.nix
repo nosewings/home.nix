@@ -283,8 +283,8 @@ in
               # the directory of the Emacs binary, not the wrapper
               # script.  So, for us, the `emacs` under
               # `invocation-directory` is completely useless, since
-              # its `load-path` won't be set properly, meaning won't
-              # be able to load any packages (including our init
+              # its `load-path` won't be set properly, meaning it
+              # won't be able to load any packages (including our init
               # file!).
               #
               # Second, a common workflow for us is to run
