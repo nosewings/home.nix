@@ -247,7 +247,7 @@ in
                 };
               };
               custom = {
-                org-roam-directory = "\"~/org/roam\"";
+                org-roam-directory = "\"${config.home.homeDirectory}/org/\"";
               };
               init = "(setq org-roam-v2-ack t)";
               config = "(org-roam-setup)";
