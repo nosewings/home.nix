@@ -89,7 +89,7 @@ let
   );
 
   mkAfter = after: optionalString (after != []) ''
-    :after ${concatStringsSep " " after}'';
+    :after (${concatStringsSep " " after})'';
 
   mkBindKeymap = mkBindGeneral "bind-keymap";
 
