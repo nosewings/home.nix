@@ -17,6 +17,9 @@ in
     programs.emacs.init.init.packages = {
       js2-mode = {
         enable = true;
+        mode = {
+          "\\\\.js\\\\'" = null;
+        };
       };
       typescript-mode = {
         enable = true;
