@@ -69,6 +69,7 @@
         , html ? true
         , java ? false
         , javascript ? false
+        , julia ? false
         # Markdown support costs us essentially nothing.
         , markdown ? true
         # We'll always want the ability to configure our system.
@@ -97,7 +98,7 @@
           extraSpecialArgs = {
             inherit system
               desktop hardware leisure singleUser ssh xsession
-              agda haskell html java javascript markdown nix python rust scala shell tex web xml yaml;
+              agda haskell html java julia javascript markdown nix python rust scala shell tex web xml yaml;
           };
         };
     in {
@@ -115,6 +116,7 @@
         agda = true;
         haskell = true;
         java = true;
+        julia = true;
         python = true;
         rust = true;
         scala = true;
@@ -141,6 +143,7 @@
         agda = true;
         haskell = true;
         java = true;
+        julia = true;
         python = true;
         rust = true;
         scala = true;
@@ -158,6 +161,7 @@
         singleUser = false;
         haskell = true;
         java = true;
+        julia = true;
         python = true;
         rust = true;
         scala = true;
