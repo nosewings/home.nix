@@ -71,8 +71,8 @@ with lib; {
     enable = true;
     shellInit = ''
       ${optionalString singleUser "replay source ${config.home.profileDirectory}/etc/profile.d/nix.sh"}
-      if test -f ~/.config/fish/config.fish.local
-          source ~/.config/fish/config.fish.local
+      if test -f ${config.xdg.configHome}/fish/config.fish.local
+          source ${config.xdg.configHome}/fish/config.fish.local
       end
     '';
     interactiveShellInit = ''

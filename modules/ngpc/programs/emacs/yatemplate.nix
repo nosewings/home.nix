@@ -19,8 +19,8 @@ in
       enable = true;
       config = "(yatemplate-fill-alist)";
     };
-    home.file = flip mapAttrs' cfg.templateFiles (file: source:
-       nameValuePair ".config/emacs/templates/${file}" { inherit source; }
+    xdg.configFile = flip mapAttrs' cfg.templateFiles (file: source:
+      nameValuePair "emacs/templates/${file}" { inherit source; }
     );
   };
 }

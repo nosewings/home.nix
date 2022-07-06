@@ -247,10 +247,10 @@ in
           { name = "early-init"; opts = cfg.earlyInit; }
           { name = "init"; opts = cfg.init; }
         ];
-    home.file.".config/emacs/early-init.el".text = ''
+    xdg.configFile."emacs/early-init.el".text = ''
       (require 'emacs-early-init)
     '';
-    home.file.".config/emacs/init.el".text = ''
+    xdg.configFile."emacs/init.el".text = ''
       (require 'emacs-init)
     '';
   };

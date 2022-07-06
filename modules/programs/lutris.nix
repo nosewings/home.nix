@@ -17,7 +17,7 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ lutris ];
-    home.file.".config/lutris/system.yml".text = toJSON {
+    xdg.configFile."lutris/system.yml".text = toJSON {
       system.game_path = cfg.system.gamePath;
     };
   };
