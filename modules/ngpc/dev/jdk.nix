@@ -8,9 +8,7 @@ in
     enable = mkEnableOption "JVM config";
   };
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      jdk
-    ];
+    programs.java.enable = true;
     programs.git.ignores = [
       "*.class"
       "*.jar"
