@@ -161,7 +161,6 @@
         singleUser = false;
         haskell = true;
         java = true;
-        julia = true;
         python = true;
         rust = true;
         scala = true;
