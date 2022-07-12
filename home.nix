@@ -30,6 +30,7 @@ with lib; {
       perl
       pv
       unzip
+      virt-manager
       wget
       (with xorg; [
         xev
