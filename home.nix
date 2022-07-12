@@ -15,6 +15,7 @@ with lib; {
       bat
       cachix
       clang-tools
+      curl
       exa
       file
       fd
