@@ -53,7 +53,8 @@
         emacs-overlay.overlay
       ];
       mkConfiguration =
-        { system
+        {
+          system
         , username
         , homeDirectory
         , stateVersion
@@ -88,13 +89,17 @@
         , xml ? true
         , config ? { }
         }: home-manager.lib.homeManagerConfiguration {
-          inherit system username homeDirectory stateVersion;
-          configuration = {
-            imports = [ ./home.nix ./platforms/${system}.nix ];
-            config = config // {
-              nixpkgs.overlays = overlays;
-            };
-          };
+          pkgs = nixpkgs.legacyPackages.${system};
+          modules = [
+            ./home.nix
+            ./platforms/${system}.nix
+            {
+              home = {
+                inherit username homeDirectory stateVersion;
+              };
+              nixpkgs.overlays = overlays
+;            }
+          ];
           extraSpecialArgs = {
             inherit system
               desktop hardware leisure singleUser ssh xsession
@@ -106,7 +111,7 @@
         system = "x86_64-linux";
         username = "ngpc";
         homeDirectory = "/home/${username}";
-        stateVersion = "22.05";
+        stateVersion = "22.11";
         desktop = true;
         hardware = true;
         ssh = true;
@@ -133,7 +138,7 @@
         system = "x86_64-linux";
         username = "ngpc";
         homeDirectory = "/home/${username}";
-        stateVersion = "22.05";
+        stateVersion = "22.11";
         desktop = true;
         hardware = true;
         ssh = true;
@@ -155,7 +160,7 @@
         system = "aarch64-darwin";
         username = "ngpc";
         homeDirectory = "/Users/${username}";
-        stateVersion = "22.05";
+        stateVersion = "22.11";
         hardware = true;
         ssh = true;
         singleUser = false;
@@ -172,7 +177,7 @@
         system = "x86_64-linux";
         username = "ec2-user";
         homeDirectory = "/home/${username}";
-        stateVersion = "22.05";
+        stateVersion = "22.11";
         singleUser = false;
         java = true;
         web = true;
