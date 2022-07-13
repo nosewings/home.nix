@@ -14,8 +14,10 @@ in
   config = mkIf cfg.enable (mkMerge [
     {
       home.packages = with pkgs; [
+        rustc
+        cargo
+        rustfmt
         cargo-expand
-        rustup
       ];
       programs.emacs.init.init.packages = {
         rustic = {
