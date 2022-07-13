@@ -25,6 +25,7 @@
       usbutils
     ]))
     (lib.mkIf leisure (with pkgs; [
+      gamehub
       mgba
       # openmw
       openrgb
