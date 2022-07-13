@@ -176,15 +176,5 @@
         tex = true;
         web = true;
       };
-
-      homeConfigurations.ec2 = mkConfiguration rec {
-        system = "x86_64-linux";
-        username = "ec2-user";
-        homeDirectory = "/home/${username}";
-        stateVersion = "22.11";
-        singleUser = false;
-        java = true;
-        web = true;
-      };
     };
 }
