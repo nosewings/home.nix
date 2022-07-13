@@ -98,8 +98,8 @@
               home = {
                 inherit username homeDirectory stateVersion;
               };
-              nixpkgs.overlays = overlays
-;            }
+              nixpkgs.overlays = overlays;
+            }
           ];
           extraSpecialArgs = {
             inherit system
