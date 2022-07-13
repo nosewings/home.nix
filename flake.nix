@@ -144,7 +144,6 @@
         desktop = true;
         hardware = true;
         ssh = true;
-        leisure = true;
         singleUser = true;
         xsession = true;
         agda = true;
