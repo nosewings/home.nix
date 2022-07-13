@@ -1,7 +1,7 @@
 {
   config, lib, pkgs,
   hardware, leisure, singleUser, ssh, xsession,
-  agda, haskell, html, java, javascript, julia, markdown, nix, python, rust, scala, shell, tex, web, xml, yaml,
+  agda, haskell, html, java, javascript, julia, markdown, nix, python, racket, rust, scala, shell, tex, web, xml, yaml,
   ...
 }:
 with lib; {
@@ -183,6 +183,9 @@ with lib; {
     lsp.enable = true;
   };
   ngpc.dev.python = mkIf python {
+    enable = true;
+  };
+  ngpc.dev.racket = mkIf racket {
     enable = true;
   };
   ngpc.dev.rust = mkIf rust {

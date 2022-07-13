@@ -76,6 +76,7 @@
         # We'll always want the ability to configure our system.
         , nix ? true
         , python ? false
+        , racket ? false
         , rust ? false
         , scala ? false
         # We'll always want the ability to write scripts, so we
@@ -103,7 +104,7 @@
           extraSpecialArgs = {
             inherit system
               desktop hardware leisure singleUser ssh xsession
-              agda haskell html java julia javascript markdown nix python rust scala shell tex web xml yaml;
+              agda haskell html java julia javascript markdown nix python racket rust scala shell tex web xml yaml;
           };
         };
     in {
@@ -123,6 +124,7 @@
         java = true;
         julia = true;
         python = true;
+        racket = true;
         rust = true;
         scala = true;
         tex = true;
@@ -150,6 +152,7 @@
         java = true;
         julia = true;
         python = true;
+        racket = true;
         rust = true;
         scala = true;
         tex = true;
@@ -167,6 +170,7 @@
         haskell = true;
         java = true;
         python = true;
+        racket = true;
         rust = true;
         scala = true;
         tex = true;
