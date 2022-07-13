@@ -27,7 +27,7 @@
     (lib.mkIf leisure (with pkgs; [
       gamehub
       mgba
-      # openmw
+      openmw
       openrgb
       openxcom
       vlc
