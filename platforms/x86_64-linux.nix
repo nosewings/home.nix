@@ -19,6 +19,7 @@
     ])
     (lib.mkIf desktop (with pkgs; [
       libreoffice-fresh
+      virt-manager
     ]))
     (lib.mkIf hardware (with pkgs; [
       lm_sensors
