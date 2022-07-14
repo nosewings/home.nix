@@ -166,7 +166,6 @@
         hardware = true;
         ssh = true;
         singleUser = false;
-        haskell = true;
         java = true;
         python = true;
         rust = true;
