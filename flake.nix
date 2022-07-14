@@ -169,7 +169,6 @@
         haskell = true;
         java = true;
         python = true;
-        racket = true;
         rust = true;
         scala = true;
         tex = true;
