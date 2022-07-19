@@ -49,6 +49,39 @@
               homepage = "https://fatboy.site/";
             };
           };
+          sf-mono-fonts = self.stdenv.mkDerivation {
+            pname = "sf-mono-fonts";
+            version = "4.0.1.1654305939";
+            src = self.fetchurl {
+              url = "https://devimages-cdn.apple.com/design/resources/download/SF-Mono.dmg";
+              sha256 = "134d38f018r9fgf3dj7g12v6h776427v0nwb4q69zr5jci756y4f";
+            };
+            buildInputs = [ self.p7zip ];
+            phases = [ "unpackPhase" "installPhase" ];
+            unpackPhase = ''
+              runHook preUnpack
+              7z e "$src"
+              7z e "SF Mono Fonts.pkg"
+              7z e Payload~
+              runHook postUnpack
+            '';
+            installPhase = ''
+              runHook preInstall
+              install -t "$out/share/fonts/opentype" -D *.otf
+              runHook postInstall
+            '';
+            meta = {
+              description = "The monospaced version of San Francisco, a font by Apple Computers";
+              longDescription = ''
+                This monospaced variant of San Francisco enables
+                alignment between rows and columns of text, and is
+                used in coding environments like Xcode. SF Mono
+                features six weights and supports Latin, Greek, and
+                Cyrillic scripts.
+              '';
+              homepage = "https://developer.apple.com/fonts/";
+            };
+          };
         })
         emacs-overlay.overlay
       ];

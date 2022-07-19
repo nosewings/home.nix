@@ -16,6 +16,7 @@ in
         nerdfonts
         overpass
         roboto
+        sf-mono-fonts
         ubuntu_font_family
       ];
     }
