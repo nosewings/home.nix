@@ -17,6 +17,7 @@
   "Disable ‘hl-line-mode’."
   (setq-local global-hl-line-mode nil))
 
+(setq display-line-numbers-width-start t)
 (defun ngpc/enable-show-trailing-whitespace ()
   (interactive)
   (setq show-trailing-whitespace t))
