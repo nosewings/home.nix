@@ -1,24 +1,20 @@
 { config, lib, pkgs, ... }:
 with lib;
+with types;
 let
   cfg = config.ngpc.programs.emacs;
-  normalModes = [ "conf-mode" "prog-mode" "text-mode" ];
-  normalModeHooks = zipAttrsWith (name: values: head values) (forEach normalModes (mode: {
-    "${mode}" = {
-      enable = true;
-      package = null;
-      hook = {
-        "${mode}" = [
-          "display-line-numbers-mode"
-          "ngpc/enable-show-trailing-whitespace"
-        ];
-      };
-    };
-  }));
 in
 {
   options.ngpc.programs.emacs = {
     enable = mkEnableOption "Emacs config";
+    normalModes = mkOption {
+      type = attrs;
+      default = {
+        conf-mode = "conf-mode";
+        prog-mode = "prog-mode";
+        text-mode = "text-mode";
+      };
+    };
   };
 
   config = mkIf cfg.enable {
@@ -64,7 +60,17 @@ in
       init = {
         prelude = readFile ./init/prelude.el;
         packages = mkMerge [
-          normalModeHooks
+          # Handle the normal modes.
+          (zipAttrsWith (name: values: head values) (flip mapAttrsToList cfg.normalModes (mode: package: {
+            "${package}" = {
+              hook = {
+                "${mode}" = [
+                  "display-line-numbers-mode"
+                  "ngpc/enable-show-trailing-whitespace"
+                ];
+              };
+            };
+          })))
           {
             dash = {
               enable = true;
@@ -96,6 +102,10 @@ in
               hook = {
                 company-mode = [ "company-box-mode" ];
               };
+            };
+            conf-mode = {
+              enable = true;
+              package = null;
             };
             crux = {
               enable = true;
@@ -267,9 +277,6 @@ in
             prog-mode = {
               enable = true;
               package = null;
-              hook = {
-                prog-mode = [ "ngpc/enable-show-trailing-whitespace" ];
-              };
             };
             restart-emacs = {
               enable = true;
@@ -328,6 +335,10 @@ in
                   "\"C-c e i u\"" = "string-inflection-upcase";
                 };
               };
+            };
+            text-mode = {
+              enable = true;
+              package = null;
             };
             unicode-fonts = {
               enable = false;

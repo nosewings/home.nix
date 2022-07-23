@@ -32,6 +32,9 @@ in
           enable = true;
         };
       };
+      ngpc.programs.emacs.normalModes = mkOptionDefault {
+        haskell-cabal-mode = "haskell-mode";
+      };
     }
     (mkIf config.ngpc.dev.nix.enable {
       home.packages = with pkgs; [
