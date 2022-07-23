@@ -16,7 +16,7 @@ in
       extraConfig = ''
         AddKeysToAgent yes
         Host blackstar-remote
-            HostName 76.186.194.45
+            HostName AA87EFF091153BAAF8B13DB3AA0EBB0C6.asuscomm.com
             Port 32359
       '';
     };
