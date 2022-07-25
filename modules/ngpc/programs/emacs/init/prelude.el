@@ -181,3 +181,7 @@ DEPTH and LOCAL are like the corresponding arguments to
     (add-hook hook hook-function depth local)))
 
 (global-so-long-mode)
+
+(defun ngpc/require-final-newline ()
+  "Set ’require-final-newline’ to ’t’ buffer-locally."
+  (setq-local require-final-newline t))

@@ -67,6 +67,7 @@ in
                 "${mode}" = [
                   "display-line-numbers-mode"
                   "ngpc/enable-show-trailing-whitespace"
+                  "ngpc/require-final-newline"
                 ];
               };
             };
