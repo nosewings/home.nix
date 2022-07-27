@@ -27,7 +27,8 @@
 (setq echo-keystrokes cl-least-positive-float)
 (setq initial-scratch-message nil)
 
-(defun find-file/make-directory (filename &optional wildcards)
+(defun find-file/make-directory (filename &optional _)
+  "Create the parent directory for FILENAME if it does not exist."
   (let ((dir (file-name-directory filename)))
     (unless (file-exists-p dir)
       (make-directory dir t))))
