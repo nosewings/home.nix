@@ -20,7 +20,7 @@
 (setq display-line-numbers-width-start t)
 (defun ngpc/enable-show-trailing-whitespace ()
   (interactive)
-  (setq show-trailing-whitespace t))
+  (setq-local show-trailing-whitespace t))
 
 (xterm-mouse-mode)
 
