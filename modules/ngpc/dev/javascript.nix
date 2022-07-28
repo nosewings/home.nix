@@ -8,8 +8,11 @@ in
     enable = mkEnableOption "Javascript config";
   };
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
+    home.packages = with pkgs; flatten [
       nodejs
+      (with nodePackages; [
+        typescript-language-server
+      ])
     ];
     programs.git.ignores = [
       "node_modules/"
