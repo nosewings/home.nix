@@ -11,6 +11,7 @@ in
     home.packages = with pkgs; flatten [
       nodejs
       (with nodePackages; [
+        typescript
         typescript-language-server
       ])
     ];
