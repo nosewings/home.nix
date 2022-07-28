@@ -19,6 +19,7 @@
 
 (setq display-line-numbers-width-start t)
 (defun ngpc/enable-show-trailing-whitespace ()
+  "Enable ‘show-trailing-whitespace’ buffer-locally."
   (interactive)
   (setq-local show-trailing-whitespace t))
 
