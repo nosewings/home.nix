@@ -63,6 +63,10 @@
        (concat (nreverse ,tmpvar)))))
 
 (defun ngpc/eval-last-sexp (arg)
+  "Evaluate sexp before point according to ARG.
+
+If ARG is 1, evaluate sexp before point and insert the result.
+Otherwise, simply call ‘eval-last-sexp’."
   (interactive "P")
   (if (not (eq arg 1))
       (call-interactively #'eval-last-sexp)
