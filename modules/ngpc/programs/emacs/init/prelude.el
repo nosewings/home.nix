@@ -90,6 +90,9 @@ Otherwise, simply call ‘eval-last-sexp’."
   '("L’important n'est pas la chute: c’est l’atterrissage! "
     "Take care.  It’s a desert out there... "))
 (defun ngpc/confirm-kill-emacs (_)
+  "Ask whether to kill Emacs.
+
+The prompt is chosen randomly from ‘ngpc/quit-prompts’."
   (yes-or-no-p (seq-random-elt ngpc/quit-prompts)))
 (setq confirm-kill-emacs #'ngpc/confirm-kill-emacs)
 
