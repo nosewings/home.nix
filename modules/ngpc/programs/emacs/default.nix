@@ -209,6 +209,10 @@ in
               };
               preface = ''
                 (defun ngpc/nxml-insert-tag (tag &optional arg)
+                  "Insert XML tag pair with name TAG.
+
+                If ARG, the tag is inserted on one line.  Otherwise, it is
+                inserted on multiple lines."
                   (interactive "MTag: \nP")
                   (let ((start (point)))
                     (insert "<" tag ">")
