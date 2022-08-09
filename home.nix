@@ -54,6 +54,7 @@ with lib; {
       yt-dlp
     ]))
     (mkIf hardware (with pkgs; [
+      openocd
       pciutils
     ]))
   ];
