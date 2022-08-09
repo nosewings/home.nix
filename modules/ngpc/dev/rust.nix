@@ -15,9 +15,11 @@ in
     {
       home.packages = with pkgs; [
         rustc
-        cargo
         rustfmt
+        cargo
+        cargo-binutils
         cargo-expand
+        cargo-generate
       ];
       programs.emacs.init.init.packages = {
         rustic = {
