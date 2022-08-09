@@ -27,6 +27,7 @@ with lib; {
       exa
       file
       fd
+      gdb
       gcc
       gnumake
       killall
