@@ -94,6 +94,9 @@ in
             };
             company = {
               enable = true;
+              custom = {
+                company-minimum-prefix-length = "1";
+              };
             };
             company-box = {
               enable = true;
