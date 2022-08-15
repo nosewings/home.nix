@@ -25,6 +25,11 @@ in
         purescript-mode = {
           enable = true;
         };
+        lsp-mode = {
+          hook = {
+            purescript-mode = [ "lsp-deferred" ];
+          };
+        };
       };
     })
   ]);
