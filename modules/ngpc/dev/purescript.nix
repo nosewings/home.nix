@@ -16,15 +16,17 @@ in
         purescript
         spago
       ];
+      programs.emacs.init.init.packages = {
+        purescript-mode = {
+          enable = true;
+        };
+      };
     }
     (mkIf cfg.lsp.enable {
       home.packages = with pkgs.nodePackages; [
         purescript-language-server
       ];
       programs.emacs.init.init.packages = {
-        purescript-mode = {
-          enable = true;
-        };
         lsp-mode = {
           hook = {
             purescript-mode = [ "lsp-deferred" ];
