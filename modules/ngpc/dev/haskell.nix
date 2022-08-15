@@ -47,6 +47,20 @@ in
       ];
       programs.emacs.init.init.packages = {
         haskell-mode = {
+          # XXX Fourmolu isn't in nixpkgs, so this will only work in a
+          # custom shell.
+          preface = ''
+            (defun ngpc/fourmolu ()
+              (interactive)
+              "Run Fourmolu on the current buffer."
+              ;; `save-excursion` doesn't work as expected; not sure why
+              (let ((c (point)))
+                (shell-command-on-region
+                 (point-min) (point-max)
+                 (s-concat "fourmolu -q --stdin-input-file " buffer-file-name)
+                 (current-buffer) 'no-mark)
+                (goto-char c)))
+          '';
           hook = {
             haskell-mode = [ "lsp-deferred" ];
           };
