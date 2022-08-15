@@ -12,6 +12,7 @@ in
   };
   config = mkIf cfg.enable (mkMerge [
     {
+      ngpc.dev.dhall.enable = true;
       home.packages = with pkgs; [
         purescript
         spago
@@ -23,6 +24,7 @@ in
       };
     }
     (mkIf cfg.lsp.enable {
+      ngpc.dev.dhall.lsp.enable = true;
       home.packages = with pkgs.nodePackages; [
         purescript-language-server
       ];
