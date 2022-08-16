@@ -21,6 +21,17 @@ in
         purescript-mode = {
           enable = true;
         };
+        projectile = {
+          config = ''
+            (projectile-register-project-type
+             'spago '("spago.dhall")
+             :project-file "spago.dhall"
+             :compile "spago build"
+             :test "spago test"
+             :run "spago run"
+             :src-dir "src"
+             :test-dir "test")'';
+        };
       };
     }
     (mkIf cfg.lsp.enable {
