@@ -48,9 +48,21 @@ let
         type = attrsOf str;
         default = {};
       };
+      demand = mkOption {
+        type = bool;
+        default = false;
+      };
       defer = mkOption {
         type = oneOf [ bool int ];
         default = false;
+      };
+      defines = mkOption {
+        type = listOf str;
+        default = [];
+      };
+      functions = mkOption {
+        type = listOf str;
+        default = [];
       };
       ensure = mkOption {
         type = bool;
@@ -114,8 +126,17 @@ let
     :custom
     ${concatStringsSep "\n" (mapAttrsToList (key: value: "(${key} ${value})") custom)}'';
 
+  mkDemand = demand: optionalString demand
+    ":demand t";
+
   mkDefer = defer: optionalString (isInt defer || defer)
     ":defer ${if isBool defer then boolToElisp defer else toString defer}";
+
+  mkDefines = defines: optionalString (defines != [])
+    ":defines (${concatStringsSep " " defines})";
+
+  mkFunctions = functions: optionalString (functions != [])
+    ":functions (${concatStringsSep " " functions})";
 
   mkEnsure = ensure: optionalString ensure
     ":ensure ${boolToElisp ensure}";
@@ -145,7 +166,10 @@ let
       (mkInit package.init)
       (mkConfig package.config)
       (mkCustom package.custom)
+      (mkDemand package.demand)
       (mkDefer package.defer)
+      (mkDefines package.defines)
+      (mkFunctions package.functions)
       (mkEnsure package.ensure)
       (mkHook package.hook)
       (mkMode package.mode)
