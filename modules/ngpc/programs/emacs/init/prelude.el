@@ -194,3 +194,19 @@ DEPTH and LOCAL are like the corresponding arguments to
 (defun ngpc/require-final-newline ()
   "Set ’require-final-newline’ to ’t’ buffer-locally."
   (setq-local require-final-newline t))
+
+(defun ngpc/open-file-for-function (func)
+  (let ((orig-buffer-list (buffer-list)))
+    (switch-to-buffer (save-window-excursion
+                        (describe-function func)
+                        (let ((help-buffer (car (-difference (buffer-list) orig-buffer-list))))
+                          (switch-to-buffer help-buffer)
+                          (re-search-forward "‘.*’\\.")
+                          (push-button (- (point) 3))
+                          (kill-buffer help-buffer)
+                          (goto-char (point-min))
+                          (current-buffer))))))
+
+(defun ngpc/open-init-file ()
+  (interactive)
+  (ngpc/open-file-for-function #'ngpc/open-init-file))
