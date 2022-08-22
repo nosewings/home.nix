@@ -154,10 +154,10 @@ process’s exit code, STDOUT is a string containing the entire
 contents of the process’s standard output stream, and STDERR is a
 string containing the entire contents of the process’s standard
 error stream."
-  (-let [stdout (make-temp-file "stdout")]
+  (let ((stderr (make-temp-file "stderr")))
     (with-temp-buffer
-      (-let [status (apply #'call-process program infile (current-buffer) nil args)]
-        `[,status ,(buffer-string) ,(f-read-text stdout)]))))
+      (let ((status (apply #'call-process program infile (list (current-buffer) stderr) nil args)))
+        (vector status (buffer-string) (f-read-text stderr))))))
 
 (defun ngpc/github-insert-sha256 (owner repo)
   "Insert the SHA-256 hash for the GitHub REPO owned by OWNER."
