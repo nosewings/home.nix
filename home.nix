@@ -48,6 +48,7 @@ with lib; {
       zip
     ])
     (mkIf leisure (with pkgs; [
+      ffmpeg
       mplayer
       musescore
       neofetch
