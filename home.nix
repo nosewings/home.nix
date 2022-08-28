@@ -52,6 +52,7 @@ with lib; {
       mplayer
       musescore
       neofetch
+      spek
       yt-dlp
     ]))
     (mkIf hardware (with pkgs; [
